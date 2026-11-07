@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bukindi Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%276%27 fill=%27%23E3A23B%27/%3E%3Cpath d=%27M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z%27 fill=%27%231B2257%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#1B2257">
+<meta name="description" content="Bukindi Commerce : le commerce africain sans frontières.">
+<style>
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+img{max-width:100%}
+</style>
+<style>
+/* Layout: indigo header band with a woven bogolan-style strip, cotton-coloured page, framed product cards, product sheet as an overlay. */
+:root{
+  --bg:#EFE9DC; --surface:#FAF6EE; --fg:#1B1F3B; --muted:#5C5E78; --line:#D6CCB8;
+  --primary:#232C6B; --on-primary:#F7F3EA; --accent:#C9841A; --on-accent:#2B1D00; --madder:#A93E26;
+  --band:#1B2257; --band-fg:#F3ECDD; --weave-bg:#141A44; --wa:#17803F; --ok:#1B7F4B; --danger:#B3261E;
+  --display:'Bricolage Grotesque','Noto Sans Arabic',system-ui,sans-serif;
+  --body:'DM Sans','Noto Sans Arabic',system-ui,sans-serif;
+  --gl:max(16px,env(safe-area-inset-left,0px)); --gr:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101330; --surface:#181C42; --fg:#F1EBDD; --muted:#ABAFD0; --line:#2C3262;
+  --primary:#E3A23B; --on-primary:#1B1305; --accent:#E3A23B; --madder:#E0775B;
+  --band:#0A0D26; --band-fg:#F3ECDD; --weave-bg:#0A0D26; --ok:#6CD39B; --danger:#FF8A80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101330; --surface:#181C42; --fg:#F1EBDD; --muted:#ABAFD0; --line:#2C3262;
+  --primary:#E3A23B; --on-primary:#1B1305; --accent:#E3A23B; --madder:#E0775B;
+  --band:#0A0D26; --band-fg:#F3ECDD; --weave-bg:#0A0D26; --ok:#6CD39B; --danger:#FF8A80; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;margin:0;padding-left:var(--gl);padding-right:var(--gr);padding-block:0 32px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin-inline:auto}
+.band{background:var(--band);color:var(--band-fg);margin-left:calc(-1*var(--gl));margin-right:calc(-1*var(--gr));padding-left:var(--gl);padding-right:var(--gr);padding-top:4px}
+.weave{display:block;width:100%;height:20px;margin-left:calc(-1*var(--gl));margin-right:calc(-1*var(--gr));width:calc(100% + var(--gl) + var(--gr))}
+.pb{fill:var(--weave-bg)}.pz{stroke:var(--accent)}.pd{fill:var(--band-fg)}.pm{fill:var(--madder)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;flex:none}
+.brand-t{display:flex;flex-direction:column;line-height:1.05}
+.brand-t b{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:.02em}
+.brand-t span{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;opacity:.8}
+.tools{display:flex;gap:8px;align-items:center}
+.proto{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px dashed currentColor;border-radius:4px;opacity:.8}
+select,input,textarea{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-height:44px;width:100%}
+textarea{resize:vertical;min-height:88px}
+.lang{width:auto;font-weight:700;background:transparent;color:var(--band-fg);border-color:color-mix(in srgb,var(--band-fg) 40%,transparent)}
+.lang option{color:#1B1F3B}
+nav{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);margin-block:0 22px;padding-top:8px}
+nav a{padding:12px 16px;text-decoration:none;color:var(--muted);font-weight:700;border-bottom:3px solid transparent;white-space:nowrap}
+nav a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+h1,h2{font-family:var(--display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;font-weight:800}
+h2{font-size:1.5rem;font-weight:800}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--madder)}
+.hero{padding-block:8px 18px;display:grid;gap:12px;max-width:680px}
+.hero p{margin:0;color:var(--muted);font-size:1.05rem}
+.trust{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:4px}
+.trust span{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.92rem}
+.dia{width:9px;height:9px;background:var(--accent);transform:rotate(45deg);flex:none}
+.filters{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:500;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.chip.fav{display:inline-flex;align-items:center;gap:6px}
+.countrow{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px;color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-width:0;box-shadow:0 1px 0 var(--line)}
+.ph{display:block;width:calc(100% - 16px);margin:8px;padding:0;border:0;background:none;border-radius:4px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;outline-offset:2px}
+.ph svg,.ph img,.gal-main svg,.gal-main img{display:block;width:100%;height:100%;object-fit:cover}
+.heart{position:absolute;top:14px;inset-inline-end:14px;width:40px;height:40px;border-radius:50%;border:0;background:color-mix(in srgb,var(--surface) 92%,transparent);display:grid;place-items:center;cursor:pointer;color:var(--fg)}
+.heart[aria-pressed="true"]{color:var(--madder)}
+.heart[aria-pressed="true"] path{fill:currentColor}
+.body{padding:4px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tag{align-self:flex-start;background:var(--accent);color:var(--on-accent);font-family:var(--display);font-weight:800;font-size:1.05rem;padding:3px 10px;border-radius:3px;font-variant-numeric:tabular-nums}
+.body h3{margin:0;font-size:1.05rem;line-height:1.3;font-weight:700}
+.body h3 button{all:unset;cursor:pointer;overflow-wrap:anywhere}
+.body h3 button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.meta{color:var(--muted);font-size:.88rem}
+.who{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.88rem}
+.ver{display:inline-flex;align-items:center;gap:4px;color:var(--ok);font-weight:700;font-size:.8rem}
+.acts{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.btn{background:var(--primary);color:var(--on-primary);border:0;border-radius:6px;padding:10px 16px;min-height:44px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.sm{padding:8px 12px;min-height:40px;flex:1;font-size:.92rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px;max-width:600px}
+form{display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg label{font-weight:500;border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;gap:8px;align-items:center;cursor:pointer;min-height:44px}
+.seg input{width:auto;min-height:0}
+.drop{position:relative;border:2px dashed var(--line);border-radius:8px;padding:18px;text-align:center;cursor:pointer;color:var(--muted);font-weight:500;display:grid;gap:4px;justify-items:center}
+.drop:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;min-height:0}
+.thumbs{display:flex;gap:10px;flex-wrap:wrap}
+.thumb{position:relative;width:84px;height:84px;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb button{position:absolute;top:4px;inset-inline-end:4px;width:28px;height:28px;border-radius:50%;border:0;background:var(--fg);color:var(--bg);cursor:pointer;font-weight:700;line-height:1}
+.profile{display:grid;gap:14px}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.6rem}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 8px;border-radius:4px;background:color-mix(in srgb,var(--primary) 14%,var(--surface));border:1px solid var(--line)}
+.threads{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chat{display:flex;flex-direction:column;gap:8px;min-height:200px;max-height:46vh;overflow-y:auto;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:10px}
+.msg{max-width:80%;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);overflow-wrap:anywhere}
+.msg.me{align-self:flex-end;background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.send{display:flex;gap:8px}
+.pay{margin-top:20px;display:grid;gap:8px}
+.pay .chip{cursor:default}
+.empty{color:var(--muted);padding:28px;border:2px dashed var(--line);border-radius:8px;text-align:center}
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin-inline:auto;background:var(--fg);color:var(--bg);padding:12px 16px;border-radius:8px;font-weight:700;text-align:center;z-index:60}
+/* product sheet */
+.ov{position:fixed;inset:0;background:rgba(10,13,38,.62);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding-top:env(safe-area-inset-top,0px)}
+.sheet{background:var(--surface);width:100%;max-width:860px;max-height:92vh;overflow-y:auto;border-radius:14px 14px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));position:relative}
+.sheet-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.gal-main{aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.gal-th{display:flex;gap:8px;margin-top:8px}
+.gal-th button{width:64px;height:48px;border:2px solid transparent;padding:0;border-radius:4px;overflow:hidden;background:none;cursor:pointer}
+.gal-th button[aria-pressed="true"]{border-color:var(--accent)}
+.gal-th img,.gal-th svg{width:100%;height:100%;object-fit:cover;display:block}
+.x{position:absolute;top:10px;inset-inline-end:max(10px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:1.3rem;font-weight:700;z-index:2}
+.det{display:grid;gap:12px;align-content:start;min-width:0}
+.det h2{padding-inline-end:48px;font-size:1.4rem}
+.big{font-family:var(--display);font-weight:800;font-size:1.7rem;font-variant-numeric:tabular-nums}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.92rem}
+dt{color:var(--muted)}dd{margin:0;font-weight:500}
+.tip{font-size:.86rem;color:var(--muted);border-inline-start:3px solid var(--accent);padding-inline-start:10px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.btnrow .btn{flex:1;min-width:140px}
+.note{margin:8px 0 16px;padding:10px 14px;border-inline-start:4px solid var(--accent);background:var(--surface);color:var(--muted);font-size:.92rem;border-radius:4px;max-width:640px}
+footer{margin-top:40px}
+footer .weave{margin:0;width:100%;border-radius:3px}
+footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){.filters{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.sheet-grid{grid-template-columns:1fr}}
+@media (min-width:700px){.ov{align-items:center}.sheet{border-radius:14px}}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="bogo" width="48" height="20" patternUnits="userSpaceOnUse">
+    <rect width="48" height="20" class="pb"/>
+    <path d="M0 8L6 3L12 8L18 3L24 8L30 3L36 8L42 3L48 8" class="pz" fill="none" stroke-width="2"/>
+    <circle cx="6" cy="15" r="1.7" class="pd"/><circle cx="18" cy="15" r="1.7" class="pd"/><circle cx="30" cy="15" r="1.7" class="pd"/><circle cx="42" cy="15" r="1.7" class="pd"/>
+    <path d="M24 12L27 15L24 18L21 15Z" class="pm"/><path d="M48 12L51 15L48 18L45 15Z" class="pm"/><path d="M0 12L3 15L0 18L-3 15Z" class="pm"/>
+  </pattern>
+</defs></svg>
+
+<div class="band">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="6" fill="#E3A23B"/><path d="M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z" fill="#1B2257"/><path d="M17 14v3.6h3c1.2 0 2-.7 2-1.8s-.8-1.8-2-1.8zm0 8.2v4.2h3.4c1.4 0 2.3-.8 2.3-2.1s-.9-2.1-2.3-2.1z" fill="#E3A23B"/></svg>
+        <div class="brand-t"><b>BUKINDI</b><span>Commerce</span></div>
+      </div>
+      <div class="tools">
+        <span class="proto" data-i18n="proto"></span>
+        <select id="lang" class="lang" aria-label="Langue / Language">
+          <option value="fr">FR</option><option value="en">EN</option><option value="pt">PT</option><option value="ar">AR</option>
+        </select>
+      </div>
+    </header>
+  </div>
+  <svg class="weave" aria-hidden="true"><rect width="100%" height="20" fill="url(#bogo)"/></svg>
+</div>
+
+<div class="wrap">
+  <nav id="nav" aria-label="Navigation">
+    <a href="#annonces" data-v="annonces" data-i18n="n_list"></a>
+    <a href="#vendre" data-v="vendre" data-i18n="n_sell"></a>
+    <a href="#messages" data-v="messages" data-i18n="n_msg"></a>
+    <a href="#compte" data-v="compte" data-i18n="n_acc"></a>
+  </nav>
+
+  <main>
+    <section id="v-annonces" data-view>
+      <div class="hero">
+        <span class="kicker" data-i18n="slogan"></span>
+        <h1 data-i18n="h_title"></h1>
+        <p data-i18n="h_sub"></p>
+        <div class="trust"><span><i class="dia"></i><b data-i18n="tr1"></b></span><span><i class="dia"></i><b data-i18n="tr2"></b></span><span><i class="dia"></i><b data-i18n="tr3"></b></span></div>
+      </div>
+      <div class="filters">
+        <input id="q" type="search" data-i18n-ph="search" aria-label="Recherche">
+        <select id="fcountry" aria-label="Pays"></select>
+      </div>
+      <div class="chips" id="cats"></div>
+      <div class="countrow"><span id="count"></span></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="v-vendre" data-view hidden>
+      <h2 data-i18n="s_title"></h2>
+      <p class="meta" data-i18n="s_sub" style="margin:6px 0 14px"></p>
+      <div id="sellNote"></div>
+      <p class="meta" id="noPhotos" data-i18n="no_photos" hidden></p>
+      <div class="panel" id="sellPanel" hidden>
+        <form id="sellForm">
+          <div id="photoBlock">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:6px" data-i18n="s_photos"></div>
+            <label class="drop"><span data-i18n="s_add"></span><span class="meta" data-i18n="s_hint"></span><input id="s_files" type="file" accept="image/*" multiple></label>
+            <div class="thumbs" id="thumbs" style="margin-top:10px"></div>
+          </div>
+          <label><span data-i18n="s_name"></span><input id="s_title" required maxlength="80"></label>
+          <div class="row2">
+            <label><span data-i18n="s_cat"></span><select id="s_cat"></select></label>
+            <label><span data-i18n="s_cond"></span><select id="s_cond"></select></label>
+          </div>
+          <div class="row2">
+            <label><span data-i18n="s_price"></span><input id="s_price" type="number" min="1" step="any" required inputmode="decimal"></label>
+            <label><span data-i18n="s_cur"></span><select id="s_cur"><option>XOF</option><option>GHS</option><option>NGN</option><option>KES</option><option>USD</option></select></label>
+          </div>
+          <div class="row2">
+            <label><span data-i18n="country"></span><select id="s_country"></select></label>
+            <label><span data-i18n="city"></span><input id="s_city" required maxlength="40"></label>
+          </div>
+          <label><span data-i18n="s_deliv"></span><select id="s_deliv"></select></label>
+          <label><span data-i18n="s_desc"></span><textarea id="s_desc" maxlength="400"></textarea></label>
+          <button class="btn" type="submit" id="s_go" data-i18n="s_go"></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="v-messages" data-view hidden>
+      <h2 data-i18n="m_title"></h2>
+      <p class="note" data-i18n="m_note"></p>
+      <div class="threads" id="threads"></div>
+      <div id="chatBox"></div>
+      <div class="pay">
+        <b data-i18n="pay_title"></b>
+        <div class="chips"><span class="chip">Orange Money</span><span class="chip">Moov Money</span><span class="chip">MTN MoMo</span><span class="chip">Wave</span></div>
+        <span class="meta" data-i18n="pay_note"></span>
+      </div>
+    </section>
+
+    <section id="v-compte" data-view hidden>
+      <h2 data-i18n="a_title" style="margin-bottom:14px"></h2>
+      <div class="panel" id="accBox"></div>
+    </section>
+  </main>
+
+  <footer>
+    <svg class="weave" aria-hidden="true" style="border-radius:0"><rect width="100%" height="20" fill="url(#bogo)"/></svg>
+    <p data-i18n="foot"></p>
+  </footer>
+</div>
+
+<div class="ov" id="ov" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div></div>
+<div class="toast" id="toast" hidden></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+var L={
+fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Annonces',n_sell:'Vendre',n_msg:'Messages',n_acc:'Compte',
+ h_title:'Achetez et vendez d’un pays à l’autre.',h_sub:'Particuliers et commerçants d’Afrique, au même endroit.',
+ tr1:'Vendeurs vérifiés',tr2:'Paiement mobile',tr3:'Livraison entre pays',
+ search:'Rechercher un produit…',all_c:'Tous les pays',cat_all:'Tout',cat_fashion:'Mode',cat_food:'Alimentation',cat_tech:'Électronique',cat_beauty:'Beauté',cat_craft:'Artisanat',
+ favs:'Favoris',count:'annonce(s)',none:'Aucune annonce ne correspond.',by:'Vendeur',msg:'Message',wa:'WhatsApp',wa_msg:'Bonjour, je suis intéressé(e) par votre annonce Bukindi :',
+ fav_add:'Ajouter aux favoris',fav_del:'Retirer des favoris',close:'Fermer',ver:'Vérifié',
+ d_cond:'État',cond_new:'Neuf',cond_used:'Occasion',cond_refurb:'Reconditionné',d_loc:'Lieu',d_deliv:'Livraison',dv_pickup:'Retrait sur place',dv_national:'Dans le pays',dv_border:'Entre pays',d_seller:'Vendeur',d_cat:'Catégorie',sales:'ventes',
+ tip:'Conseil : rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé.',
+ s_title:'Publier une annonce',s_sub:'Ajoutez jusqu’à 3 photos : une annonce avec photos reçoit plus de messages.',s_photos:'Photos',s_add:'Appuyer pour ajouter des photos',s_hint:'3 photos maximum, JPG ou PNG',s_name:'Nom du produit',s_cat:'Catégorie',s_cond:'État',s_price:'Prix',s_cur:'Devise',country:'Pays',city:'Ville',s_deliv:'Livraison',s_desc:'Description',s_go:'Publier l’annonce',s_ok:'Annonce publiée.',s_max:'3 photos maximum.',
+ m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
+ pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
+ a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
+ foot:'Bukindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
+en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
+ h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
+ tr1:'Verified sellers',tr2:'Mobile payment',tr3:'Cross-border delivery',
+ search:'Search for a product…',all_c:'All countries',cat_all:'All',cat_fashion:'Fashion',cat_food:'Food',cat_tech:'Electronics',cat_beauty:'Beauty',cat_craft:'Crafts',
+ favs:'Favorites',count:'listing(s)',none:'No listing matches.',by:'Seller',msg:'Message',wa:'WhatsApp',wa_msg:'Hello, I am interested in your Bukindi listing:',
+ fav_add:'Add to favorites',fav_del:'Remove from favorites',close:'Close',ver:'Verified',
+ d_cond:'Condition',cond_new:'New',cond_used:'Used',cond_refurb:'Refurbished',d_loc:'Location',d_deliv:'Delivery',dv_pickup:'Pickup only',dv_national:'Within the country',dv_border:'Across borders',d_seller:'Seller',d_cat:'Category',sales:'sales',
+ tip:'Tip: meet the seller in a public place and pay only on receipt, or through a protected payment.',
+ s_title:'Post a listing',s_sub:'Add up to 3 photos: listings with photos get more messages.',s_photos:'Photos',s_add:'Tap to add photos',s_hint:'Up to 3 photos, JPG or PNG',s_name:'Product name',s_cat:'Category',s_cond:'Condition',s_price:'Price',s_cur:'Currency',country:'Country',city:'City',s_deliv:'Delivery',s_desc:'Description',s_go:'Publish listing',s_ok:'Listing published.',s_max:'Up to 3 photos.',
+ m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
+ pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
+ a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
+ foot:'Bukindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
+pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
+ h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
+ tr1:'Vendedores verificados',tr2:'Pagamento móvel',tr3:'Entrega entre países',
+ search:'Procurar um produto…',all_c:'Todos os países',cat_all:'Tudo',cat_fashion:'Moda',cat_food:'Alimentação',cat_tech:'Eletrónica',cat_beauty:'Beleza',cat_craft:'Artesanato',
+ favs:'Favoritos',count:'anúncio(s)',none:'Nenhum anúncio corresponde.',by:'Vendedor',msg:'Mensagem',wa:'WhatsApp',wa_msg:'Olá, tenho interesse no seu anúncio no Bukindi:',
+ fav_add:'Adicionar aos favoritos',fav_del:'Remover dos favoritos',close:'Fechar',ver:'Verificado',
+ d_cond:'Estado',cond_new:'Novo',cond_used:'Usado',cond_refurb:'Recondicionado',d_loc:'Local',d_deliv:'Entrega',dv_pickup:'Levantamento no local',dv_national:'Dentro do país',dv_border:'Entre países',d_seller:'Vendedor',d_cat:'Categoria',sales:'vendas',
+ tip:'Dica: encontre o vendedor num local público e pague apenas na receção, ou com pagamento protegido.',
+ s_title:'Publicar um anúncio',s_sub:'Adicione até 3 fotos: anúncios com fotos recebem mais mensagens.',s_photos:'Fotos',s_add:'Toque para adicionar fotos',s_hint:'Até 3 fotos, JPG ou PNG',s_name:'Nome do produto',s_cat:'Categoria',s_cond:'Estado',s_price:'Preço',s_cur:'Moeda',country:'País',city:'Cidade',s_deliv:'Entrega',s_desc:'Descrição',s_go:'Publicar anúncio',s_ok:'Anúncio publicado.',s_max:'Até 3 fotos.',
+ m_title:'Mensagens',m_none:'Sem conversas. Toque em Mensagem num anúncio.',m_ph:'A sua mensagem…',m_send:'Enviar',m_hi:'Olá, este produto ainda está disponível?',m_re:'Olá! Sim, está disponível. Para que país devemos entregar?',
+ pay_title:'Pagamento móvel',pay_note:'Em breve: pague e receba com a sua carteira móvel.',
+ a_title:'A minha conta',a_type:'Sou',a_ind:'Particular',a_mer:'Comerciante',a_fn:'Nome completo',a_ph:'Telefone',a_pw:'Palavra-passe',a_go:'Criar a minha conta',a_ok:'Conta criada.',a_out:'Terminar sessão',a_mine:'Os meus anúncios',a_none:'Ainda não publicou nada.',a_ver:'Verificação pendente',you:'Você',
+ foot:'Bukindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
+ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا حدود',n_list:'الإعلانات',n_sell:'بيع',n_msg:'الرسائل',n_acc:'الحساب',
+ h_title:'اشترِ وبِع من بلد إلى آخر.',h_sub:'أفراد وتجار من كل أنحاء أفريقيا في مكان واحد.',
+ tr1:'بائعون موثّقون',tr2:'الدفع عبر الجوال',tr3:'توصيل بين البلدان',
+ search:'ابحث عن منتج…',all_c:'كل البلدان',cat_all:'الكل',cat_fashion:'أزياء',cat_food:'غذاء',cat_tech:'إلكترونيات',cat_beauty:'جمال',cat_craft:'حِرف يدوية',
+ favs:'المفضلة',count:'إعلان',none:'لا توجد إعلانات مطابقة.',by:'البائع',msg:'رسالة',wa:'واتساب',wa_msg:'مرحبًا، أنا مهتم بإعلانك على بوكيندي:',
+ fav_add:'أضف إلى المفضلة',fav_del:'أزل من المفضلة',close:'إغلاق',ver:'موثّق',
+ d_cond:'الحالة',cond_new:'جديد',cond_used:'مستعمل',cond_refurb:'مجدد',d_loc:'الموقع',d_deliv:'التوصيل',dv_pickup:'استلام من المكان',dv_national:'داخل البلد',dv_border:'بين البلدان',d_seller:'البائع',d_cat:'الفئة',sales:'مبيعات',
+ tip:'نصيحة: قابل البائع في مكان عام ولا تدفع إلا عند الاستلام أو عبر دفع محمي.',
+ s_title:'نشر إعلان',s_sub:'أضف حتى 3 صور: الإعلانات المصوّرة تتلقى رسائل أكثر.',s_photos:'الصور',s_add:'اضغط لإضافة صور',s_hint:'حتى 3 صور، JPG أو PNG',s_name:'اسم المنتج',s_cat:'الفئة',s_cond:'الحالة',s_price:'السعر',s_cur:'العملة',country:'البلد',city:'المدينة',s_deliv:'التوصيل',s_desc:'الوصف',s_go:'نشر الإعلان',s_ok:'تم نشر الإعلان.',s_max:'حتى 3 صور.',
+ m_title:'الرسائل',m_none:'لا توجد محادثات. اضغط «رسالة» من أي إعلان.',m_ph:'اكتب رسالتك…',m_send:'إرسال',m_hi:'مرحبًا، هل هذا المنتج متوفر؟',m_re:'مرحبًا! نعم، متوفر. إلى أي بلد نوصل؟',
+ pay_title:'الدفع عبر الجوال',pay_note:'قريبًا: ادفع واستلم المال عبر محفظتك على الجوال.',
+ a_title:'حسابي',a_type:'أنا',a_ind:'فرد',a_mer:'تاجر',a_fn:'الاسم الكامل',a_ph:'الهاتف',a_pw:'كلمة المرور',a_go:'إنشاء حسابي',a_ok:'تم إنشاء الحساب.',a_out:'تسجيل الخروج',a_mine:'إعلاناتي',a_none:'لم تنشر أي شيء بعد.',a_ver:'التحقق قيد الانتظار',you:'أنت',
+ foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نموذج أولي: الإعلانات والبائعون والمحادثات أمثلة.'}
+};
+var CATS=['fashion','food','tech','beauty','craft'];
+var CCS=['BF','ML','CI','GH','NG','KE','SN','CM'];
+
+/* Illustrations drawn in code so every sample listing has a picture. Each one carries its own background. */
+function art(k){
+  var o='<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">',s='';
+  if(k==='cloth'){
+    s='<rect width="240" height="180" fill="#E4B45A"/><g transform="rotate(-5 120 90)"><rect x="28" y="26" width="184" height="128" fill="#F4EBD8"/>';
+    var c=['#23306F','#B5432A','#23306F','#E4B45A','#23306F','#B5432A'];
+    for(var i=0;i<6;i++)s+='<rect x="'+(34+i*30)+'" y="26" width="20" height="128" fill="'+c[i]+'"/>';
+    for(var j=0;j<4;j++)s+='<path d="M28 '+(50+j*28)+'h184" stroke="#F4EBD8" stroke-width="3" stroke-dasharray="6 6" opacity=".7"/>';
+    s+='</g>';
+  }else if(k==='shea'){
+    s='<rect width="240" height="180" fill="#CFE0C4"/><rect x="72" y="50" width="96" height="24" rx="6" fill="#8A5A2B"/><rect x="78" y="70" width="84" height="76" rx="10" fill="#F2E6C9" stroke="#7A5A2B" stroke-width="3"/><rect x="88" y="88" width="64" height="38" fill="#23306F"/><path d="M88 107l8-8 8 8 8-8 8 8 8-8 8 8 8-8" stroke="#E4B45A" stroke-width="3" fill="none"/><path d="M180 140q20-30 6-50q-24 18-6 50z" fill="#3B7A3A"/>';
+  }else if(k==='rice'){
+    s='<rect width="240" height="180" fill="#E9C98A"/><path d="M72 52h96l16 100q-64 18-128 0z" fill="#E8DDC3" stroke="#6B5530" stroke-width="3"/><rect x="94" y="40" width="52" height="16" rx="7" fill="#B5432A"/><circle cx="120" cy="104" r="22" fill="#23306F"/>';
+    for(var r=0;r<5;r++)s+='<ellipse cx="'+(108+r*6)+'" cy="104" rx="2.4" ry="7" fill="#F4EBD8" transform="rotate('+(r*14-28)+' '+(108+r*6)+' 104)"/>';
+  }else if(k==='phone'){
+    s='<rect width="240" height="180" fill="#C9D1E8"/><rect x="84" y="20" width="72" height="140" rx="12" fill="#1B1F3B"/><rect x="91" y="34" width="58" height="108" rx="4" fill="#3C57B8"/><circle cx="120" cy="70" r="12" fill="#F0A500"/><path d="M91 142V104l18-18 14 14 12-10 14 14v38z" fill="#23306F"/><rect x="108" y="24" width="24" height="4" rx="2" fill="#3A3F66"/>';
+  }else if(k==='coffee'){
+    s='<rect width="240" height="180" fill="#D9B68E"/><path d="M74 36h92l12 120H62z" fill="#3B2418"/><rect x="62" y="30" width="116" height="14" rx="4" fill="#2A1910"/><rect x="82" y="78" width="76" height="46" rx="4" fill="#F1E3C4"/><ellipse cx="120" cy="101" rx="14" ry="19" fill="#6B3F22"/><path d="M120 83q-6 18 0 36" stroke="#F1E3C4" stroke-width="3" fill="none"/>';
+  }else if(k==='sandals'){
+    s='<rect width="240" height="180" fill="#BFE0D8"/><g transform="rotate(-10 78 90)"><rect x="52" y="30" width="52" height="124" rx="26" fill="#8A5A2B"/><path d="M52 78q26 -22 52 0M52 100q26 -22 52 0" stroke="#23306F" stroke-width="7" fill="none"/></g><g transform="rotate(10 162 90)"><rect x="136" y="30" width="52" height="124" rx="26" fill="#8A5A2B"/><path d="M136 78q26 -22 52 0M136 100q26 -22 52 0" stroke="#23306F" stroke-width="7" fill="none"/></g>';
+  }else if(k==='mango'){
+    s='<rect width="240" height="180" fill="#F2C27A"/>';
+    var m=[[84,98,-20],[126,84,8],[158,112,28]];
+    for(var q=0;q<3;q++){var a=m[q];s+='<g transform="rotate('+a[2]+' '+a[0]+' '+a[1]+')"><ellipse cx="'+a[0]+'" cy="'+a[1]+'" rx="26" ry="38" fill="#E58A1F"/><ellipse cx="'+(a[0]+8)+'" cy="'+(a[1]+6)+'" rx="12" ry="24" fill="#D9531E" opacity=".75"/><path d="M'+a[0]+' '+(a[1]-36)+'q16 -14 26 -4q-10 14 -26 4z" fill="#3B7A3A"/></g>';}
+  }else{
+    s='<rect width="240" height="180" fill="#E3D3B3"/><path d="M68 84Q120 66 172 84L158 148Q120 160 82 148Z" fill="#B98A4A"/>';
+    for(var h=0;h<5;h++)s+='<path d="M'+(70+h*2)+' '+(96+h*13)+'Q120 '+(84+h*13)+' '+(170-h*2)+' '+(96+h*13)+'" stroke="#7A5A2B" stroke-width="2.4" fill="none"/>';
+    for(var v=0;v<7;v++)s+='<path d="M'+(80+v*13)+' 88L'+(86+v*11)+' 152" stroke="#7A5A2B" stroke-width="2" opacity=".6"/>';
+    s+='<path d="M72 86Q120 8 168 86" stroke="#7A5A2B" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  }
+  return o+s+'</svg>';
+}
+var DEFART={fashion:'cloth',food:'rice',tech:'phone',beauty:'shea',craft:'basket'};
+var ARTS=['cloth','shea','rice','phone','coffee','sandals','mango','basket'];
+var L2={
+fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direct',tr3:'Annonces dans plusieurs pays',
+ foot:'Bukindi Commerce · Fondateur : Zoundi Christian · Version bêta.',
+ loading:'Chargement…',slow:'La connexion est lente. Les annonces peuvent ne pas être à jour.',offline:'Impossible de joindre le service. Vérifiez votre connexion.',
+ empty_t:'Aucune annonce pour le moment.',empty_b:'Publier la première annonce',need_acc:'Connectez-vous ou créez votre compte pour publier une annonce.',
+ phone_note:'Ce numéro sera visible par les acheteurs (pour WhatsApp). Indiquez l’indicatif du pays.',
+ a_save:'Enregistrer',a_edit:'Modifier mon profil',a_cancel:'Annuler',a_email:'Adresse e-mail',a_pw_hint:'6 caractères minimum',
+ a_signup:'Créer un compte',a_login:'Se connecter',a_to_login:'J’ai déjà un compte',a_to_signup:'Je n’ai pas encore de compte',a_reset:'Mot de passe oublié ?',a_reset_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',a_logout:'Se déconnecter',
+ e_bad:'E-mail ou mot de passe incorrect.',e_exists:'Cette adresse e-mail a déjà un compte.',e_weak:'Mot de passe trop court (6 caractères minimum).',e_mail:'Adresse e-mail invalide.',e_net:'Problème de connexion. Réessayez.',e_many:'Trop d’essais. Réessayez plus tard.',e_first:'Saisissez d’abord votre e-mail.',
+ del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
+ m_note:'Aperçu : la messagerie intégrée arrive bientôt. En attendant, contactez les vendeurs par WhatsApp.'},
+en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
+ foot:'Bukindi Commerce · Founder: Zoundi Christian · Beta version.',
+ loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
+ empty_t:'No listings yet.',empty_b:'Post the first listing',need_acc:'Sign in or create your account to post a listing.',
+ phone_note:'This number will be visible to buyers (for WhatsApp). Include the country code.',
+ a_save:'Save',a_edit:'Edit my profile',a_cancel:'Cancel',a_email:'Email address',a_pw_hint:'6 characters minimum',
+ a_signup:'Create account',a_login:'Sign in',a_to_login:'I already have an account',a_to_signup:'I do not have an account yet',a_reset:'Forgot your password?',a_reset_ok:'Email sent. Check your inbox.',a_logout:'Sign out',
+ e_bad:'Wrong email or password.',e_exists:'This email already has an account.',e_weak:'Password too short (6 characters minimum).',e_mail:'Invalid email address.',e_net:'Connection problem. Try again.',e_many:'Too many attempts. Try again later.',e_first:'Enter your email first.',
+ del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
+ m_note:'Preview: built-in messaging is coming soon. Until then, contact sellers on WhatsApp.'},
+pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
+ foot:'Bukindi Commerce · Fundador: Zoundi Christian · Versão beta.',
+ loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
+ empty_t:'Ainda não há anúncios.',empty_b:'Publicar o primeiro anúncio',need_acc:'Inicie sessão ou crie a sua conta para publicar um anúncio.',
+ phone_note:'Este número será visível para os compradores (para WhatsApp). Inclua o indicativo do país.',
+ a_save:'Guardar',a_edit:'Editar o meu perfil',a_cancel:'Cancelar',a_email:'Endereço de e-mail',a_pw_hint:'Mínimo de 6 caracteres',
+ a_signup:'Criar conta',a_login:'Iniciar sessão',a_to_login:'Já tenho conta',a_to_signup:'Ainda não tenho conta',a_reset:'Esqueceu-se da palavra-passe?',a_reset_ok:'E-mail enviado. Verifique a caixa de entrada.',a_logout:'Terminar sessão',
+ e_bad:'E-mail ou palavra-passe incorretos.',e_exists:'Este e-mail já tem uma conta.',e_weak:'Palavra-passe demasiado curta (mínimo 6 caracteres).',e_mail:'Endereço de e-mail inválido.',e_net:'Problema de ligação. Tente novamente.',e_many:'Demasiadas tentativas. Tente mais tarde.',e_first:'Indique primeiro o seu e-mail.',
+ del:'Eliminar anúncio',del_ok:'Confirmar eliminação',deleted:'Anúncio eliminado.',err:'Não foi possível guardar. Tente novamente.',publishing:'A publicar…',
+ m_note:'Pré-visualização: a mensagem integrada chega em breve. Até lá, contacte os vendedores pelo WhatsApp.'},
+ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
+ foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نسخة تجريبية.',
+ loading:'جارٍ التحميل…',slow:'الاتصال بطيء. قد لا تكون الإعلانات محدّثة.',offline:'تعذّر الوصول إلى الخدمة. تحقق من اتصالك.',
+ empty_t:'لا توجد إعلانات بعد.',empty_b:'انشر أول إعلان',need_acc:'سجّل الدخول أو أنشئ حسابك لنشر إعلان.',
+ phone_note:'سيكون هذا الرقم ظاهرًا للمشترين (لواتساب). أضف رمز البلد.',
+ a_save:'حفظ',a_edit:'تعديل ملفي',a_cancel:'إلغاء',a_email:'البريد الإلكتروني',a_pw_hint:'6 أحرف على الأقل',
+ a_signup:'إنشاء حساب',a_login:'تسجيل الدخول',a_to_login:'لدي حساب بالفعل',a_to_signup:'ليس لدي حساب بعد',a_reset:'نسيت كلمة المرور؟',a_reset_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',a_logout:'تسجيل الخروج',
+ e_bad:'البريد الإلكتروني أو كلمة المرور غير صحيحة.',e_exists:'هذا البريد لديه حساب بالفعل.',e_weak:'كلمة المرور قصيرة جدًا (6 أحرف على الأقل).',e_mail:'عنوان بريد إلكتروني غير صالح.',e_net:'مشكلة في الاتصال. حاول مرة أخرى.',e_many:'محاولات كثيرة. حاول لاحقًا.',e_first:'أدخل بريدك الإلكتروني أولًا.',
+ del:'حذف الإعلان',del_ok:'تأكيد الحذف',deleted:'تم حذف الإعلان.',err:'تعذّر الحفظ. حاول مرة أخرى.',publishing:'جارٍ النشر…',
+ m_note:'معاينة: المراسلة المدمجة قريبًا. حتى ذلك الحين تواصل مع البائعين عبر واتساب.'}
+};
+Object.keys(L2).forEach(function(k){Object.keys(L2[k]).forEach(function(j){L[k][j]=L2[k][j]})});
+
+var firebaseConfig={
+  apiKey:"AIzaSyBapHc-A2E0-BGDJFmpZgmawfmddLMPLzM",
+  authDomain:"bukindi-commerce.firebaseapp.com",
+  projectId:"bukindi-commerce",
+  storageBucket:"bukindi-commerce.firebasestorage.app",
+  messagingSenderId:"46730821561",
+  appId:"1:46730821561:web:e3d0941873ba14284a4068"
+};
+
+var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',threads={},cur=null,photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
+var app=null,auth=null,db=null,uid=null,status='loading',authReady=false,busy=false,favQ=Promise.resolve();
+try{lang=localStorage.getItem('bk-lang')||'fr';if(!L[lang])lang='fr'}catch(e){}
+var $=function(i){return document.getElementById(i)};
+function t(k){return (L[lang]&&L[lang][k])||L.fr[k]||k}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function loc(){return lang==='ar'?'ar-u-nu-latn':lang}
+function country(cc){try{return new Intl.DisplayNames([loc()],{type:'region'}).of(cc)||cc}catch(e){return cc}}
+function money(p,c){try{return new Intl.NumberFormat(loc(),{style:'currency',currency:c,maximumFractionDigits:0}).format(p)}catch(e){return p+' '+c}}
+function ttl(p){return p.t?(p.t[lang]||p.t.fr||''):p.title}
+function desc(p){return p.d?(p.d[lang]||p.d.fr||''):p.text}
+function byId(id){return P.filter(function(x){return String(x.id)===String(id)})[0]}
+function toast(m){var el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){el.hidden=true},2800)}
+var HEART='<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C1 8.6 2.9 5 6.3 5c2 0 3.7 1.1 4.7 2.7h2C14 6.1 15.700 5 17.700 5 21.100 5 23 8.600 21.600 11.800 19.500 16.400 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+var WAI='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.700 13.600L3 21l4.500-1.200A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8.500c0 3.500 3 6.500 6.500 6.500l1-2-2.200-1-1 1c-1-.5-2-1.500-2.500-2.500l1-1-1-2.200z" fill="currentColor"/></svg>';
+var CHK='<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.600 2 3.200-.2 1 3 2.600 1.900-1 3.100 1 3.100-2.600 1.900-1 3-3.200-.2L12 22l-2.600-2-3.200.2-1-3L2.600 15.300l1-3.100-1-3.100L5.200 7.200l1-3 3.200.2z" fill="currentColor"/><path d="M8 12l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+
+/* Everything read from the database is treated as untrusted text. */
+function clean(id,d){
+  return {id:id,cat:CATS.indexOf(d.cat)>-1?d.cat:'craft',art:ARTS.indexOf(d.art)>-1?d.art:'',cc:String(d.cc||''),city:String(d.city||''),
+   price:Number(d.price)||0,cur:/^[A-Z]{3}$/.test(d.cur)?d.cur:'XOF',cond:['new','used','refurb'].indexOf(d.cond)>-1?d.cond:'new',
+   dv:['pickup','national','border'].indexOf(d.dv)>-1?d.dv:'pickup',seller:String(d.seller||''),ownerId:String(d.ownerId||''),phone:String(d.phone||''),
+   title:String(d.title||''),text:String(d.text||''),t:null,d:null,
+   imgs:Array.isArray(d.imgs)?d.imgs.filter(function(x){return typeof x==='string'&&x.indexOf('data:image/jpeg;base64,')===0&&x.length<400000}).slice(0,3):[],
+   v:d.v?1:0,r:0,n:0,ts:Number(d.ts)||0};
+}
+function media(p,i){var s=p.imgs[i||0];return s?'<img src="'+esc(s)+'" alt="" loading="lazy">':art(p.art||DEFART[p.cat]||'basket')}
+function waLink(p){var base=p.phone&&/\d/.test(p.phone)?'https://wa.me/'+p.phone.replace(/\D/g,''):'https://wa.me/';return base+'?text='+encodeURIComponent(t('wa_msg')+' '+ttl(p))}
+
+function fillSelect(el,items,keep){var v=keep?el.value:null;el.innerHTML=items.map(function(i){return '<option value="'+i[0]+'">'+esc(i[1])+'</option>'}).join('');if(v!==null&&items.some(function(i){return i[0]===v}))el.value=v}
+function applyLang(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(function(e){e.textContent=t(e.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(e){e.placeholder=t(e.dataset.i18nPh)});
+  $('lang').value=lang;
+  var cs=CCS.map(function(c){return [c,country(c)]});
+  fillSelect($('fcountry'),[['all',t('all_c')]].concat(cs),true);
+  fillSelect($('s_country'),cs,true);
+  fillSelect($('s_cat'),CATS.map(function(c){return [c,t('cat_'+c)]}),true);
+  fillSelect($('s_cond'),[['new',t('cond_new')],['used',t('cond_used')],['refurb',t('cond_refurb')]],true);
+  fillSelect($('s_deliv'),[['pickup',t('dv_pickup')],['national',t('dv_national')],['border',t('dv_border')]],true);
+  renderCats();renderGrid();renderThreads();renderAcc();renderSellGate();renderThumbs();if(openId)renderSheet();
+}
+function renderCats(){
+  $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'">'+esc(t('cat_'+c))+'</button>'}).join('')+
+   '<button type="button" class="chip fav" data-favonly="1" aria-pressed="'+favOnly+'">'+HEART.replace('width="20" height="20"','width="16" height="16"')+esc(t('favs'))+'</button>';
+}
+function who(p){return '<div class="who"><span>'+esc(p.seller)+'</span>'+(p.v?'<span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</div>'}
+function renderGrid(){
+  var g=$('grid');
+  if(status==='loading'||status==='offline'){$('count').textContent='';g.innerHTML='<div class="empty" style="grid-column:1/-1">'+esc(t(status==='loading'?'loading':'offline'))+'</div>';return}
+  var q=$('q').value.trim().toLowerCase(),fc=$('fcountry').value;
+  var list=P.filter(function(p){
+    return (cat==='all'||p.cat===cat)&&(fc==='all'||p.cc===fc)&&(!favOnly||favs[p.id])&&(!q||ttl(p).toLowerCase().indexOf(q)>-1);
+  });
+  $('count').textContent=list.length+' '+t('count')+(status==='slow'?' · '+t('slow'):'');
+  if(!P.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px"><b>'+esc(t('empty_t'))+'</b></p><a class="btn" href="#vendre">'+esc(t('empty_b'))+'</a></div>';return}
+  g.innerHTML=list.length?list.map(function(p){
+    var f=!!favs[p.id];
+    return '<article class="card"><button class="ph" data-open="'+esc(p.id)+'" aria-label="'+esc(ttl(p))+'">'+media(p)+'</button>'+
+    '<button class="heart" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'" aria-label="'+esc(t(f?'fav_del':'fav_add'))+'">'+HEART+'</button>'+
+    '<div class="body"><span class="tag">'+esc(money(p.price,p.cur))+'</span><h3><button type="button" data-open="'+esc(p.id)+'">'+esc(ttl(p))+'</button></h3>'+
+    '<div class="meta">'+esc(p.city)+', '+esc(country(p.cc))+'</div>'+who(p)+
+    '<div class="acts"><a class="btn wa sm" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn alt sm" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button></div></div></article>';
+  }).join(''):'<div class="empty" style="grid-column:1/-1">'+esc(t('none'))+'</div>';
+}
+function renderSheet(){
+  var p=byId(openId);if(!p)return;
+  var n=p.imgs.length?p.imgs.length:1;if(gi>=n)gi=0;
+  var th='';if(n>1){th='<div class="gal-th">';for(var i=0;i<n;i++)th+='<button type="button" data-gi="'+i+'" aria-pressed="'+(i===gi)+'">'+media(p,i)+'</button>';th+='</div>'}
+  var f=!!favs[p.id],canDel=!!uid&&p.ownerId===uid;
+  $('sheet').innerHTML='<button class="x" id="xbtn" type="button" aria-label="'+esc(t('close'))+'">×</button><div class="sheet-grid"><div><div class="gal-main">'+media(p,gi)+'</div>'+th+'</div>'+
+  '<div class="det"><h2 id="sheetTitle">'+esc(ttl(p))+'</h2><div class="big">'+esc(money(p.price,p.cur))+'</div>'+
+  (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+
+  '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd>'+esc(p.seller)+(p.v?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</dd></dl>'+
+  '<div class="btnrow"><a class="btn wa" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
+  (canDel?'<button class="btn alt" data-del="'+esc(p.id)+'" style="color:var(--danger)">'+esc(t(confirmDel?'del_ok':'del'))+'</button>':'')+
+  '<p class="tip">'+esc(t('tip'))+'</p></div></div>';
+}
+function openSheet(id){lastFocus=document.activeElement;openId=id;gi=0;confirmDel=false;renderSheet();$('ov').hidden=false;document.body.style.overflow='hidden';setTimeout(function(){var x=$('xbtn');if(x)x.focus()},0)}
+function closeSheet(){openId=null;confirmDel=false;$('ov').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)try{lastFocus.focus()}catch(e){}}
+function renderThreads(){
+  var names=Object.keys(threads);
+  $('threads').innerHTML=names.map(function(n){return '<button type="button" class="chip" data-th="'+esc(n)+'" aria-pressed="'+(n===cur)+'">'+esc(n)+'</button>'}).join('');
+  if(!names.length){$('chatBox').innerHTML='<div class="empty">'+esc(t('m_none'))+'</div>';return}
+  var msgs=threads[cur]||[];
+  $('chatBox').innerHTML='<div class="chat" id="chat">'+msgs.map(function(m){return '<div class="msg'+(m.me?' me':'')+'">'+esc(m.k?t(m.k):m.x)+'</div>'}).join('')+'</div><form class="send" id="sendForm"><input id="msgIn" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button></form>';
+  var c=$('chat');c.scrollTop=c.scrollHeight;
+}
+function renderThumbs(){
+  $('thumbs').innerHTML=photos.map(function(s,i){return '<div class="thumb"><img src="'+s.url+'" alt=""><button type="button" data-rm="'+i+'" aria-label="×">×</button></div>'}).join('');
+}
+function renderSellGate(){
+  var note=$('sellNote'),panel=$('sellPanel'),msg='',link=false;
+  if(!authReady&&status!=='offline'){note.innerHTML='';panel.hidden=true;return}
+  if(status==='offline'){msg=t('offline')}
+  else if(!uid||!profile){msg=t('need_acc');link=true}
+  note.innerHTML=msg?'<div class="empty" style="max-width:600px"><p style="margin:0 0 '+(link?'12':'0')+'px">'+esc(msg)+'</p>'+(link?'<a class="btn" href="#compte">'+esc(t('a_go'))+'</a>':'')+'</div>':'';
+  panel.hidden=!!msg;
+}
+function profileFields(p){
+  return '<div><div style="font-weight:700;font-size:.92rem;margin-bottom:6px">'+esc(t('a_type'))+'</div><div class="seg"><label><input type="radio" name="atype" value="ind"'+(p.type!=='mer'?' checked':'')+'> '+esc(t('a_ind'))+'</label><label><input type="radio" name="atype" value="mer"'+(p.type==='mer'?' checked':'')+'> '+esc(t('a_mer'))+'</label></div></div>'+
+  '<label><span>'+esc(t('a_fn'))+'</span><input id="a_name" required maxlength="60" autocomplete="name" value="'+esc(p.name)+'"></label>'+
+  '<div class="row2"><label><span>'+esc(t('country'))+'</span><select id="a_cc">'+CCS.map(function(c){return '<option value="'+c+'"'+(c===p.cc?' selected':'')+'>'+esc(country(c))+'</option>'}).join('')+'</select></label>'+
+  '<label><span>'+esc(t('a_ph'))+'</span><input id="a_tel" type="tel" required maxlength="24" inputmode="tel" placeholder="+226 70 00 00 00" dir="ltr" value="'+esc(p.tel)+'"></label></div>'+
+  '<span class="meta">'+esc(t('phone_note'))+'</span>';
+}
+function renderAcc(){
+  var b=$('accBox');
+  if(status==='offline'){b.innerHTML='<div class="empty">'+esc(t('offline'))+'</div>';return}
+  if(!authReady){b.innerHTML='<div class="empty">'+esc(t('loading'))+'</div>';return}
+  if(!uid){
+    var su=mode==='signup';
+    b.innerHTML='<form id="authForm" novalidate>'+
+    '<label><span>'+esc(t('a_email'))+'</span><input id="au_email" type="email" required autocomplete="email" inputmode="email" dir="ltr"></label>'+
+    '<label><span>'+esc(t('a_pw'))+'</span><input id="au_pw" type="password" required minlength="6" autocomplete="'+(su?'new-password':'current-password')+'" dir="ltr"></label>'+
+    (su?'<span class="meta">'+esc(t('a_pw_hint'))+'</span>'+profileFields({type:'ind',name:'',cc:'BF',tel:''}):'')+
+    '<button class="btn" type="submit">'+esc(t(su?'a_signup':'a_login'))+'</button>'+
+    '<div class="btnrow"><button class="btn alt" type="button" data-mode="'+(su?'login':'signup')+'">'+esc(t(su?'a_to_login':'a_to_signup'))+'</button>'+(su?'':'<button class="btn alt" type="button" data-reset="1">'+esc(t('a_reset'))+'</button>')+'</div></form>';
+    return;
+  }
+  if(!profile||editing){
+    var p=profile||{type:'ind',name:'',cc:'BF',tel:''};
+    b.innerHTML='<form id="accForm">'+profileFields(p)+
+    '<div class="btnrow"><button class="btn" type="submit">'+esc(t('a_save'))+'</button>'+(profile?'<button class="btn alt" type="button" id="cancelEdit">'+esc(t('a_cancel'))+'</button>':'<button class="btn alt" type="button" id="out">'+esc(t('a_logout'))+'</button>')+'</div></form>';
+    return;
+  }
+  var mm=P.filter(function(x){return x.ownerId===uid}).map(function(p){return '<li>'+esc(ttl(p))+' · '+esc(money(p.price,p.cur))+'</li>'}).join('');
+  b.innerHTML='<div class="profile"><div class="avatar">'+esc(profile.name.charAt(0).toUpperCase())+'</div><div><h2 style="font-size:1.25rem">'+esc(profile.name)+'</h2><div class="meta" dir="ltr" style="text-align:start">'+esc(profile.tel)+'</div></div>'+
+  '<div class="chips"><span class="badge">'+esc(profile.type==='mer'?t('a_mer'):t('a_ind'))+'</span><span class="badge">'+esc(country(profile.cc))+'</span></div>'+
+  '<div><b>'+esc(t('a_mine'))+'</b>'+(mm?'<ul>'+mm+'</ul>':'<p class="meta">'+esc(t('a_none'))+'</p>')+'</div>'+
+  '<div class="btnrow"><button class="btn alt" id="editBtn" type="button">'+esc(t('a_edit'))+'</button><button class="btn alt" id="out" type="button">'+esc(t('a_logout'))+'</button></div></div>';
+}
+function show(){
+  var v=(location.hash||'#annonces').slice(1);
+  if(['annonces','vendre','messages','compte'].indexOf(v)<0)v='annonces';
+  document.querySelectorAll('[data-view]').forEach(function(s){s.hidden=s.id!=='v-'+v});
+  document.querySelectorAll('#nav a').forEach(function(a){if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+}
+/* Photos are resized in the browser and stored inside the listing itself (about 40 KB each, 3 at most). */
+function readImg(file){return new Promise(function(res){
+  var u=URL.createObjectURL(file),im=new Image();
+  im.onload=function(){var m=640,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);try{c.toBlob(function(b){res(b)},'image/jpeg',.65)}catch(e){res(null)}};
+  im.onerror=function(){URL.revokeObjectURL(u);res(null)};im.src=u;
+})}
+function blobToDataUrl(b){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result)};fr.onerror=function(){rej(fr.error)};fr.readAsDataURL(b)})}
+function authMsg(e){
+  var c=(e&&e.code)||'';
+  if(c==='auth/email-already-in-use')return t('e_exists');
+  if(c==='auth/weak-password')return t('e_weak');
+  if(c==='auth/invalid-email')return t('e_mail');
+  if(c==='auth/too-many-requests')return t('e_many');
+  if(c==='auth/network-request-failed')return t('e_net');
+  if(c==='auth/invalid-credential'||c==='auth/wrong-password'||c==='auth/user-not-found'||c==='auth/invalid-login-credentials')return t('e_bad');
+  return t('err');
+}
+
+/* ---- data ---- */
+function startListings(){
+  var timer=setTimeout(function(){if(status==='loading'){status='slow';renderGrid()}},10000);
+  onSnapshot(query(collection(db,'listings'),orderBy('ts','desc'),limit(40)),function(s){
+    clearTimeout(timer);
+    P=s.docs.map(function(d){return clean(d.id,d.data()||{})});
+    status='ready';renderGrid();renderAcc();
+    if(openId){if(byId(openId))renderSheet();else closeSheet()}
+  },function(){clearTimeout(timer);status='offline';renderGrid();renderAcc();renderSellGate()});
+}
+function saveFavs(){var snap=JSON.parse(JSON.stringify(favs)),me=uid;favQ=favQ.then(function(){return setDoc(doc(db,'users',me,'private','favs'),{ids:snap})}).catch(function(){toast(t('err'))})}
+async function loadUser(u){
+  try{
+    var ps=await getDoc(doc(db,'users',u.uid,'private','profile'));
+    if(ps.exists()){var d=ps.data()||{};profile={type:d.type==='mer'?'mer':'ind',name:String(d.name||''),cc:String(d.cc||'BF'),tel:String(d.tel||'')}}
+  }catch(e){}
+  try{
+    var fs=await getDoc(doc(db,'users',u.uid,'private','favs'));
+    if(fs.exists()){var ids=(fs.data()||{}).ids;if(ids&&typeof ids==='object'){Object.keys(ids).forEach(function(k){if(ids[k])favs[k]=true})}}
+  }catch(e){}
+}
+async function doAuth(form){
+  var email=$('au_email').value.trim(),pw=$('au_pw').value;
+  var btn=form.querySelector('button[type=submit]');
+  if(!email||!pw){toast(t(!email?'e_mail':'e_weak'));return}
+  var prof=null;
+  if(mode==='signup'){
+    prof={type:form.querySelector('input[name=atype]:checked').value,name:$('a_name').value.trim(),cc:$('a_cc').value,tel:$('a_tel').value.trim()};
+    if(!prof.name||!prof.tel){toast(t('err'));return}
+  }
+  btn.disabled=true;
+  try{
+    if(prof){
+      var cred=await createUserWithEmailAndPassword(auth,email,pw);
+      profile=prof;
+      await setDoc(doc(db,'users',cred.user.uid,'private','profile'),prof);
+      renderAcc();renderSellGate();toast(t('a_ok'));
+    }else{
+      await signInWithEmailAndPassword(auth,email,pw);
+    }
+  }catch(e){toast(authMsg(e))}
+  finally{btn.disabled=false}
+}
+async function doReset(){
+  var el=$('au_email'),email=el?el.value.trim():'';
+  if(!email){toast(t('e_first'));return}
+  try{await sendPasswordResetEmail(auth,email);toast(t('a_reset_ok'))}catch(e){toast(authMsg(e))}
+}
+async function postListing(form){
+  if(busy||!uid||!profile)return;busy=true;
+  var btn=$('s_go');btn.disabled=true;btn.textContent=t('publishing');
+  try{
+    var imgs=[];for(var i=0;i<photos.length;i++)imgs.push(await blobToDataUrl(photos[i].blob));
+    var cc=$('s_cat').value;
+    await addDoc(collection(db,'listings'),{title:$('s_title').value.trim(),cat:cc,art:DEFART[cc],imgs:imgs,cc:$('s_country').value,city:$('s_city').value.trim(),
+      price:parseFloat($('s_price').value),cur:$('s_cur').value,cond:$('s_cond').value,dv:$('s_deliv').value,text:$('s_desc').value.trim(),
+      seller:profile.name,ownerId:uid,phone:profile.tel,v:0,ts:Date.now()});
+    photos.forEach(function(p){URL.revokeObjectURL(p.url)});photos=[];form.reset();renderThumbs();
+    toast(t('s_ok'));location.hash='#annonces';show();
+  }catch(e){toast(t('err'))}
+  finally{busy=false;btn.disabled=false;btn.textContent=t('s_go')}
+}
+function saveProfile(form){
+  var p={type:form.querySelector('input[name=atype]:checked').value,name:$('a_name').value.trim(),cc:$('a_cc').value,tel:$('a_tel').value.trim()};
+  setDoc(doc(db,'users',uid,'private','profile'),p).then(function(){profile=p;editing=false;renderAcc();renderSellGate();toast(t('a_ok'))}).catch(function(){toast(t('err'))});
+}
+function deleteListing(id){
+  if(!db)return;
+  deleteDoc(doc(db,'listings',id)).then(function(){closeSheet();toast(t('deleted'))}).catch(function(){toast(t('err'))});
+}
+
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-fav]');if(g){var id=g.dataset.fav;if(favs[id])delete favs[id];else favs[id]=true;if(uid)saveFavs();renderGrid();if(openId)renderSheet();return}
+  var m=e.target.closest('[data-msg]');if(m){var p=byId(m.dataset.msg);if(p){var nm=p.seller||'—';if(!threads[nm])threads[nm]=[{me:true,k:'m_hi'}];cur=nm;renderThreads();if(openId)closeSheet();location.hash='#messages';show()}return}
+  var dl=e.target.closest('[data-del]');if(dl){if(!confirmDel){confirmDel=true;renderSheet()}else deleteListing(dl.dataset.del);return}
+  var o=e.target.closest('[data-open]');if(o){openSheet(o.dataset.open);return}
+  var gb=e.target.closest('[data-gi]');if(gb){gi=+gb.dataset.gi;renderSheet();return}
+  if(e.target.id==='xbtn'||e.target.id==='ov'){closeSheet();return}
+  var c=e.target.closest('[data-c]');if(c){cat=c.dataset.c;renderCats();renderGrid();return}
+  if(e.target.closest('[data-favonly]')){favOnly=!favOnly;renderCats();renderGrid();return}
+  var th=e.target.closest('[data-th]');if(th){cur=th.dataset.th;renderThreads();return}
+  var rm=e.target.closest('[data-rm]');if(rm){var x=photos.splice(+rm.dataset.rm,1)[0];if(x)URL.revokeObjectURL(x.url);renderThumbs();return}
+  var md=e.target.closest('[data-mode]');if(md){mode=md.dataset.mode;renderAcc();return}
+  if(e.target.closest('[data-reset]')){doReset();return}
+  if(e.target.id==='editBtn'){editing=true;renderAcc();return}
+  if(e.target.id==='cancelEdit'){editing=false;renderAcc();return}
+  if(e.target.id==='out'){signOut(auth).catch(function(){})}
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&openId){closeSheet();return}
+  if(e.key==='Tab'&&openId){var f=$('sheet').querySelectorAll('button,a[href]');if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+});
+$('s_files').addEventListener('change',function(e){
+  var fl=Array.prototype.slice.call(e.target.files||[]);e.target.value='';
+  if(photos.length+fl.length>3)toast(t('s_max'));
+  fl=fl.slice(0,Math.max(0,3-photos.length));
+  Promise.all(fl.map(readImg)).then(function(r){r.forEach(function(b){if(b&&photos.length<3)photos.push({blob:b,url:URL.createObjectURL(b)})});renderThumbs()});
+});
+document.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(e.target.id==='authForm')doAuth(e.target);
+  else if(e.target.id==='accForm')saveProfile(e.target);
+  else if(e.target.id==='sellForm')postListing(e.target);
+  else if(e.target.id==='sendForm'){
+    var inp=$('msgIn'),v=inp.value.trim();if(!v||!cur)return;
+    var w=cur;threads[w].push({me:true,x:v});renderThreads();
+    setTimeout(function(){if(threads[w]){threads[w].push({me:false,k:'m_re'});if(cur===w)renderThreads()}},900);
+  }
+});
+$('q').addEventListener('input',renderGrid);
+$('fcountry').addEventListener('change',renderGrid);
+$('lang').addEventListener('change',function(e){lang=e.target.value;try{localStorage.setItem('bk-lang',lang)}catch(x){}applyLang()});
+window.addEventListener('hashchange',show);
+
+function init(){
+  try{app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}
+  catch(e){status='offline';authReady=true;renderGrid();renderAcc();renderSellGate();return}
+  startListings();
+  onAuthStateChanged(auth,async function(u){
+    if(u){uid=u.uid;mode='login';await loadUser(u)}
+    else{uid=null;profile=null;favs={};editing=false}
+    authReady=true;
+    renderGrid();renderAcc();renderSellGate();if(openId)renderSheet();
+  },function(){authReady=true;renderAcc();renderSellGate()});
+}
+applyLang();show();init();
+</script>
+</body>
+</html>
