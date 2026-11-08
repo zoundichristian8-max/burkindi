@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Bukindi Commerce</title>
+<title>Burkindi Commerce</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%276%27 fill=%27%23E3A23B%27/%3E%3Cpath d=%27M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z%27 fill=%27%231B2257%27/%3E%3C/svg%3E">
-<meta name="theme-color" content="#1B2257"><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1B2257">
+<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="description" content="Bukindi Commerce : le commerce africain sans frontières.">
+<meta name="description" content="Burkindi Commerce : le commerce africain sans frontières.">
 <style>
 :root{color-scheme:light}
 html{-webkit-text-size-adjust:100%}
@@ -161,7 +162,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
     <header>
       <div class="brand">
         <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="6" fill="#E3A23B"/><path d="M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z" fill="#1B2257"/><path d="M17 14v3.6h3c1.2 0 2-.7 2-1.8s-.8-1.8-2-1.8zm0 8.2v4.2h3.4c1.4 0 2.3-.8 2.3-2.1s-.9-2.1-2.3-2.1z" fill="#E3A23B"/></svg>
-        <div class="brand-t"><b>BUKINDI</b><span>Commerce</span></div>
+        <div class="brand-t"><b>BURKINDI</b><span>Commerce</span></div>
       </div>
       <div class="tools">
         <span class="proto" data-i18n="proto"></span>
@@ -258,6 +259,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 <div class="ov" id="ov" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div></div>
 <div class="toast" id="toast" hidden></div>
 <script type="module">
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -267,7 +269,7 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  h_title:'Achetez et vendez d’un pays à l’autre.',h_sub:'Particuliers et commerçants d’Afrique, au même endroit.',
  tr1:'Vendeurs vérifiés',tr2:'Paiement mobile',tr3:'Livraison entre pays',
  search:'Rechercher un produit…',all_c:'Tous les pays',cat_all:'Tout',cat_fashion:'Mode',cat_food:'Alimentation',cat_tech:'Électronique',cat_beauty:'Beauté',cat_craft:'Artisanat',
- favs:'Favoris',count:'annonce(s)',none:'Aucune annonce ne correspond.',by:'Vendeur',msg:'Message',wa:'WhatsApp',wa_msg:'Bonjour, je suis intéressé(e) par votre annonce Bukindi :',
+ favs:'Favoris',count:'annonce(s)',none:'Aucune annonce ne correspond.',by:'Vendeur',msg:'Message',wa:'WhatsApp',wa_msg:'Bonjour, je suis intéressé(e) par votre annonce Burkindi :',
  fav_add:'Ajouter aux favoris',fav_del:'Retirer des favoris',close:'Fermer',ver:'Vérifié',
  d_cond:'État',cond_new:'Neuf',cond_used:'Occasion',cond_refurb:'Reconditionné',d_loc:'Lieu',d_deliv:'Livraison',dv_pickup:'Retrait sur place',dv_national:'Dans le pays',dv_border:'Entre pays',d_seller:'Vendeur',d_cat:'Catégorie',sales:'ventes',
  tip:'Conseil : rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé.',
@@ -275,12 +277,12 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
- foot:'Bukindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
+ foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
 en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
  h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
  tr1:'Verified sellers',tr2:'Mobile payment',tr3:'Cross-border delivery',
  search:'Search for a product…',all_c:'All countries',cat_all:'All',cat_fashion:'Fashion',cat_food:'Food',cat_tech:'Electronics',cat_beauty:'Beauty',cat_craft:'Crafts',
- favs:'Favorites',count:'listing(s)',none:'No listing matches.',by:'Seller',msg:'Message',wa:'WhatsApp',wa_msg:'Hello, I am interested in your Bukindi listing:',
+ favs:'Favorites',count:'listing(s)',none:'No listing matches.',by:'Seller',msg:'Message',wa:'WhatsApp',wa_msg:'Hello, I am interested in your Burkindi listing:',
  fav_add:'Add to favorites',fav_del:'Remove from favorites',close:'Close',ver:'Verified',
  d_cond:'Condition',cond_new:'New',cond_used:'Used',cond_refurb:'Refurbished',d_loc:'Location',d_deliv:'Delivery',dv_pickup:'Pickup only',dv_national:'Within the country',dv_border:'Across borders',d_seller:'Seller',d_cat:'Category',sales:'sales',
  tip:'Tip: meet the seller in a public place and pay only on receipt, or through a protected payment.',
@@ -288,12 +290,12 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
- foot:'Bukindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
+ foot:'Burkindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
 pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
  h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
  tr1:'Vendedores verificados',tr2:'Pagamento móvel',tr3:'Entrega entre países',
  search:'Procurar um produto…',all_c:'Todos os países',cat_all:'Tudo',cat_fashion:'Moda',cat_food:'Alimentação',cat_tech:'Eletrónica',cat_beauty:'Beleza',cat_craft:'Artesanato',
- favs:'Favoritos',count:'anúncio(s)',none:'Nenhum anúncio corresponde.',by:'Vendedor',msg:'Mensagem',wa:'WhatsApp',wa_msg:'Olá, tenho interesse no seu anúncio no Bukindi:',
+ favs:'Favoritos',count:'anúncio(s)',none:'Nenhum anúncio corresponde.',by:'Vendedor',msg:'Mensagem',wa:'WhatsApp',wa_msg:'Olá, tenho interesse no seu anúncio no Burkindi:',
  fav_add:'Adicionar aos favoritos',fav_del:'Remover dos favoritos',close:'Fechar',ver:'Verificado',
  d_cond:'Estado',cond_new:'Novo',cond_used:'Usado',cond_refurb:'Recondicionado',d_loc:'Local',d_deliv:'Entrega',dv_pickup:'Levantamento no local',dv_national:'Dentro do país',dv_border:'Entre países',d_seller:'Vendedor',d_cat:'Categoria',sales:'vendas',
  tip:'Dica: encontre o vendedor num local público e pague apenas na receção, ou com pagamento protegido.',
@@ -301,7 +303,7 @@ pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anú
  m_title:'Mensagens',m_none:'Sem conversas. Toque em Mensagem num anúncio.',m_ph:'A sua mensagem…',m_send:'Enviar',m_hi:'Olá, este produto ainda está disponível?',m_re:'Olá! Sim, está disponível. Para que país devemos entregar?',
  pay_title:'Pagamento móvel',pay_note:'Em breve: pague e receba com a sua carteira móvel.',
  a_title:'A minha conta',a_type:'Sou',a_ind:'Particular',a_mer:'Comerciante',a_fn:'Nome completo',a_ph:'Telefone',a_pw:'Palavra-passe',a_go:'Criar a minha conta',a_ok:'Conta criada.',a_out:'Terminar sessão',a_mine:'Os meus anúncios',a_none:'Ainda não publicou nada.',a_ver:'Verificação pendente',you:'Você',
- foot:'Bukindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
+ foot:'Burkindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
 ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا حدود',n_list:'الإعلانات',n_sell:'بيع',n_msg:'الرسائل',n_acc:'الحساب',
  h_title:'اشترِ وبِع من بلد إلى آخر.',h_sub:'أفراد وتجار من كل أنحاء أفريقيا في مكان واحد.',
  tr1:'بائعون موثّقون',tr2:'الدفع عبر الجوال',tr3:'توصيل بين البلدان',
@@ -355,7 +357,7 @@ var DEFART={fashion:'cloth',food:'rice',tech:'phone',beauty:'shea',craft:'basket
 var ARTS=['cloth','shea','rice','phone','coffee','sandals','mango','basket'];
 var L2={
 fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direct',tr3:'Annonces dans plusieurs pays',
- foot:'Bukindi Commerce · Fondateur : Zoundi Christian · Version bêta.',
+ foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Version bêta.',
  loading:'Chargement…',slow:'La connexion est lente. Les annonces peuvent ne pas être à jour.',offline:'Impossible de joindre le service. Vérifiez votre connexion.',
  empty_t:'Aucune annonce pour le moment.',empty_b:'Publier la première annonce',need_acc:'Connectez-vous ou créez votre compte pour publier une annonce.',
  phone_note:'Ce numéro sera visible par les acheteurs (pour WhatsApp). Indiquez l’indicatif du pays.',
@@ -365,7 +367,7 @@ fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direc
  del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
  m_note:'Aperçu : la messagerie intégrée arrive bientôt. En attendant, contactez les vendeurs par WhatsApp.'},
 en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
- foot:'Bukindi Commerce · Founder: Zoundi Christian · Beta version.',
+ foot:'Burkindi Commerce · Founder: Zoundi Christian · Beta version.',
  loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
  empty_t:'No listings yet.',empty_b:'Post the first listing',need_acc:'Sign in or create your account to post a listing.',
  phone_note:'This number will be visible to buyers (for WhatsApp). Include the country code.',
@@ -375,7 +377,7 @@ en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3
  del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
  m_note:'Preview: built-in messaging is coming soon. Until then, contact sellers on WhatsApp.'},
 pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
- foot:'Bukindi Commerce · Fundador: Zoundi Christian · Versão beta.',
+ foot:'Burkindi Commerce · Fundador: Zoundi Christian · Versão beta.',
  loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
  empty_t:'Ainda não há anúncios.',empty_b:'Publicar o primeiro anúncio',need_acc:'Inicie sessão ou crie a sua conta para publicar um anúncio.',
  phone_note:'Este número será visível para os compradores (para WhatsApp). Inclua o indicativo do país.',
