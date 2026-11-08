@@ -116,6 +116,9 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .msg{max-width:80%;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);overflow-wrap:anywhere}
 .msg.me{align-self:flex-end;background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
 .send{display:flex;gap:8px}
+.chathead{font-weight:700;margin-bottom:8px;overflow-wrap:anywhere}
+#nav a[data-unread]::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--madder);margin-inline-start:6px;vertical-align:middle}
+.msg small{display:block;opacity:.7;font-size:12px;margin-top:2px}
 .pay{margin-top:20px;display:grid;gap:8px}
 .pay .chip{cursor:default}
 .empty{color:var(--muted);padding:28px;border:2px dashed var(--line);border-radius:8px;text-align:center}
@@ -262,7 +265,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, query, where, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 var L={
 fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Annonces',n_sell:'Vendre',n_msg:'Messages',n_acc:'Compte',
@@ -365,7 +368,7 @@ fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direc
  a_signup:'Créer un compte',a_login:'Se connecter',a_to_login:'J’ai déjà un compte',a_to_signup:'Je n’ai pas encore de compte',a_reset:'Mot de passe oublié ?',a_reset_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',a_logout:'Se déconnecter',
  e_bad:'E-mail ou mot de passe incorrect.',e_exists:'Cette adresse e-mail a déjà un compte.',e_weak:'Mot de passe trop court (6 caractères minimum).',e_mail:'Adresse e-mail invalide.',e_net:'Problème de connexion. Réessayez.',e_many:'Trop d’essais. Réessayez plus tard.',e_first:'Saisissez d’abord votre e-mail.',
  del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
- m_note:'Aperçu : la messagerie intégrée arrive bientôt. En attendant, contactez les vendeurs par WhatsApp.'},
+ m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.'},
 en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Beta version.',
  loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
@@ -375,7 +378,7 @@ en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3
  a_signup:'Create account',a_login:'Sign in',a_to_login:'I already have an account',a_to_signup:'I do not have an account yet',a_reset:'Forgot your password?',a_reset_ok:'Email sent. Check your inbox.',a_logout:'Sign out',
  e_bad:'Wrong email or password.',e_exists:'This email already has an account.',e_weak:'Password too short (6 characters minimum).',e_mail:'Invalid email address.',e_net:'Connection problem. Try again.',e_many:'Too many attempts. Try again later.',e_first:'Enter your email first.',
  del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
- m_note:'Preview: built-in messaging is coming soon. Until then, contact sellers on WhatsApp.'},
+ m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.'},
 pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
  foot:'Burkindi Commerce · Fundador: Zoundi Christian · Versão beta.',
  loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
@@ -385,7 +388,7 @@ pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por What
  a_signup:'Criar conta',a_login:'Iniciar sessão',a_to_login:'Já tenho conta',a_to_signup:'Ainda não tenho conta',a_reset:'Esqueceu-se da palavra-passe?',a_reset_ok:'E-mail enviado. Verifique a caixa de entrada.',a_logout:'Terminar sessão',
  e_bad:'E-mail ou palavra-passe incorretos.',e_exists:'Este e-mail já tem uma conta.',e_weak:'Palavra-passe demasiado curta (mínimo 6 caracteres).',e_mail:'Endereço de e-mail inválido.',e_net:'Problema de ligação. Tente novamente.',e_many:'Demasiadas tentativas. Tente mais tarde.',e_first:'Indique primeiro o seu e-mail.',
  del:'Eliminar anúncio',del_ok:'Confirmar eliminação',deleted:'Anúncio eliminado.',err:'Não foi possível guardar. Tente novamente.',publishing:'A publicar…',
- m_note:'Pré-visualização: a mensagem integrada chega em breve. Até lá, contacte os vendedores pelo WhatsApp.'},
+ m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.'},
 ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
  foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نسخة تجريبية.',
  loading:'جارٍ التحميل…',slow:'الاتصال بطيء. قد لا تكون الإعلانات محدّثة.',offline:'تعذّر الوصول إلى الخدمة. تحقق من اتصالك.',
@@ -395,7 +398,7 @@ ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر 
  a_signup:'إنشاء حساب',a_login:'تسجيل الدخول',a_to_login:'لدي حساب بالفعل',a_to_signup:'ليس لدي حساب بعد',a_reset:'نسيت كلمة المرور؟',a_reset_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',a_logout:'تسجيل الخروج',
  e_bad:'البريد الإلكتروني أو كلمة المرور غير صحيحة.',e_exists:'هذا البريد لديه حساب بالفعل.',e_weak:'كلمة المرور قصيرة جدًا (6 أحرف على الأقل).',e_mail:'عنوان بريد إلكتروني غير صالح.',e_net:'مشكلة في الاتصال. حاول مرة أخرى.',e_many:'محاولات كثيرة. حاول لاحقًا.',e_first:'أدخل بريدك الإلكتروني أولًا.',
  del:'حذف الإعلان',del_ok:'تأكيد الحذف',deleted:'تم حذف الإعلان.',err:'تعذّر الحفظ. حاول مرة أخرى.',publishing:'جارٍ النشر…',
- m_note:'معاينة: المراسلة المدمجة قريبًا. حتى ذلك الحين تواصل مع البائعين عبر واتساب.'}
+ m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.'}
 };
 Object.keys(L2).forEach(function(k){Object.keys(L2[k]).forEach(function(j){L[k][j]=L2[k][j]})});
 
@@ -408,7 +411,7 @@ var firebaseConfig={
   appId:"1:46730821561:web:e3d0941873ba14284a4068"
 };
 
-var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',threads={},cur=null,photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
+var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',cur=null,chats=[],msgs=[],unsubChats=null,unsubMsgs=null,draft=null,sendBusy=false,seen={},photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
 var app=null,auth=null,db=null,uid=null,status='loading',authReady=false,busy=false,favQ=Promise.resolve();
 try{lang=localStorage.getItem('bk-lang')||'fr';if(!L[lang])lang='fr'}catch(e){}
 var $=function(i){return document.getElementById(i)};
@@ -489,13 +492,90 @@ function renderSheet(){
 }
 function openSheet(id){lastFocus=document.activeElement;openId=id;gi=0;confirmDel=false;renderSheet();$('ov').hidden=false;document.body.style.overflow='hidden';setTimeout(function(){var x=$('xbtn');if(x)x.focus()},0)}
 function closeSheet(){openId=null;confirmDel=false;$('ov').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)try{lastFocus.focus()}catch(e){}}
+function isUnread(c){return !!c.lastFrom&&c.lastFrom!==uid&&c.ts>(seen[c.id]||0)}
+function updateUnread(){
+  var a=document.querySelector('#nav a[data-v=messages]');if(!a)return;
+  if(uid&&chats.some(isUnread))a.setAttribute('data-unread','1');else a.removeAttribute('data-unread');
+}
 function renderThreads(){
-  var names=Object.keys(threads);
-  $('threads').innerHTML=names.map(function(n){return '<button type="button" class="chip" data-th="'+esc(n)+'" aria-pressed="'+(n===cur)+'">'+esc(n)+'</button>'}).join('');
-  if(!names.length){$('chatBox').innerHTML='<div class="empty">'+esc(t('m_none'))+'</div>';return}
-  var msgs=threads[cur]||[];
-  $('chatBox').innerHTML='<div class="chat" id="chat">'+msgs.map(function(m){return '<div class="msg'+(m.me?' me':'')+'">'+esc(m.k?t(m.k):m.x)+'</div>'}).join('')+'</div><form class="send" id="sendForm"><input id="msgIn" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button></form>';
-  var c=$('chat');c.scrollTop=c.scrollHeight;
+  var box=$('chatBox');
+  if(!uid){$('threads').innerHTML='';box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_login'))+' <a href="#compte">'+esc(t('n_acc'))+'</a></div>';return}
+  var list=chats.slice();if(draft&&!list.some(function(c){return c.id===draft.id}))list.unshift(draft);
+  $('threads').innerHTML=list.map(function(c){var lb=c.other+' · '+c.title;if(lb.length>40)lb=lb.slice(0,38)+'…';return '<button type="button" class="chip" data-th="'+esc(c.id)+'" aria-pressed="'+(c.id===cur)+'">'+esc(lb)+(isUnread(c)?' •':'')+'</button>'}).join('');
+  if(!list.length){box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_none'))+'</div>';return}
+  var c=list.filter(function(x){return x.id===cur})[0];
+  if(!c){if(cur===null){openChat(list[0].id)}else{cur=null;box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_pick'))+'</div>'}return}
+  if(box.dataset.cur!==c.id||box.dataset.lang!==lang||!$('sendForm')){
+    box.dataset.cur=c.id;box.dataset.lang=lang;
+    box.innerHTML='<div class="chathead" id="chatHead"></div><div class="chat" id="chat"></div><form class="send" id="sendForm"><input id="msgIn" maxlength="1000" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button></form>';
+  }
+  $('chatHead').textContent=c.title+' · '+c.other;
+  var ch=$('chat');
+  ch.innerHTML=msgs.length?msgs.map(function(m){return '<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
+  ch.scrollTop=ch.scrollHeight;
+}
+function cleanChat(id,d){
+  var m=Array.isArray(d.members)?d.members.slice(0,2).map(String):[];
+  var buyer=m[0]===uid;
+  return {id:id,members:m,listingId:String(d.listingId||''),title:String(d.title||'').slice(0,80),bn:String(d.bn||'').slice(0,60),sn:String(d.sn||'').slice(0,60),
+    other:String((buyer?d.sn:d.bn)||'').slice(0,60)||'—',last:String(d.last||'').slice(0,200),lastFrom:String(d.lastFrom||''),ts:Number(d.ts)||0};
+}
+function seenLoad(){try{seen=JSON.parse(localStorage.getItem('bk-seen-'+uid)||'{}')||{}}catch(e){seen={}}}
+function seenSave(){try{localStorage.setItem('bk-seen-'+uid,JSON.stringify(seen))}catch(e){}}
+function markSeen(){
+  var c=chats.filter(function(x){return x.id===cur})[0];
+  if(c&&c.ts>(seen[c.id]||0)){seen[c.id]=c.ts;seenSave()}
+  updateUnread();
+}
+function startChats(){
+  if(unsubChats)unsubChats();
+  var me=uid;
+  unsubChats=onSnapshot(query(collection(db,'chats'),where('members','array-contains',me)),function(s){
+    chats=s.docs.map(function(d){return cleanChat(d.id,d.data()||{})}).sort(function(a,b){return b.ts-a.ts});
+    if(draft&&chats.some(function(c){return c.id===draft.id}))draft=null;
+    if(location.hash==='#messages')markSeen();else updateUnread();
+    renderThreads();
+  },function(){});
+}
+function stopChats(){
+  if(unsubChats){unsubChats();unsubChats=null}
+  if(unsubMsgs){unsubMsgs();unsubMsgs=null}
+  chats=[];msgs=[];cur=null;draft=null;seen={};updateUnread();
+}
+function openChat(id){
+  cur=id;msgs=[];
+  if(unsubMsgs){unsubMsgs();unsubMsgs=null}
+  var isNew=draft&&draft.id===id&&!draft.sent;
+  if(!isNew){
+    unsubMsgs=onSnapshot(query(collection(db,'chats',id,'msgs'),orderBy('ts','desc'),limit(100)),function(s){
+      if(cur!==id)return;
+      msgs=s.docs.map(function(d){var x=d.data()||{};return {from:String(x.from||''),text:String(x.text||'').slice(0,1000),ts:Number(x.ts)||0}}).sort(function(a,b){return a.ts-b.ts});
+      if(location.hash==='#messages')markSeen();
+      renderThreads();
+    },function(){});
+  }
+  renderThreads();
+}
+async function sendMsg(){
+  var inp=$('msgIn');if(!inp||!uid||!cur||sendBusy)return;
+  var v=inp.value.trim().slice(0,1000);if(!v)return;
+  var c=(draft&&draft.id===cur)?draft:chats.filter(function(x){return x.id===cur})[0];if(!c)return;
+  sendBusy=true;var now=Date.now(),first=!!(c.draft&&!c.sent);
+  try{
+    if(first){await setDoc(doc(db,'chats',c.id),{members:c.members,listingId:c.listingId,title:c.title,bn:c.bn,sn:c.sn,last:v.slice(0,200),lastFrom:uid,ts:now});c.sent=true}
+    await addDoc(collection(db,'chats',c.id,'msgs'),{from:uid,text:v,ts:now});
+    if(!first)await updateDoc(doc(db,'chats',c.id),{last:v.slice(0,200),lastFrom:uid,ts:now});
+    inp.value='';
+    if(first)openChat(c.id);
+  }catch(e){toast(t('err'))}
+  finally{sendBusy=false}
+}
+function startChatWith(p){
+  if(!uid){if(openId)closeSheet();toast(t('m_login'));location.hash='#compte';show();return}
+  if(p.ownerId===uid){toast(t('m_own'));return}
+  var id=p.id+'_'+uid;
+  if(!chats.some(function(c){return c.id===id}))draft={id:id,members:[uid,p.ownerId],listingId:String(p.id),title:String(p.title).slice(0,80),bn:profile?profile.name:'',sn:p.seller||'',other:p.seller||'—',last:'',lastFrom:'',ts:0,draft:true};
+  openChat(id);if(openId)closeSheet();location.hash='#messages';show();
 }
 function renderThumbs(){
   $('thumbs').innerHTML=photos.map(function(s,i){return '<div class="thumb"><img src="'+s.url+'" alt=""><button type="button" data-rm="'+i+'" aria-label="×">×</button></div>'}).join('');
@@ -545,6 +625,7 @@ function show(){
   var v=(location.hash||'#annonces').slice(1);
   if(['annonces','vendre','messages','compte'].indexOf(v)<0)v='annonces';
   document.querySelectorAll('[data-view]').forEach(function(s){s.hidden=s.id!=='v-'+v});
+  if(v==='messages'&&uid)markSeen();
   document.querySelectorAll('#nav a').forEach(function(a){if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
 }
 /* Photos are resized in the browser and stored inside the listing itself (about 40 KB each, 3 at most). */
@@ -638,14 +719,14 @@ function deleteListing(id){
 
 document.addEventListener('click',function(e){
   var g=e.target.closest('[data-fav]');if(g){var id=g.dataset.fav;if(favs[id])delete favs[id];else favs[id]=true;if(uid)saveFavs();renderGrid();if(openId)renderSheet();return}
-  var m=e.target.closest('[data-msg]');if(m){var p=byId(m.dataset.msg);if(p){var nm=p.seller||'—';if(!threads[nm])threads[nm]=[{me:true,k:'m_hi'}];cur=nm;renderThreads();if(openId)closeSheet();location.hash='#messages';show()}return}
+  var m=e.target.closest('[data-msg]');if(m){var p=byId(m.dataset.msg);if(p)startChatWith(p);return}
   var dl=e.target.closest('[data-del]');if(dl){if(!confirmDel){confirmDel=true;renderSheet()}else deleteListing(dl.dataset.del);return}
   var o=e.target.closest('[data-open]');if(o){openSheet(o.dataset.open);return}
   var gb=e.target.closest('[data-gi]');if(gb){gi=+gb.dataset.gi;renderSheet();return}
   if(e.target.id==='xbtn'||e.target.id==='ov'){closeSheet();return}
   var c=e.target.closest('[data-c]');if(c){cat=c.dataset.c;renderCats();renderGrid();return}
   if(e.target.closest('[data-favonly]')){favOnly=!favOnly;renderCats();renderGrid();return}
-  var th=e.target.closest('[data-th]');if(th){cur=th.dataset.th;renderThreads();return}
+  var th=e.target.closest('[data-th]');if(th){openChat(th.dataset.th);return}
   var rm=e.target.closest('[data-rm]');if(rm){var x=photos.splice(+rm.dataset.rm,1)[0];if(x)URL.revokeObjectURL(x.url);renderThumbs();return}
   var md=e.target.closest('[data-mode]');if(md){mode=md.dataset.mode;renderAcc();return}
   if(e.target.closest('[data-reset]')){doReset();return}
@@ -668,11 +749,7 @@ document.addEventListener('submit',function(e){
   if(e.target.id==='authForm')doAuth(e.target);
   else if(e.target.id==='accForm')saveProfile(e.target);
   else if(e.target.id==='sellForm')postListing(e.target);
-  else if(e.target.id==='sendForm'){
-    var inp=$('msgIn'),v=inp.value.trim();if(!v||!cur)return;
-    var w=cur;threads[w].push({me:true,x:v});renderThreads();
-    setTimeout(function(){if(threads[w]){threads[w].push({me:false,k:'m_re'});if(cur===w)renderThreads()}},900);
-  }
+  else if(e.target.id==='sendForm')sendMsg();
 });
 $('q').addEventListener('input',renderGrid);
 $('fcountry').addEventListener('change',renderGrid);
@@ -684,10 +761,10 @@ function init(){
   catch(e){status='offline';authReady=true;renderGrid();renderAcc();renderSellGate();return}
   startListings();
   onAuthStateChanged(auth,async function(u){
-    if(u){uid=u.uid;mode='login';await loadUser(u)}
-    else{uid=null;profile=null;favs={};editing=false}
+    if(u){uid=u.uid;mode='login';await loadUser(u);seenLoad();startChats()}
+    else{stopChats();uid=null;profile=null;favs={};editing=false}
     authReady=true;
-    renderGrid();renderAcc();renderSellGate();if(openId)renderSheet();
+    renderGrid();renderAcc();renderSellGate();renderThreads();if(openId)renderSheet();
   },function(){authReady=true;renderAcc();renderSellGate()});
 }
 applyLang();show();init();
