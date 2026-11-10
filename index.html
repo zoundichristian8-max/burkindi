@@ -121,6 +121,14 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .vedette .spons{background:var(--accent);color:var(--on-primary);padding:1px 6px;border-radius:4px}
 .boost{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:8px;margin-top:12px}
 .boost .boosto{display:flex;justify-content:space-between;gap:8px;text-align:start}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer;text-align:start}
+.shop{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
+.shop .btnrow{grid-column:1/-1}
+.shoplogo{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--primary);color:var(--on-primary)}
+.shoplogo.ini{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.6rem}
+.shopinfo h2{margin:0;font-size:1.2rem;overflow-wrap:anywhere}
+.shopinfo p{margin:4px 0 0;overflow-wrap:anywhere}
+.shopform{display:grid;gap:10px;margin-top:12px}
 .chathead{font-weight:700;margin-bottom:8px;overflow-wrap:anywhere}
 #nav a[data-unread]::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--madder);margin-inline-start:6px;vertical-align:middle}
 .msg small{display:block;opacity:.7;font-size:12px;margin-top:2px}
@@ -204,6 +212,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
         <select id="fcountry" aria-label="Pays"></select>
       </div>
       <div class="chips" id="cats"></div>
+      <div id="shopHead" hidden></div>
       <div class="countrow"><span id="count"></span></div>
       <div class="grid" id="grid"></div>
     </section>
@@ -373,7 +382,7 @@ fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direc
  a_signup:'Créer un compte',a_login:'Se connecter',a_to_login:'J’ai déjà un compte',a_to_signup:'Je n’ai pas encore de compte',a_reset:'Mot de passe oublié ?',a_reset_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',a_logout:'Se déconnecter',
  e_bad:'E-mail ou mot de passe incorrect.',e_exists:'Cette adresse e-mail a déjà un compte.',e_weak:'Mot de passe trop court (6 caractères minimum).',e_mail:'Adresse e-mail invalide.',e_net:'Problème de connexion. Réessayez.',e_many:'Trop d’essais. Réessayez plus tard.',e_first:'Saisissez d’abord votre e-mail.',
  del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
- m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.',b_discover:'Publicité découverte',b_popular:'Publicité populaire',b_premium:'Publicité premium',b_featured:'Annonce en vedette',b_vedette:'En vedette',b_spons:'Sponsorisé',b_btn:'Mettre en avant mon annonce',b_how:'Choisissez une offre. WhatsApp s’ouvre avec votre demande : nous vous envoyons le moyen de paiement (Orange Money, Moov, MTN, Wave). Votre annonce passe en haut dès réception du paiement.',b_days:'jours',b_active:'Mise en avant jusqu’au',b_msg:'Bonjour, je souhaite mettre en avant mon annonce « {t} » (réf. {id}) sur Burkindi Commerce : {o}, {d} jours, {p} FCFA. Merci de m’envoyer le moyen de paiement.',ad_title:'Administration',ad_off:'Retirer la mise en avant',ad_ok:'Mise à jour.'},
+ m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.',b_discover:'Publicité découverte',b_popular:'Publicité populaire',b_premium:'Publicité premium',b_featured:'Annonce en vedette',b_vedette:'En vedette',b_spons:'Sponsorisé',b_btn:'Mettre en avant mon annonce',b_how:'Choisissez une offre. WhatsApp s’ouvre avec votre demande : nous vous envoyons le moyen de paiement (Orange Money, Moov, MTN, Wave). Votre annonce passe en haut dès réception du paiement.',b_days:'jours',b_active:'Mise en avant jusqu’au',b_msg:'Bonjour, je souhaite mettre en avant mon annonce « {t} » (réf. {id}) sur Burkindi Commerce : {o}, {d} jours, {p} FCFA. Merci de m’envoyer le moyen de paiement.',sh_title:'Ma boutique',sh_name:'Nom de la boutique',sh_desc:'Présentation (300 caractères max)',sh_logo:'Logo (facultatif)',sh_edit:'Modifier ma boutique',sh_create:'Créer ma boutique',sh_view:'Voir ma boutique',sh_all:'Toutes les annonces',sh_none:'Créez votre boutique : nom, logo et présentation visibles par les acheteurs.',sh_ver:'Vérifier ce vendeur',sh_unver:'Retirer le badge Vérifié',ad_title:'Administration',ad_off:'Retirer la mise en avant',ad_ok:'Mise à jour.'},
 en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Beta version.',
  loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
@@ -383,7 +392,7 @@ en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3
  a_signup:'Create account',a_login:'Sign in',a_to_login:'I already have an account',a_to_signup:'I do not have an account yet',a_reset:'Forgot your password?',a_reset_ok:'Email sent. Check your inbox.',a_logout:'Sign out',
  e_bad:'Wrong email or password.',e_exists:'This email already has an account.',e_weak:'Password too short (6 characters minimum).',e_mail:'Invalid email address.',e_net:'Connection problem. Try again.',e_many:'Too many attempts. Try again later.',e_first:'Enter your email first.',
  del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
- m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.',b_discover:'Discovery ad',b_popular:'Popular ad',b_premium:'Premium ad',b_featured:'Featured listing',b_vedette:'Featured',b_spons:'Sponsored',b_btn:'Promote my listing',b_how:'Choose an offer. WhatsApp opens with your request: we send you the payment details (Orange Money, Moov, MTN, Wave). Your listing moves to the top once payment is received.',b_days:'days',b_active:'Promoted until',b_msg:'Hello, I would like to promote my listing “{t}” (ref. {id}) on Burkindi Commerce: {o}, {d} days, {p} FCFA. Please send me the payment details.'},
+ m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.',b_discover:'Discovery ad',b_popular:'Popular ad',b_premium:'Premium ad',b_featured:'Featured listing',b_vedette:'Featured',b_spons:'Sponsored',b_btn:'Promote my listing',b_how:'Choose an offer. WhatsApp opens with your request: we send you the payment details (Orange Money, Moov, MTN, Wave). Your listing moves to the top once payment is received.',b_days:'days',b_active:'Promoted until',b_msg:'Hello, I would like to promote my listing “{t}” (ref. {id}) on Burkindi Commerce: {o}, {d} days, {p} FCFA. Please send me the payment details.',sh_title:'My shop',sh_name:'Shop name',sh_desc:'About your shop (300 characters max)',sh_logo:'Logo (optional)',sh_edit:'Edit my shop',sh_create:'Create my shop',sh_view:'View my shop',sh_all:'All listings',sh_none:'Create your shop: a name, logo and description that buyers can see.'},
 pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
  foot:'Burkindi Commerce · Fundador: Zoundi Christian · Versão beta.',
  loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
@@ -393,7 +402,7 @@ pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por What
  a_signup:'Criar conta',a_login:'Iniciar sessão',a_to_login:'Já tenho conta',a_to_signup:'Ainda não tenho conta',a_reset:'Esqueceu-se da palavra-passe?',a_reset_ok:'E-mail enviado. Verifique a caixa de entrada.',a_logout:'Terminar sessão',
  e_bad:'E-mail ou palavra-passe incorretos.',e_exists:'Este e-mail já tem uma conta.',e_weak:'Palavra-passe demasiado curta (mínimo 6 caracteres).',e_mail:'Endereço de e-mail inválido.',e_net:'Problema de ligação. Tente novamente.',e_many:'Demasiadas tentativas. Tente mais tarde.',e_first:'Indique primeiro o seu e-mail.',
  del:'Eliminar anúncio',del_ok:'Confirmar eliminação',deleted:'Anúncio eliminado.',err:'Não foi possível guardar. Tente novamente.',publishing:'A publicar…',
- m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.',b_discover:'Anúncio descoberta',b_popular:'Anúncio popular',b_premium:'Anúncio premium',b_featured:'Anúncio em destaque',b_vedette:'Em destaque',b_spons:'Patrocinado',b_btn:'Promover o meu anúncio',b_how:'Escolha uma oferta. O WhatsApp abre com o seu pedido: enviamos-lhe os dados de pagamento (Orange Money, Moov, MTN, Wave). O anúncio sobe ao topo quando recebermos o pagamento.',b_days:'dias',b_active:'Promovido até',b_msg:'Olá, quero promover o meu anúncio «{t}» (ref. {id}) no Burkindi Commerce: {o}, {d} dias, {p} FCFA. Envie-me os dados de pagamento, por favor.'},
+ m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.',b_discover:'Anúncio descoberta',b_popular:'Anúncio popular',b_premium:'Anúncio premium',b_featured:'Anúncio em destaque',b_vedette:'Em destaque',b_spons:'Patrocinado',b_btn:'Promover o meu anúncio',b_how:'Escolha uma oferta. O WhatsApp abre com o seu pedido: enviamos-lhe os dados de pagamento (Orange Money, Moov, MTN, Wave). O anúncio sobe ao topo quando recebermos o pagamento.',b_days:'dias',b_active:'Promovido até',b_msg:'Olá, quero promover o meu anúncio «{t}» (ref. {id}) no Burkindi Commerce: {o}, {d} dias, {p} FCFA. Envie-me os dados de pagamento, por favor.',sh_title:'A minha loja',sh_name:'Nome da loja',sh_desc:'Apresentação (máx. 300 caracteres)',sh_logo:'Logótipo (opcional)',sh_edit:'Editar a minha loja',sh_create:'Criar a minha loja',sh_view:'Ver a minha loja',sh_all:'Todos os anúncios',sh_none:'Crie a sua loja: nome, logótipo e apresentação visíveis para os compradores.'},
 ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
  foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نسخة تجريبية.',
  loading:'جارٍ التحميل…',slow:'الاتصال بطيء. قد لا تكون الإعلانات محدّثة.',offline:'تعذّر الوصول إلى الخدمة. تحقق من اتصالك.',
@@ -403,7 +412,7 @@ ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر 
  a_signup:'إنشاء حساب',a_login:'تسجيل الدخول',a_to_login:'لدي حساب بالفعل',a_to_signup:'ليس لدي حساب بعد',a_reset:'نسيت كلمة المرور؟',a_reset_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',a_logout:'تسجيل الخروج',
  e_bad:'البريد الإلكتروني أو كلمة المرور غير صحيحة.',e_exists:'هذا البريد لديه حساب بالفعل.',e_weak:'كلمة المرور قصيرة جدًا (6 أحرف على الأقل).',e_mail:'عنوان بريد إلكتروني غير صالح.',e_net:'مشكلة في الاتصال. حاول مرة أخرى.',e_many:'محاولات كثيرة. حاول لاحقًا.',e_first:'أدخل بريدك الإلكتروني أولًا.',
  del:'حذف الإعلان',del_ok:'تأكيد الحذف',deleted:'تم حذف الإعلان.',err:'تعذّر الحفظ. حاول مرة أخرى.',publishing:'جارٍ النشر…',
- m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.',b_discover:'إعلان الاكتشاف',b_popular:'إعلان شائع',b_premium:'إعلان مميز',b_featured:'إعلان في الواجهة',b_vedette:'في الواجهة',b_spons:'ممول',b_btn:'ترويج إعلاني',b_how:'اختر عرضًا. يفتح واتساب بطلبك وسنرسل لك طريقة الدفع (Orange Money وMoov وMTN وWave). يصعد إعلانك إلى الأعلى فور استلام الدفع.',b_days:'يومًا',b_active:'مروَّج حتى',b_msg:'مرحبًا، أريد ترويج إعلاني «{t}» (المرجع {id}) على Burkindi Commerce: {o}، {d} يومًا، {p} فرنك. أرسلوا لي طريقة الدفع من فضلكم.'}
+ m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.',b_discover:'إعلان الاكتشاف',b_popular:'إعلان شائع',b_premium:'إعلان مميز',b_featured:'إعلان في الواجهة',b_vedette:'في الواجهة',b_spons:'ممول',b_btn:'ترويج إعلاني',b_how:'اختر عرضًا. يفتح واتساب بطلبك وسنرسل لك طريقة الدفع (Orange Money وMoov وMTN وWave). يصعد إعلانك إلى الأعلى فور استلام الدفع.',b_days:'يومًا',b_active:'مروَّج حتى',b_msg:'مرحبًا، أريد ترويج إعلاني «{t}» (المرجع {id}) على Burkindi Commerce: {o}، {d} يومًا، {p} فرنك. أرسلوا لي طريقة الدفع من فضلكم.',sh_title:'متجري',sh_name:'اسم المتجر',sh_desc:'نبذة عن المتجر (300 حرف كحد أقصى)',sh_logo:'الشعار (اختياري)',sh_edit:'تعديل متجري',sh_create:'إنشاء متجري',sh_view:'عرض متجري',sh_all:'كل الإعلانات',sh_none:'أنشئ متجرك: اسم وشعار ونبذة يراها المشترون.'}
 };
 Object.keys(L2).forEach(function(k){Object.keys(L2[k]).forEach(function(j){L[k][j]=L2[k][j]})});
 
@@ -422,7 +431,7 @@ var PAY_WA='22667002840';
 var ADMIN_UID='d8sfGyunXpaNkFWYzYJrNzhrx5V2';
 var BT=[{k:'discover',d:7,p:2500},{k:'popular',d:15,p:5000},{k:'premium',d:30,p:10000},{k:'featured',d:30,p:15000}];
 var BT_RANK={discover:1,popular:2,premium:3,featured:4};
-var Pa=[],Pb=[],boostOpen=false;
+var Pa=[],Pb=[],boostOpen=false,shops={},sellerFilter='',shopEditing=false,shopLogoNew=null;
 var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',cur=null,chats=[],msgs=[],unsubChats=null,unsubMsgs=null,draft=null,sendBusy=false,seen={},photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
 var app=null,auth=null,db=null,uid=null,status='loading',authReady=false,busy=false,favQ=Promise.resolve();
 try{lang=localStorage.getItem('bk-lang')||'fr';if(!L[lang])lang='fr'}catch(e){}
@@ -441,6 +450,53 @@ var WAI='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><pat
 var CHK='<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.600 2 3.200-.2 1 3 2.600 1.900-1 3.100 1 3.100-2.600 1.900-1 3-3.200-.2L12 22l-2.600-2-3.200.2-1-3L2.600 15.300l1-3.100-1-3.100L5.200 7.200l1-3 3.200.2z" fill="currentColor"/><path d="M8 12l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg>';
 
 /* Everything read from the database is treated as untrusted text. */
+function cleanShop(d){var lg=d.logo;return {name:String(d.name||'').slice(0,60),desc:String(d.desc||'').slice(0,300),cc:String(d.cc||''),v:d.v?1:0,
+  logo:(typeof lg==='string'&&lg.indexOf('data:image/jpeg;base64,')===0&&lg.length<80000)?lg:''}}
+function shopOf(p){return shops[p.ownerId]||null}
+function sellerName(p){var sh=shopOf(p);return (sh&&sh.name)||p.seller}
+function isV(p){var sh=shopOf(p);return !!(p.v||(sh&&sh.v))}
+function renderShopHead(){
+  var h=$('shopHead');if(!h)return;
+  if(!sellerFilter){h.hidden=true;h.innerHTML='';return}
+  var sh=shops[sellerFilter]||null,any=P.filter(function(x){return x.ownerId===sellerFilter})[0];
+  var name=(sh&&sh.name)||(any&&any.seller)||'—';
+  var ver=!!((sh&&sh.v)||P.some(function(x){return x.ownerId===sellerFilter&&x.v}));
+  var logo=sh&&sh.logo?'<img class="shoplogo" src="'+esc(sh.logo)+'" alt="">':'<div class="shoplogo ini" aria-hidden="true">'+esc(name.charAt(0).toUpperCase())+'</div>';
+  h.innerHTML='<div class="shop">'+logo+'<div class="shopinfo"><h2>'+esc(name)+(ver?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh&&sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+(sh&&sh.cc?'<div class="meta">'+esc(country(sh.cc))+'</div>':'')+'</div>'+
+    '<div class="btnrow"><button class="btn alt sm" type="button" data-shopclear="1">'+esc(t('sh_all'))+'</button>'+(isAdmin()?'<button class="btn alt sm" type="button" data-shopver="'+esc(sellerFilter)+'">'+esc(t(sh&&sh.v?'sh_unver':'sh_ver'))+'</button>':'')+'</div></div>';
+  h.hidden=false;
+}
+function shopBox(){
+  var sh=shops[uid]||null;
+  if(shopEditing){
+    var pv=shopLogoNew||(sh&&sh.logo)||'';
+    return '<form id="shopForm" class="shopform"><b>'+esc(t('sh_title'))+'</b>'+
+    '<label><span>'+esc(t('sh_name'))+'</span><input id="sh_name" maxlength="60" required value="'+esc((sh&&sh.name)||(profile?profile.name:''))+'"></label>'+
+    '<label><span>'+esc(t('sh_desc'))+'</span><textarea id="sh_desc" maxlength="300" rows="3">'+esc((sh&&sh.desc)||'')+'</textarea></label>'+
+    '<label><span>'+esc(t('sh_logo'))+'</span><input id="sh_file" type="file" accept="image/*"></label>'+
+    '<div id="sh_prev">'+(pv?'<img class="shoplogo" src="'+esc(pv)+'" alt="">':'')+'</div>'+
+    '<div class="btnrow"><button class="btn" type="submit">'+esc(t('a_save'))+'</button><button class="btn alt" type="button" data-shopcancel="1">'+esc(t('a_cancel'))+'</button></div></form>';
+  }
+  if(!sh)return '<div class="shopform"><b>'+esc(t('sh_title'))+'</b><p class="meta" style="margin:0">'+esc(t('sh_none'))+'</p><div class="btnrow"><button class="btn" type="button" data-shopedit="1">'+esc(t('sh_create'))+'</button></div></div>';
+  return '<div class="shopform"><b>'+esc(t('sh_title'))+'</b><div class="shop">'+(sh.logo?'<img class="shoplogo" src="'+esc(sh.logo)+'" alt="">':'<div class="shoplogo ini" aria-hidden="true">'+esc((sh.name||'?').charAt(0).toUpperCase())+'</div>')+
+    '<div class="shopinfo"><h2>'+esc(sh.name)+(sh.v?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+'</div>'+
+    '<div class="btnrow"><button class="btn alt sm" type="button" data-shopedit="1">'+esc(t('sh_edit'))+'</button><button class="btn alt sm" type="button" data-myshop="1">'+esc(t('sh_view'))+'</button></div></div></div>';
+}
+async function saveShop(){
+  if(!uid||!profile||busy)return;
+  var name=$('sh_name').value.trim(),desc=$('sh_desc').value.trim();
+  if(!name){toast(t('err'));return}
+  var data={name:name.slice(0,60),desc:desc.slice(0,300),cc:profile.cc,ts:Date.now()};
+  if(shopLogoNew)data.logo=shopLogoNew;
+  busy=true;
+  try{await setDoc(doc(db,'shops',uid),data,{merge:true});shopEditing=false;shopLogoNew=null;renderAcc();renderGrid();toast(t('a_ok'))}
+  catch(e){toast(t('err'))}
+  finally{busy=false}
+}
+function setShopVerified(id){
+  var cur=shops[id]&&shops[id].v;
+  setDoc(doc(db,'shops',id),{v:cur?0:1},{merge:true}).then(function(){toast(t('ad_ok'))}).catch(function(){toast(t('err'))});
+}
 function tsMs(x){return typeof x==='number'?x:(x&&typeof x.toMillis==='function')?x.toMillis():0}
 function boostRank(p){return p.bt&&p.bu>Date.now()?BT_RANK[p.bt]:0}
 function mergeP(){var m={};Pa.concat(Pb).forEach(function(p){m[p.id]=p});P=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return boostRank(b)-boostRank(a)||b.ts-a.ts})}
@@ -476,13 +532,13 @@ function renderCats(){
   $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'">'+esc(t('cat_'+c))+'</button>'}).join('')+
    '<button type="button" class="chip fav" data-favonly="1" aria-pressed="'+favOnly+'">'+HEART.replace('width="20" height="20"','width="16" height="16"')+esc(t('favs'))+'</button>';
 }
-function who(p){return '<div class="who"><span>'+esc(p.seller)+'</span>'+(p.v?'<span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</div>'}
+function who(p){return '<div class="who"><button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?'<span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</div>'}
 function renderGrid(){
-  var g=$('grid');
+  var g=$('grid');renderShopHead();
   if(status==='loading'||status==='offline'){$('count').textContent='';g.innerHTML='<div class="empty" style="grid-column:1/-1">'+esc(t(status==='loading'?'loading':'offline'))+'</div>';return}
   var q=$('q').value.trim().toLowerCase(),fc=$('fcountry').value;
   var list=P.filter(function(p){
-    return (cat==='all'||p.cat===cat)&&(fc==='all'||p.cc===fc)&&(!favOnly||favs[p.id])&&(!q||ttl(p).toLowerCase().indexOf(q)>-1);
+    return (!sellerFilter||p.ownerId===sellerFilter)&&(cat==='all'||p.cat===cat)&&(fc==='all'||p.cc===fc)&&(!favOnly||favs[p.id])&&(!q||ttl(p).toLowerCase().indexOf(q)>-1);
   });
   $('count').textContent=list.length+' '+t('count')+(status==='slow'?' · '+t('slow'):'');
   if(!P.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px"><b>'+esc(t('empty_t'))+'</b></p><a class="btn" href="#vendre">'+esc(t('empty_b'))+'</a></div>';return}
@@ -503,7 +559,7 @@ function renderSheet(){
   $('sheet').innerHTML='<button class="x" id="xbtn" type="button" aria-label="'+esc(t('close'))+'">×</button><div class="sheet-grid"><div><div class="gal-main">'+media(p,gi)+'</div>'+th+'</div>'+
   '<div class="det"><h2 id="sheetTitle">'+esc(ttl(p))+'</h2><div class="big">'+esc(money(p.price,p.cur))+'</div>'+
   (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+
-  '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd>'+esc(p.seller)+(p.v?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</dd></dl>'+
+  '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd><button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</dd></dl>'+
   '<div class="btnrow"><a class="btn wa" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
   (canDel?'<button class="btn alt" data-del="'+esc(p.id)+'" style="color:var(--danger)">'+esc(t(confirmDel?'del_ok':'del'))+'</button>':'')+
   (uid&&p.ownerId===uid?boostPanel(p):'')+(isAdmin()?adminPanel(p):'')+
@@ -658,7 +714,7 @@ function renderAcc(){
   b.innerHTML='<div class="profile"><div class="avatar">'+esc(profile.name.charAt(0).toUpperCase())+'</div><div><h2 style="font-size:1.25rem">'+esc(profile.name)+'</h2><div class="meta" dir="ltr" style="text-align:start">'+esc(profile.tel)+'</div></div>'+
   '<div class="chips"><span class="badge">'+esc(profile.type==='mer'?t('a_mer'):t('a_ind'))+'</span><span class="badge">'+esc(country(profile.cc))+'</span></div>'+
   '<div><b>'+esc(t('a_mine'))+'</b>'+(mm?'<ul>'+mm+'</ul>':'<p class="meta">'+esc(t('a_none'))+'</p>')+'</div>'+
-  '<div class="btnrow"><button class="btn alt" id="editBtn" type="button">'+esc(t('a_edit'))+'</button><button class="btn alt" id="out" type="button">'+esc(t('a_logout'))+'</button></div></div>';
+  shopBox()+'<div class="btnrow"><button class="btn alt" id="editBtn" type="button">'+esc(t('a_edit'))+'</button><button class="btn alt" id="out" type="button">'+esc(t('a_logout'))+'</button></div></div>';
 }
 function show(){
   var v=(location.hash||'#annonces').slice(1);
@@ -668,9 +724,10 @@ function show(){
   document.querySelectorAll('#nav a').forEach(function(a){if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
 }
 /* Photos are resized in the browser and stored inside the listing itself (about 40 KB each, 3 at most). */
-function readImg(file){return new Promise(function(res){
+function readImg(file){return readImgSz(file,640)}
+function readImgSz(file,max){return new Promise(function(res){
   var u=URL.createObjectURL(file),im=new Image();
-  im.onload=function(){var m=640,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);try{c.toBlob(function(b){res(b)},'image/jpeg',.65)}catch(e){res(null)}};
+  im.onload=function(){var m=max,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);try{c.toBlob(function(b){res(b)},'image/jpeg',.65)}catch(e){res(null)}};
   im.onerror=function(){URL.revokeObjectURL(u);res(null)};im.src=u;
 })}
 function blobToDataUrl(b){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result)};fr.onerror=function(){rej(fr.error)};fr.readAsDataURL(b)})}
@@ -694,6 +751,10 @@ function startListings(){
     status='ready';renderGrid();renderAcc();
     if(openId){if(byId(openId))renderSheet();else closeSheet()}
   },function(){clearTimeout(timer);status='offline';renderGrid();renderAcc();renderSellGate()});
+  onSnapshot(query(collection(db,'shops'),limit(300)),function(s){
+    shops={};s.docs.forEach(function(d){shops[d.id]=cleanShop(d.data()||{})});
+    renderGrid();if(!shopEditing)renderAcc();if(openId)renderSheet();
+  },function(){});
   onSnapshot(query(collection(db,'listings'),where('bu','>',Timestamp.now()),orderBy('bu','desc'),limit(20)),function(s){
     Pb=s.docs.map(function(d){return clean(d.id,d.data()||{})});mergeP();
     renderGrid();if(openId){if(byId(openId))renderSheet();else closeSheet()}
@@ -763,6 +824,12 @@ function deleteListing(id){
 document.addEventListener('click',function(e){
   var g=e.target.closest('[data-fav]');if(g){var id=g.dataset.fav;if(favs[id])delete favs[id];else favs[id]=true;if(uid)saveFavs();renderGrid();if(openId)renderSheet();return}
   var m=e.target.closest('[data-msg]');if(m){var p=byId(m.dataset.msg);if(p)startChatWith(p);return}
+  var sh1=e.target.closest('[data-shop]');if(sh1){sellerFilter=sh1.dataset.shop;if(openId)closeSheet();location.hash='#annonces';show();renderGrid();window.scrollTo(0,0);return}
+  if(e.target.closest('[data-shopclear]')){sellerFilter='';renderGrid();return}
+  if(e.target.closest('[data-myshop]')){sellerFilter=uid;location.hash='#annonces';show();renderGrid();window.scrollTo(0,0);return}
+  if(e.target.closest('[data-shopedit]')){shopEditing=true;shopLogoNew=null;renderAcc();return}
+  if(e.target.closest('[data-shopcancel]')){shopEditing=false;shopLogoNew=null;renderAcc();return}
+  var sv=e.target.closest('[data-shopver]');if(sv){if(isAdmin())setShopVerified(sv.dataset.shopver);return}
   if(e.target.closest('[data-boostbtn]')){boostOpen=!boostOpen;renderSheet();return}
   var sb=e.target.closest('[data-setboost]');if(sb){if(isAdmin())setBoost(sb.dataset.id,sb.dataset.setboost);return}
   var dl=e.target.closest('[data-del]');if(dl){if(!confirmDel){confirmDel=true;renderSheet()}else deleteListing(dl.dataset.del);return}
@@ -789,11 +856,17 @@ $('s_files').addEventListener('change',function(e){
   fl=fl.slice(0,Math.max(0,3-photos.length));
   Promise.all(fl.map(readImg)).then(function(r){r.forEach(function(b){if(b&&photos.length<3)photos.push({blob:b,url:URL.createObjectURL(b)})});renderThumbs()});
 });
+document.addEventListener('change',function(e){
+  if(e.target.id!=='sh_file')return;
+  var f=e.target.files&&e.target.files[0];if(!f)return;
+  readImgSz(f,160).then(function(b){if(!b)return;return blobToDataUrl(b)}).then(function(u){if(!u)return;shopLogoNew=u;var pv=$('sh_prev');if(pv)pv.innerHTML='<img class="shoplogo" src="'+esc(u)+'" alt="">'}).catch(function(){toast(t('err'))});
+});
 document.addEventListener('submit',function(e){
   e.preventDefault();
   if(e.target.id==='authForm')doAuth(e.target);
   else if(e.target.id==='accForm')saveProfile(e.target);
   else if(e.target.id==='sellForm')postListing(e.target);
+  else if(e.target.id==='shopForm')saveShop();
   else if(e.target.id==='sendForm')sendMsg();
 });
 $('q').addEventListener('input',renderGrid);
@@ -807,7 +880,7 @@ function init(){
   startListings();
   onAuthStateChanged(auth,async function(u){
     if(u){uid=u.uid;mode='login';await loadUser(u);seenLoad();startChats()}
-    else{stopChats();uid=null;profile=null;favs={};editing=false}
+    else{stopChats();uid=null;profile=null;favs={};editing=false;shopEditing=false;shopLogoNew=null}
     authReady=true;
     renderGrid();renderAcc();renderSellGate();renderThreads();if(openId)renderSheet();
   },function(){authReady=true;renderAcc();renderSellGate()});
