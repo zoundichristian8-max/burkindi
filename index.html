@@ -140,6 +140,7 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .ov{position:fixed;inset:0;background:rgba(10,13,38,.62);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding-top:env(safe-area-inset-top,0px)}
 .sheet{background:var(--surface);width:100%;max-width:860px;max-height:92vh;overflow-y:auto;border-radius:14px 14px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));position:relative}
 .sheet-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.vid{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;margin-top:4px}.vid.port{aspect-ratio:9/16;max-height:70vh;margin-inline:auto}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vbadge{position:absolute;left:8px;bottom:8px;background:rgba(27,34,87,.88);color:#fff;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:99px}.ph{position:relative}
 .gal-main{aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
 .gal-th{display:flex;gap:8px;margin-top:8px}
 .gal-th button{width:64px;height:48px;border:2px solid transparent;padding:0;border-radius:4px;overflow:hidden;background:none;cursor:pointer}
@@ -244,6 +245,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
           </div>
           <label><span data-i18n="s_deliv"></span><select id="s_deliv"></select></label>
           <label><span data-i18n="s_desc"></span><textarea id="s_desc" maxlength="400"></textarea></label>
+          <label><span data-i18n="vd_lbl"></span><input id="s_vid" type="url" maxlength="300" inputmode="url" autocomplete="off" data-i18n-ph="vd_ph"><span class="meta" data-i18n="vd_hint"></span></label>
           <button class="btn" type="submit" id="s_go" data-i18n="s_go"></button>
         </form>
       </div>
@@ -373,7 +375,7 @@ function art(k){
 var DEFART={fashion:'cloth',food:'rice',tech:'phone',beauty:'shea',craft:'basket'};
 var ARTS=['cloth','shea','rice','phone','coffee','sandals','mango','basket'];
 var L2={
-fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direct',tr3:'Annonces dans plusieurs pays',
+fr:{b_novid:'Pack vidéo : republiez l’annonce avec un lien vidéo pour y avoir accès.',vd_lbl:'Vidéo publicité (facultatif)',vd_ph:'Collez le lien YouTube, TikTok ou Facebook',vd_hint:'Votre vidéo doit d’abord être publiée sur YouTube, TikTok ou Facebook. Collez ensuite son lien ici.',vd_bad:'Lien vidéo non reconnu. Utilisez un lien YouTube, TikTok ou Facebook.',vd_t:'Vidéo',vd_open:'Ouvrir la vidéo',proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direct',tr3:'Annonces dans plusieurs pays',
  foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Version bêta.',
  loading:'Chargement…',slow:'La connexion est lente. Les annonces peuvent ne pas être à jour.',offline:'Impossible de joindre le service. Vérifiez votre connexion.',
  empty_t:'Aucune annonce pour le moment.',empty_b:'Publier la première annonce',need_acc:'Connectez-vous ou créez votre compte pour publier une annonce.',
@@ -382,8 +384,8 @@ fr:{proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direc
  a_signup:'Créer un compte',a_login:'Se connecter',a_to_login:'J’ai déjà un compte',a_to_signup:'Je n’ai pas encore de compte',a_reset:'Mot de passe oublié ?',a_reset_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',a_logout:'Se déconnecter',
  e_bad:'E-mail ou mot de passe incorrect.',e_exists:'Cette adresse e-mail a déjà un compte.',e_weak:'Mot de passe trop court (6 caractères minimum).',e_mail:'Adresse e-mail invalide.',e_net:'Problème de connexion. Réessayez.',e_many:'Trop d’essais. Réessayez plus tard.',e_first:'Saisissez d’abord votre e-mail.',
  del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
- m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.',b_discover:'Publicité découverte',b_popular:'Publicité populaire',b_premium:'Publicité premium',b_featured:'Annonce en vedette',b_vedette:'En vedette',b_spons:'Sponsorisé',b_btn:'Mettre en avant mon annonce',b_how:'Choisissez une offre. WhatsApp s’ouvre avec votre demande : nous vous envoyons le moyen de paiement (Orange Money, Moov, MTN, Wave). Votre annonce passe en haut dès réception du paiement.',b_days:'jours',b_active:'Mise en avant jusqu’au',b_msg:'Bonjour, je souhaite mettre en avant mon annonce « {t} » (réf. {id}) sur Burkindi Commerce : {o}, {d} jours, {p} FCFA. Merci de m’envoyer le moyen de paiement.',sh_title:'Ma boutique',sh_name:'Nom de la boutique',sh_desc:'Présentation (300 caractères max)',sh_logo:'Logo (facultatif)',sh_edit:'Modifier ma boutique',sh_create:'Créer ma boutique',sh_view:'Voir ma boutique',sh_all:'Toutes les annonces',sh_none:'Créez votre boutique : nom, logo et présentation visibles par les acheteurs.',sh_ver:'Vérifier ce vendeur',sh_unver:'Retirer le badge Vérifié',ad_title:'Administration',ad_off:'Retirer la mise en avant',ad_ok:'Mise à jour.'},
-en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
+ m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.',b_discover:'Publicité découverte',b_popular:'Publicité populaire',b_video:'Pack vidéo',b_premium:'Publicité premium',b_featured:'Annonce en vedette',b_vedette:'En vedette',b_spons:'Sponsorisé',b_btn:'Mettre en avant mon annonce',b_how:'Choisissez une offre. WhatsApp s’ouvre avec votre demande : nous vous envoyons le moyen de paiement (Orange Money, Moov, MTN, Wave). Votre annonce passe en haut dès réception du paiement.',b_days:'jours',b_active:'Mise en avant jusqu’au',b_msg:'Bonjour, je souhaite mettre en avant mon annonce « {t} » (réf. {id}) sur Burkindi Commerce : {o}, {d} jours, {p} FCFA. Merci de m’envoyer le moyen de paiement.',sh_title:'Ma boutique',sh_name:'Nom de la boutique',sh_desc:'Présentation (300 caractères max)',sh_logo:'Logo (facultatif)',sh_edit:'Modifier ma boutique',sh_create:'Créer ma boutique',sh_view:'Voir ma boutique',sh_all:'Toutes les annonces',sh_none:'Créez votre boutique : nom, logo et présentation visibles par les acheteurs.',sh_ver:'Vérifier ce vendeur',sh_unver:'Retirer le badge Vérifié',ad_title:'Administration',ad_off:'Retirer la mise en avant',ad_ok:'Mise à jour.'},
+en:{b_novid:'Video pack: repost the listing with a video link to unlock it.',vd_lbl:'Promo video (optional)',vd_ph:'Paste a YouTube, TikTok or Facebook link',vd_hint:'Your video must first be posted on YouTube, TikTok or Facebook. Then paste its link here.',vd_bad:'Video link not recognised. Use a YouTube, TikTok or Facebook link.',vd_t:'Video',vd_open:'Open video',proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Beta version.',
  loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
  empty_t:'No listings yet.',empty_b:'Post the first listing',need_acc:'Sign in or create your account to post a listing.',
@@ -392,8 +394,8 @@ en:{proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3
  a_signup:'Create account',a_login:'Sign in',a_to_login:'I already have an account',a_to_signup:'I do not have an account yet',a_reset:'Forgot your password?',a_reset_ok:'Email sent. Check your inbox.',a_logout:'Sign out',
  e_bad:'Wrong email or password.',e_exists:'This email already has an account.',e_weak:'Password too short (6 characters minimum).',e_mail:'Invalid email address.',e_net:'Connection problem. Try again.',e_many:'Too many attempts. Try again later.',e_first:'Enter your email first.',
  del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
- m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.',b_discover:'Discovery ad',b_popular:'Popular ad',b_premium:'Premium ad',b_featured:'Featured listing',b_vedette:'Featured',b_spons:'Sponsored',b_btn:'Promote my listing',b_how:'Choose an offer. WhatsApp opens with your request: we send you the payment details (Orange Money, Moov, MTN, Wave). Your listing moves to the top once payment is received.',b_days:'days',b_active:'Promoted until',b_msg:'Hello, I would like to promote my listing “{t}” (ref. {id}) on Burkindi Commerce: {o}, {d} days, {p} FCFA. Please send me the payment details.',sh_title:'My shop',sh_name:'Shop name',sh_desc:'About your shop (300 characters max)',sh_logo:'Logo (optional)',sh_edit:'Edit my shop',sh_create:'Create my shop',sh_view:'View my shop',sh_all:'All listings',sh_none:'Create your shop: a name, logo and description that buyers can see.'},
-pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
+ m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.',b_discover:'Discovery ad',b_popular:'Popular ad',b_video:'Video pack',b_premium:'Premium ad',b_featured:'Featured listing',b_vedette:'Featured',b_spons:'Sponsored',b_btn:'Promote my listing',b_how:'Choose an offer. WhatsApp opens with your request: we send you the payment details (Orange Money, Moov, MTN, Wave). Your listing moves to the top once payment is received.',b_days:'days',b_active:'Promoted until',b_msg:'Hello, I would like to promote my listing “{t}” (ref. {id}) on Burkindi Commerce: {o}, {d} days, {p} FCFA. Please send me the payment details.',sh_title:'My shop',sh_name:'Shop name',sh_desc:'About your shop (300 characters max)',sh_logo:'Logo (optional)',sh_edit:'Edit my shop',sh_create:'Create my shop',sh_view:'View my shop',sh_all:'All listings',sh_none:'Create your shop: a name, logo and description that buyers can see.'},
+pt:{b_novid:'Pack vídeo: volte a publicar o anúncio com um link de vídeo para o ativar.',vd_lbl:'Vídeo publicitário (opcional)',vd_ph:'Cole o link do YouTube, TikTok ou Facebook',vd_hint:'O seu vídeo deve primeiro ser publicado no YouTube, TikTok ou Facebook. Depois cole o link aqui.',vd_bad:'Link de vídeo não reconhecido. Use um link do YouTube, TikTok ou Facebook.',vd_t:'Vídeo',vd_open:'Abrir vídeo',proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
  foot:'Burkindi Commerce · Fundador: Zoundi Christian · Versão beta.',
  loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
  empty_t:'Ainda não há anúncios.',empty_b:'Publicar o primeiro anúncio',need_acc:'Inicie sessão ou crie a sua conta para publicar um anúncio.',
@@ -402,8 +404,8 @@ pt:{proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por What
  a_signup:'Criar conta',a_login:'Iniciar sessão',a_to_login:'Já tenho conta',a_to_signup:'Ainda não tenho conta',a_reset:'Esqueceu-se da palavra-passe?',a_reset_ok:'E-mail enviado. Verifique a caixa de entrada.',a_logout:'Terminar sessão',
  e_bad:'E-mail ou palavra-passe incorretos.',e_exists:'Este e-mail já tem uma conta.',e_weak:'Palavra-passe demasiado curta (mínimo 6 caracteres).',e_mail:'Endereço de e-mail inválido.',e_net:'Problema de ligação. Tente novamente.',e_many:'Demasiadas tentativas. Tente mais tarde.',e_first:'Indique primeiro o seu e-mail.',
  del:'Eliminar anúncio',del_ok:'Confirmar eliminação',deleted:'Anúncio eliminado.',err:'Não foi possível guardar. Tente novamente.',publishing:'A publicar…',
- m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.',b_discover:'Anúncio descoberta',b_popular:'Anúncio popular',b_premium:'Anúncio premium',b_featured:'Anúncio em destaque',b_vedette:'Em destaque',b_spons:'Patrocinado',b_btn:'Promover o meu anúncio',b_how:'Escolha uma oferta. O WhatsApp abre com o seu pedido: enviamos-lhe os dados de pagamento (Orange Money, Moov, MTN, Wave). O anúncio sobe ao topo quando recebermos o pagamento.',b_days:'dias',b_active:'Promovido até',b_msg:'Olá, quero promover o meu anúncio «{t}» (ref. {id}) no Burkindi Commerce: {o}, {d} dias, {p} FCFA. Envie-me os dados de pagamento, por favor.',sh_title:'A minha loja',sh_name:'Nome da loja',sh_desc:'Apresentação (máx. 300 caracteres)',sh_logo:'Logótipo (opcional)',sh_edit:'Editar a minha loja',sh_create:'Criar a minha loja',sh_view:'Ver a minha loja',sh_all:'Todos os anúncios',sh_none:'Crie a sua loja: nome, logótipo e apresentação visíveis para os compradores.'},
-ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
+ m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.',b_discover:'Anúncio descoberta',b_popular:'Anúncio popular',b_video:'Pack vídeo',b_premium:'Anúncio premium',b_featured:'Anúncio em destaque',b_vedette:'Em destaque',b_spons:'Patrocinado',b_btn:'Promover o meu anúncio',b_how:'Escolha uma oferta. O WhatsApp abre com o seu pedido: enviamos-lhe os dados de pagamento (Orange Money, Moov, MTN, Wave). O anúncio sobe ao topo quando recebermos o pagamento.',b_days:'dias',b_active:'Promovido até',b_msg:'Olá, quero promover o meu anúncio «{t}» (ref. {id}) no Burkindi Commerce: {o}, {d} dias, {p} FCFA. Envie-me os dados de pagamento, por favor.',sh_title:'A minha loja',sh_name:'Nome da loja',sh_desc:'Apresentação (máx. 300 caracteres)',sh_logo:'Logótipo (opcional)',sh_edit:'Editar a minha loja',sh_create:'Criar a minha loja',sh_view:'Ver a minha loja',sh_all:'Todos os anúncios',sh_none:'Crie a sua loja: nome, logótipo e apresentação visíveis para os compradores.'},
+ar:{b_novid:'باقة الفيديو: أعد نشر الإعلان مع رابط فيديو لتفعيلها.',vd_lbl:'فيديو إعلاني (اختياري)',vd_ph:'الصق رابط يوتيوب أو تيك توك أو فيسبوك',vd_hint:'يجب نشر الفيديو أولاً على يوتيوب أو تيك توك أو فيسبوك، ثم الصق رابطه هنا.',vd_bad:'رابط الفيديو غير معروف. استخدم رابط يوتيوب أو تيك توك أو فيسبوك.',vd_t:'فيديو',vd_open:'فتح الفيديو',proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
  foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نسخة تجريبية.',
  loading:'جارٍ التحميل…',slow:'الاتصال بطيء. قد لا تكون الإعلانات محدّثة.',offline:'تعذّر الوصول إلى الخدمة. تحقق من اتصالك.',
  empty_t:'لا توجد إعلانات بعد.',empty_b:'انشر أول إعلان',need_acc:'سجّل الدخول أو أنشئ حسابك لنشر إعلان.',
@@ -412,7 +414,7 @@ ar:{proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر 
  a_signup:'إنشاء حساب',a_login:'تسجيل الدخول',a_to_login:'لدي حساب بالفعل',a_to_signup:'ليس لدي حساب بعد',a_reset:'نسيت كلمة المرور؟',a_reset_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',a_logout:'تسجيل الخروج',
  e_bad:'البريد الإلكتروني أو كلمة المرور غير صحيحة.',e_exists:'هذا البريد لديه حساب بالفعل.',e_weak:'كلمة المرور قصيرة جدًا (6 أحرف على الأقل).',e_mail:'عنوان بريد إلكتروني غير صالح.',e_net:'مشكلة في الاتصال. حاول مرة أخرى.',e_many:'محاولات كثيرة. حاول لاحقًا.',e_first:'أدخل بريدك الإلكتروني أولًا.',
  del:'حذف الإعلان',del_ok:'تأكيد الحذف',deleted:'تم حذف الإعلان.',err:'تعذّر الحفظ. حاول مرة أخرى.',publishing:'جارٍ النشر…',
- m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.',b_discover:'إعلان الاكتشاف',b_popular:'إعلان شائع',b_premium:'إعلان مميز',b_featured:'إعلان في الواجهة',b_vedette:'في الواجهة',b_spons:'ممول',b_btn:'ترويج إعلاني',b_how:'اختر عرضًا. يفتح واتساب بطلبك وسنرسل لك طريقة الدفع (Orange Money وMoov وMTN وWave). يصعد إعلانك إلى الأعلى فور استلام الدفع.',b_days:'يومًا',b_active:'مروَّج حتى',b_msg:'مرحبًا، أريد ترويج إعلاني «{t}» (المرجع {id}) على Burkindi Commerce: {o}، {d} يومًا، {p} فرنك. أرسلوا لي طريقة الدفع من فضلكم.',sh_title:'متجري',sh_name:'اسم المتجر',sh_desc:'نبذة عن المتجر (300 حرف كحد أقصى)',sh_logo:'الشعار (اختياري)',sh_edit:'تعديل متجري',sh_create:'إنشاء متجري',sh_view:'عرض متجري',sh_all:'كل الإعلانات',sh_none:'أنشئ متجرك: اسم وشعار ونبذة يراها المشترون.'}
+ m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.',b_discover:'إعلان الاكتشاف',b_popular:'إعلان شائع',b_video:'باقة الفيديو',b_premium:'إعلان مميز',b_featured:'إعلان في الواجهة',b_vedette:'في الواجهة',b_spons:'ممول',b_btn:'ترويج إعلاني',b_how:'اختر عرضًا. يفتح واتساب بطلبك وسنرسل لك طريقة الدفع (Orange Money وMoov وMTN وWave). يصعد إعلانك إلى الأعلى فور استلام الدفع.',b_days:'يومًا',b_active:'مروَّج حتى',b_msg:'مرحبًا، أريد ترويج إعلاني «{t}» (المرجع {id}) على Burkindi Commerce: {o}، {d} يومًا، {p} فرنك. أرسلوا لي طريقة الدفع من فضلكم.',sh_title:'متجري',sh_name:'اسم المتجر',sh_desc:'نبذة عن المتجر (300 حرف كحد أقصى)',sh_logo:'الشعار (اختياري)',sh_edit:'تعديل متجري',sh_create:'إنشاء متجري',sh_view:'عرض متجري',sh_all:'كل الإعلانات',sh_none:'أنشئ متجرك: اسم وشعار ونبذة يراها المشترون.'}
 };
 Object.keys(L2).forEach(function(k){Object.keys(L2[k]).forEach(function(j){L[k][j]=L2[k][j]})});
 
@@ -429,8 +431,8 @@ var firebaseConfig={
 var PAY_WA='22667002840';
 /* Identifiant (UID) du compte administrateur : voir Firebase > Authentication > Utilisateurs. */
 var ADMIN_UID='d8sfGyunXpaNkFWYzYJrNzhrx5V2';
-var BT=[{k:'discover',d:7,p:2500},{k:'popular',d:15,p:5000},{k:'premium',d:30,p:10000},{k:'featured',d:30,p:15000}];
-var BT_RANK={discover:1,popular:2,premium:3,featured:4};
+var BT=[{k:'discover',d:7,p:2500},{k:'popular',d:15,p:5000},{k:'video',d:15,p:5000,vid:1},{k:'premium',d:30,p:10000},{k:'featured',d:30,p:15000}];
+var BT_RANK={discover:1,popular:2,video:2,premium:3,featured:4};
 var Pa=[],Pb=[],boostOpen=false,shops={},sellerFilter='',shopEditing=false,shopLogoNew=null;
 var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',cur=null,chats=[],msgs=[],unsubChats=null,unsubMsgs=null,draft=null,sendBusy=false,seen={},photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
 var app=null,auth=null,db=null,uid=null,status='loading',authReady=false,busy=false,favQ=Promise.resolve();
@@ -509,7 +511,22 @@ function clean(id,d){
    dv:['pickup','national','border'].indexOf(d.dv)>-1?d.dv:'pickup',seller:String(d.seller||''),ownerId:String(d.ownerId||''),phone:String(d.phone||''),
    title:String(d.title||''),text:String(d.text||''),t:null,d:null,
    imgs:Array.isArray(d.imgs)?d.imgs.filter(function(x){return typeof x==='string'&&x.indexOf('data:image/jpeg;base64,')===0&&x.length<400000}).slice(0,3):[],
-   v:d.v?1:0,r:0,n:0,ts:Number(d.ts)||0,bt:BT_RANK[d.bt]?d.bt:'',bu:tsMs(d.bu)};
+   v:d.v?1:0,r:0,n:0,ts:Number(d.ts)||0,bt:BT_RANK[d.bt]?d.bt:'',bu:tsMs(d.bu),vid:String(d.vid||'').slice(0,300)};
+}
+function vidInfo(u){
+  u=String(u||'').trim();var m;
+  if(!/^https:\/\//i.test(u)||u.length>300)return null;
+  if((m=u.match(/^https:\/\/(?:www\.|m\.)?youtube\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/)([\w-]{11})/i))||(m=u.match(/^https:\/\/youtu\.be\/([\w-]{11})/i)))
+    return {k:'yt',src:'https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0',port:0};
+  if((m=u.match(/^https:\/\/(?:www\.)?tiktok\.com\/@[\w.-]+\/video\/(\d{8,25})/i)))
+    return {k:'tt',src:'https://www.tiktok.com/embed/v2/'+m[1],port:1};
+  if(/^https:\/\/(?:www\.|m\.|web\.)?facebook\.com\/[^\s]+/i.test(u)&&/(\/videos?\/|\/reel\/|\/watch|[?&]v=)/i.test(u)||/^https:\/\/fb\.watch\/[\w-]+/i.test(u))
+    return {k:'fb',src:'https://www.facebook.com/plugins/video.php?show_text=false&href='+encodeURIComponent(u),port:0};
+  return null;
+}
+function vidBox(p){
+  var v=vidInfo(p.vid);if(!v)return '';
+  return '<div class="vid'+(v.port?' port':'')+'"><iframe src="'+esc(v.src)+'" title="'+esc(t('vd_t'))+'" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen"></iframe></div><a class="meta" href="'+esc(p.vid)+'" target="_blank" rel="noopener">'+esc(t('vd_open'))+' ↗</a>';
 }
 function media(p,i){var s=p.imgs[i||0];return s?'<img src="'+esc(s)+'" alt="" loading="lazy">':art(p.art||DEFART[p.cat]||'basket')}
 function waLink(p){var base=p.phone&&/\d/.test(p.phone)?'https://wa.me/'+p.phone.replace(/\D/g,''):'https://wa.me/';return base+'?text='+encodeURIComponent(t('wa_msg')+' '+ttl(p))}
@@ -544,7 +561,7 @@ function renderGrid(){
   if(!P.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px"><b>'+esc(t('empty_t'))+'</b></p><a class="btn" href="#vendre">'+esc(t('empty_b'))+'</a></div>';return}
   g.innerHTML=list.length?list.map(function(p){
     var f=!!favs[p.id];
-    return '<article class="card'+(boostRank(p)===4?' vedette':'')+'"><button class="ph" data-open="'+esc(p.id)+'" aria-label="'+esc(ttl(p))+'">'+media(p)+'</button>'+
+    return '<article class="card'+(boostRank(p)===4?' vedette':'')+'"><button class="ph" data-open="'+esc(p.id)+'" aria-label="'+esc(ttl(p))+'">'+media(p)+(vidInfo(p.vid)?'<span class="vbadge" aria-hidden="true">▶ '+esc(t('vd_t'))+'</span>':'')+'</button>'+
     '<button class="heart" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'" aria-label="'+esc(t(f?'fav_del':'fav_add'))+'">'+HEART+'</button>'+
     '<div class="body"><span class="tag">'+esc(money(p.price,p.cur))+'</span>'+(boostRank(p)?'<span class="spons">'+esc(t(boostRank(p)===4?'b_vedette':'b_spons'))+'</span>':'')+'<h3><button type="button" data-open="'+esc(p.id)+'">'+esc(ttl(p))+'</button></h3>'+
     '<div class="meta">'+esc(p.city)+', '+esc(country(p.cc))+'</div>'+who(p)+
@@ -558,7 +575,7 @@ function renderSheet(){
   var f=!!favs[p.id],canDel=!!uid&&(p.ownerId===uid||isAdmin());
   $('sheet').innerHTML='<button class="x" id="xbtn" type="button" aria-label="'+esc(t('close'))+'">×</button><div class="sheet-grid"><div><div class="gal-main">'+media(p,gi)+'</div>'+th+'</div>'+
   '<div class="det"><h2 id="sheetTitle">'+esc(ttl(p))+'</h2><div class="big">'+esc(money(p.price,p.cur))+'</div>'+
-  (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+
+  (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+vidBox(p)+
   '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd><button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</dd></dl>'+
   '<div class="btnrow"><a class="btn wa" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
   (canDel?'<button class="btn alt" data-del="'+esc(p.id)+'" style="color:var(--danger)">'+esc(t(confirmDel?'del_ok':'del'))+'</button>':'')+
@@ -570,10 +587,12 @@ function boostPanel(p){
   if(boostOpen){
     h+='<p class="meta" style="margin:0">'+esc(t('b_how'))+'</p>';
     BT.forEach(function(o){
+      if(o.vid&&!vidInfo(p.vid))return;
       var txt=t('b_msg').split('{id}').join(p.id).split('{o}').join(t('b_'+o.k)).split('{d}').join(o.d).split('{p}').join(fmtN(o.p)).split('{t}').join(ttl(p));
       h+='<a class="btn alt boosto" target="_blank" rel="noopener" href="'+esc(payLink(txt))+'"><span>'+esc(t('b_'+o.k))+' · '+o.d+' '+esc(t('b_days'))+'</span><b>'+fmtN(o.p)+' FCFA</b></a>';
     });
   }
+  if(!vidInfo(p.vid))h+='<p class="meta" style="margin:0">'+esc(t('b_novid'))+'</p>';
   if(boostRank(p))h+='<p class="meta" style="margin:0">'+esc(t('b_active'))+' '+esc(new Date(p.bu).toLocaleDateString(lang))+'</p>';
   return h+'</div>';
 }
@@ -803,9 +822,10 @@ async function postListing(form){
   var btn=$('s_go');btn.disabled=true;btn.textContent=t('publishing');
   try{
     var imgs=[];for(var i=0;i<photos.length;i++)imgs.push(await blobToDataUrl(photos[i].blob));
-    var cc=$('s_cat').value;
+    var cc=$('s_cat').value,vid=$('s_vid').value.trim();
+    if(vid&&!vidInfo(vid)){toast(t('vd_bad'));busy=false;btn.disabled=false;btn.textContent=t('s_go');return}
     await addDoc(collection(db,'listings'),{title:$('s_title').value.trim(),cat:cc,art:DEFART[cc],imgs:imgs,cc:$('s_country').value,city:$('s_city').value.trim(),
-      price:parseFloat($('s_price').value),cur:$('s_cur').value,cond:$('s_cond').value,dv:$('s_deliv').value,text:$('s_desc').value.trim(),
+      price:parseFloat($('s_price').value),cur:$('s_cur').value,cond:$('s_cond').value,dv:$('s_deliv').value,text:$('s_desc').value.trim(),vid:vid,
       seller:profile.name,ownerId:uid,phone:profile.tel,v:0,ts:Date.now()});
     photos.forEach(function(p){URL.revokeObjectURL(p.url)});photos=[];form.reset();renderThumbs();
     toast(t('s_ok'));location.hash='#annonces';show();
