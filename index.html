@@ -168,6 +168,66 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 @media (max-width:640px){.filters{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.sheet-grid{grid-template-columns:1fr}}
 @media (min-width:700px){.ov{align-items:center}.sheet{border-radius:14px}}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+
+/* BURKINDI COMMERCE — finition premium inspirée du Faso */
+:root{
+ --bg:#f3eee2;--surface:#fffaf0;--fg:#172044;--muted:#626983;--line:#dfd2bb;
+ --primary:#1b285f;--on-primary:#fff9e9;--accent:#e5a329;--on-accent:#241600;
+ --band:#101b4b;--band-fg:#fff8e9;--weave-bg:#10183e;--madder:#a83d2b;
+}
+body{
+ background-color:var(--bg);
+ background-image:radial-gradient(ellipse at 8% 12%,rgba(229,163,41,.10),transparent 34%),radial-gradient(ellipse at 92% 34%,rgba(27,40,95,.07),transparent 36%),linear-gradient(135deg,rgba(255,255,255,.30),transparent 55%);
+}
+.band{
+ background:linear-gradient(115deg,#0b143d 0%,#1b2b69 54%,#10183e 100%);
+ box-shadow:0 7px 22px rgba(12,20,57,.22);position:relative;z-index:2;
+ border-bottom:1px solid rgba(229,163,41,.65);
+}
+.brand .logo{filter:drop-shadow(0 4px 3px rgba(0,0,0,.32));transform:translateY(-1px)}
+.brand-t b{color:#fff4d9;text-shadow:0 2px 0 #8c5a0d,0 4px 12px rgba(0,0,0,.38);letter-spacing:.045em}
+.brand-t span{color:#e9bd65}
+.proto{border-color:#e9b64e;color:#ffedc7;background:rgba(255,255,255,.05);padding:6px 11px}
+.gear{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 4px 12px rgba(0,0,0,.22);border-color:rgba(255,220,150,.55)}
+.weave{height:24px;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
+nav{border-bottom:1px solid rgba(178,143,83,.35);margin-bottom:26px;position:relative}
+nav a{transition:color .18s,border-color .18s,background .18s;border-radius:10px 10px 0 0}
+nav a[aria-current="page"]{background:linear-gradient(180deg,rgba(229,163,41,.18),transparent);color:var(--primary);border-bottom-color:var(--accent)}
+.hero{
+ position:relative;isolation:isolate;overflow:hidden;min-height:310px;max-width:none;
+ padding:30px clamp(18px,4vw,42px) 26px;border:1px solid rgba(205,164,91,.42);
+ border-radius:22px;background:linear-gradient(105deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.94) 48%,rgba(255,250,240,.40) 100%),url('burkindi-hero-3d.webp') right 42%/auto 125% no-repeat;
+ box-shadow:0 14px 34px rgba(30,34,66,.12),inset 0 1px 0 #fff;margin-bottom:24px;
+}
+.hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(135deg,transparent 58%,rgba(229,163,41,.13));pointer-events:none}
+.hero>*{position:relative;z-index:1;max-width:610px}
+.hero .kicker{display:inline-flex;align-items:center;gap:9px;color:#9d432e;font-weight:800}
+.hero .kicker:before{content:"";width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,#d63b2f 50%,#18864b 50%);box-shadow:0 1px 2px #999}
+.hero h1{color:#15204b;text-shadow:0 2px 0 rgba(255,255,255,.75)}
+.hero p{color:#535d78;max-width:540px;font-size:1.08rem}
+.trust{gap:10px 20px;margin-top:10px}
+.trust span{background:rgba(255,255,255,.78);border:1px solid rgba(209,183,139,.62);border-radius:999px;padding:7px 12px;box-shadow:0 3px 8px rgba(35,31,22,.06)}
+.dia{box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.filters input,.filters select{border-radius:13px;border-color:#d8c8a9;box-shadow:0 5px 14px rgba(34,35,55,.07);background:rgba(255,252,245,.96);min-height:52px}
+.chip{border-radius:999px;border-color:#dfd1b8;box-shadow:0 2px 5px rgba(31,35,60,.045);transition:transform .16s,box-shadow .16s}
+.chip:active{transform:translateY(1px)}
+.chip[aria-pressed="true"]{background:linear-gradient(145deg,#263879,#111b4b);border-color:#e4ad3d;box-shadow:0 4px 12px rgba(25,35,91,.22),inset 0 1px 0 rgba(255,255,255,.2)}
+.card,.panel,.shop,.setcard{border-radius:14px;box-shadow:0 8px 22px rgba(30,34,66,.075),inset 0 1px 0 rgba(255,255,255,.8);border-color:#e1d4bd}
+.card{overflow:hidden}
+.ph{border-radius:10px}
+.btn{border-radius:10px;background:linear-gradient(145deg,#2b3c83,#111b4b);box-shadow:0 4px 10px rgba(24,34,87,.18),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn.wa{background:linear-gradient(145deg,#21a35a,#13713d)}
+.btn.alt{background:linear-gradient(180deg,#fffdf8,#f0e8d9);box-shadow:0 2px 6px rgba(30,34,66,.06)}
+.tag{border-radius:8px;box-shadow:0 3px 8px rgba(126,78,10,.16);background:linear-gradient(145deg,#f2c35f,#d38a17)}
+#fsort{border-radius:10px;min-height:42px}
+footer{border-top:1px solid rgba(186,146,75,.35);padding-top:18px}
+@media(max-width:640px){
+ .hero{min-height:300px;padding:23px 18px 20px;background:linear-gradient(100deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.93) 64%,rgba(255,250,240,.72) 100%),url('burkindi-hero-3d.webp') 68% center/auto 100% no-repeat;border-radius:16px}
+ .hero>*{max-width:100%}.hero h1{font-size:clamp(1.9rem,8vw,2.65rem)}
+ nav{margin-bottom:18px}
+}
+@media(prefers-reduced-motion:no-preference){.btn,.gear,.chip,.card{transition:transform .18s ease,box-shadow .18s ease}.btn:hover,.gear:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(24,34,87,.2)}}
+
 </style>
 </head>
 <body>
