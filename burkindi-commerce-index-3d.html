@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Burkindi Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%276%27 fill=%27%23E3A23B%27/%3E%3Cpath d=%27M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z%27 fill=%27%231B2257%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#1B2257">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="description" content="Burkindi Commerce : le commerce africain sans frontières.">
+<style>
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+img{max-width:100%}
+</style>
+<style>
+/* Layout: indigo header band with a woven bogolan-style strip, cotton-coloured page, framed product cards, product sheet as an overlay. */
+:root{
+  --bg:#EFE9DC; --surface:#FAF6EE; --fg:#1B1F3B; --muted:#5C5E78; --line:#D6CCB8;
+  --primary:#232C6B; --on-primary:#F7F3EA; --accent:#C9841A; --on-accent:#2B1D00; --madder:#A93E26;
+  --band:#1B2257; --band-fg:#F3ECDD; --weave-bg:#141A44; --wa:#17803F; --ok:#1B7F4B; --danger:#B3261E;
+  --display:'Bricolage Grotesque','Noto Sans Arabic',system-ui,sans-serif;
+  --body:'DM Sans','Noto Sans Arabic',system-ui,sans-serif;
+  --gl:max(16px,env(safe-area-inset-left,0px)); --gr:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101330; --surface:#181C42; --fg:#F1EBDD; --muted:#ABAFD0; --line:#2C3262;
+  --primary:#E3A23B; --on-primary:#1B1305; --accent:#E3A23B; --madder:#E0775B;
+  --band:#0A0D26; --band-fg:#F3ECDD; --weave-bg:#0A0D26; --ok:#6CD39B; --danger:#FF8A80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101330; --surface:#181C42; --fg:#F1EBDD; --muted:#ABAFD0; --line:#2C3262;
+  --primary:#E3A23B; --on-primary:#1B1305; --accent:#E3A23B; --madder:#E0775B;
+  --band:#0A0D26; --band-fg:#F3ECDD; --weave-bg:#0A0D26; --ok:#6CD39B; --danger:#FF8A80; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;margin:0;padding-left:var(--gl);padding-right:var(--gr);padding-block:0 32px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin-inline:auto}
+.band{background:var(--band);color:var(--band-fg);margin-left:calc(-1*var(--gl));margin-right:calc(-1*var(--gr));padding-left:var(--gl);padding-right:var(--gr);padding-top:4px}
+.weave{display:block;width:100%;height:20px;margin-left:calc(-1*var(--gl));margin-right:calc(-1*var(--gr));width:calc(100% + var(--gl) + var(--gr))}
+.pb{fill:var(--weave-bg)}.pz{stroke:var(--accent)}.pd{fill:var(--band-fg)}.pm{fill:var(--madder)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;flex:none}
+.brand-t{display:flex;flex-direction:column;line-height:1.05}
+.brand-t b{font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:.02em}
+.brand-t span{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;opacity:.8}
+.tools{display:flex;gap:8px;align-items:center}
+.proto{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px dashed currentColor;border-radius:4px;opacity:.8}
+select,input,textarea{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-height:44px;width:100%}
+textarea{resize:vertical;min-height:88px}
+.lang{width:auto;font-weight:700;background:transparent;color:var(--band-fg);border-color:color-mix(in srgb,var(--band-fg) 40%,transparent)}
+.lang option{color:#1B1F3B}
+nav{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);margin-block:0 22px;padding-top:8px}
+nav a{padding:12px 16px;text-decoration:none;color:var(--muted);font-weight:700;border-bottom:3px solid transparent;white-space:nowrap}
+nav a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+h1,h2{font-family:var(--display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;font-weight:800}
+h2{font-size:1.5rem;font-weight:800}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--madder)}
+.hero{padding-block:8px 18px;display:grid;gap:12px;max-width:680px}
+.hero p{margin:0;color:var(--muted);font-size:1.05rem}
+.trust{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:4px}
+.trust span{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.92rem}
+.dia{width:9px;height:9px;background:var(--accent);transform:rotate(45deg);flex:none}
+.filters{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:500;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.chip.fav{display:inline-flex;align-items:center;gap:6px}
+.countrow{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px;color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;min-width:0;box-shadow:0 1px 0 var(--line)}
+.ph{display:block;width:calc(100% - 16px);margin:8px;padding:0;border:0;background:none;border-radius:4px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;outline-offset:2px}
+.ph svg,.ph img,.gal-main svg,.gal-main img{display:block;width:100%;height:100%;object-fit:cover}
+.heart{position:absolute;top:14px;inset-inline-end:14px;width:40px;height:40px;border-radius:50%;border:0;background:color-mix(in srgb,var(--surface) 92%,transparent);display:grid;place-items:center;cursor:pointer;color:var(--fg)}
+.heart[aria-pressed="true"]{color:var(--madder)}
+.heart[aria-pressed="true"] path{fill:currentColor}
+.body{padding:4px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tag{align-self:flex-start;background:var(--accent);color:var(--on-accent);font-family:var(--display);font-weight:800;font-size:1.05rem;padding:3px 10px;border-radius:3px;font-variant-numeric:tabular-nums}
+.body h3{margin:0;font-size:1.05rem;line-height:1.3;font-weight:700}
+.body h3 button{all:unset;cursor:pointer;overflow-wrap:anywhere}
+.body h3 button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.meta{color:var(--muted);font-size:.88rem}
+.who{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.88rem}
+.ver{display:inline-flex;align-items:center;gap:4px;color:var(--ok);font-weight:700;font-size:.8rem}
+.acts{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.btn{background:var(--primary);color:var(--on-primary);border:0;border-radius:6px;padding:10px 16px;min-height:44px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.sm{padding:8px 12px;min-height:40px;flex:1;font-size:.92rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px;max-width:600px}
+form{display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg label{font-weight:500;border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;gap:8px;align-items:center;cursor:pointer;min-height:44px}
+.seg input{width:auto;min-height:0}
+.drop{position:relative;border:2px dashed var(--line);border-radius:8px;padding:18px;text-align:center;cursor:pointer;color:var(--muted);font-weight:500;display:grid;gap:4px;justify-items:center}
+.drop:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;min-height:0}
+.thumbs{display:flex;gap:10px;flex-wrap:wrap}
+.thumb{position:relative;width:84px;height:84px;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb button{position:absolute;top:4px;inset-inline-end:4px;width:28px;height:28px;border-radius:50%;border:0;background:var(--fg);color:var(--bg);cursor:pointer;font-weight:700;line-height:1}
+.profile{display:grid;gap:14px}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.6rem}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 8px;border-radius:4px;background:color-mix(in srgb,var(--primary) 14%,var(--surface));border:1px solid var(--line)}
+.threads{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chat{display:flex;flex-direction:column;gap:8px;min-height:200px;max-height:46vh;overflow-y:auto;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:10px}
+.msg{max-width:80%;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);overflow-wrap:anywhere}
+.msg.me{align-self:flex-end;background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.send{display:flex;gap:8px}
+.card.vedette{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.spons{display:inline-block;align-self:flex-start;margin-inline-start:8px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--madder)}
+.vedette .spons{background:var(--accent);color:var(--on-primary);padding:1px 6px;border-radius:4px}
+.boost{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:8px;margin-top:12px}
+.boost .boosto{display:flex;justify-content:space-between;gap:8px;text-align:start}
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer;text-align:start}
+.shop{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
+.shop .btnrow{grid-column:1/-1}
+.shoplogo{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--primary);color:var(--on-primary)}
+.shoplogo.ini{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.6rem}
+.shopinfo h2{margin:0;font-size:1.2rem;overflow-wrap:anywhere}
+.shopinfo p{margin:4px 0 0;overflow-wrap:anywhere}
+.shopform{display:grid;gap:10px;margin-top:12px}
+.chathead{font-weight:700;margin-bottom:8px;overflow-wrap:anywhere}
+#nav a[data-unread]::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--madder);margin-inline-start:6px;vertical-align:middle}
+.msg small{display:block;opacity:.7;font-size:12px;margin-top:2px}
+.pay{margin-top:20px;display:grid;gap:8px}
+.pay .chip{cursor:default}
+.empty{color:var(--muted);padding:28px;border:2px dashed var(--line);border-radius:8px;text-align:center}
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin-inline:auto;background:var(--fg);color:var(--bg);padding:12px 16px;border-radius:8px;font-weight:700;text-align:center;z-index:60}
+/* product sheet */
+.ov{position:fixed;inset:0;background:rgba(10,13,38,.62);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding-top:env(safe-area-inset-top,0px)}
+.sheet{background:var(--surface);width:100%;max-width:860px;max-height:92vh;overflow-y:auto;border-radius:14px 14px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));position:relative}
+.sheet-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.vid{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000;margin-top:4px}.vid.port{aspect-ratio:9/16;max-height:70vh;margin-inline:auto}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.vbadge{position:absolute;left:8px;bottom:8px;background:rgba(27,34,87,.88);color:#fff;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:99px}.ph{position:relative}
+.terms{display:grid;gap:12px;padding-inline-start:22px;line-height:1.55}.soldb{position:absolute;top:8px;left:8px;background:var(--danger);color:#fff;font-size:.72rem;font-weight:800;padding:3px 8px;border-radius:4px;letter-spacing:.05em}.soldb.inl{position:static;display:inline-block;vertical-align:middle;margin-inline-start:6px}.card.sold .ph img,.card.sold .ph svg{opacity:.45}footer a{color:inherit}#fsort{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:inherit;max-width:55%}
+.gear{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid color-mix(in srgb,var(--band-fg) 40%,transparent);color:var(--band-fg);text-decoration:none}
+.setgroup{display:grid;gap:8px;margin:18px 0}.setgroup h3{margin:0;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.setrow{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-align:start;font:inherit;color:inherit;text-decoration:none;cursor:pointer;box-sizing:border-box}
+.setrow .si{font-size:1.25rem;width:28px;text-align:center}.setrow .st{display:grid;flex:1;min-width:0}.setrow small{color:var(--muted);overflow-wrap:anywhere}.setrow .chev{opacity:.5;font-size:1.3rem}
+.setrow.danger b{color:var(--danger)}.setrow select{width:auto;max-width:50%}.setcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}.setcard .shopform{border:0;padding:0}
+.gal-main{aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.gal-th{display:flex;gap:8px;margin-top:8px}
+.gal-th button{width:64px;height:48px;border:2px solid transparent;padding:0;border-radius:4px;overflow:hidden;background:none;cursor:pointer}
+.gal-th button[aria-pressed="true"]{border-color:var(--accent)}
+.gal-th img,.gal-th svg{width:100%;height:100%;object-fit:cover;display:block}
+.x{position:absolute;top:10px;inset-inline-end:max(10px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:1.3rem;font-weight:700;z-index:2}
+.det{display:grid;gap:12px;align-content:start;min-width:0}
+.det h2{padding-inline-end:48px;font-size:1.4rem}
+.big{font-family:var(--display);font-weight:800;font-size:1.7rem;font-variant-numeric:tabular-nums}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.92rem}
+dt{color:var(--muted)}dd{margin:0;font-weight:500}
+.tip{font-size:.86rem;color:var(--muted);border-inline-start:3px solid var(--accent);padding-inline-start:10px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.btnrow .btn{flex:1;min-width:140px}
+.note{margin:8px 0 16px;padding:10px 14px;border-inline-start:4px solid var(--accent);background:var(--surface);color:var(--muted);font-size:.92rem;border-radius:4px;max-width:640px}
+footer{margin-top:40px}
+footer .weave{margin:0;width:100%;border-radius:3px}
+footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
+@media (max-width:640px){.filters{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.sheet-grid{grid-template-columns:1fr}}
+@media (min-width:700px){.ov{align-items:center}.sheet{border-radius:14px}}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+
+/* BURKINDI COMMERCE — finition premium inspirée du Faso */
+:root{
+ --bg:#f3eee2;--surface:#fffaf0;--fg:#172044;--muted:#626983;--line:#dfd2bb;
+ --primary:#1b285f;--on-primary:#fff9e9;--accent:#e5a329;--on-accent:#241600;
+ --band:#101b4b;--band-fg:#fff8e9;--weave-bg:#10183e;--madder:#a83d2b;
+}
+body{
+ background-color:var(--bg);
+ background-image:radial-gradient(ellipse at 8% 12%,rgba(229,163,41,.10),transparent 34%),radial-gradient(ellipse at 92% 34%,rgba(27,40,95,.07),transparent 36%),linear-gradient(135deg,rgba(255,255,255,.30),transparent 55%);
+}
+.band{
+ background:linear-gradient(115deg,#0b143d 0%,#1b2b69 54%,#10183e 100%);
+ box-shadow:0 7px 22px rgba(12,20,57,.22);position:relative;z-index:2;
+ border-bottom:1px solid rgba(229,163,41,.65);
+}
+.brand .logo{filter:drop-shadow(0 4px 3px rgba(0,0,0,.32));transform:translateY(-1px)}
+.brand-t b{color:#fff4d9;text-shadow:0 2px 0 #8c5a0d,0 4px 12px rgba(0,0,0,.38);letter-spacing:.045em}
+.brand-t span{color:#e9bd65}
+.proto{border-color:#e9b64e;color:#ffedc7;background:rgba(255,255,255,.05);padding:6px 11px}
+.gear{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 4px 12px rgba(0,0,0,.22);border-color:rgba(255,220,150,.55)}
+.weave{height:24px;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
+nav{border-bottom:1px solid rgba(178,143,83,.35);margin-bottom:26px;position:relative}
+nav a{transition:color .18s,border-color .18s,background .18s;border-radius:10px 10px 0 0}
+nav a[aria-current="page"]{background:linear-gradient(180deg,rgba(229,163,41,.18),transparent);color:var(--primary);border-bottom-color:var(--accent)}
+.hero{
+ position:relative;isolation:isolate;overflow:hidden;min-height:310px;max-width:none;
+ padding:30px clamp(18px,4vw,42px) 26px;border:1px solid rgba(205,164,91,.42);
+ border-radius:22px;background:linear-gradient(105deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.94) 48%,rgba(255,250,240,.40) 100%),url('burkindi-hero-3d.webp') right 42%/auto 125% no-repeat;
+ box-shadow:0 14px 34px rgba(30,34,66,.12),inset 0 1px 0 #fff;margin-bottom:24px;
+}
+.hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(135deg,transparent 58%,rgba(229,163,41,.13));pointer-events:none}
+.hero>*{position:relative;z-index:1;max-width:610px}
+.hero .kicker{display:inline-flex;align-items:center;gap:9px;color:#9d432e;font-weight:800}
+.hero .kicker:before{content:"";width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,#d63b2f 50%,#18864b 50%);box-shadow:0 1px 2px #999}
+.hero h1{color:#15204b;text-shadow:0 2px 0 rgba(255,255,255,.75)}
+.hero p{color:#535d78;max-width:540px;font-size:1.08rem}
+.trust{gap:10px 20px;margin-top:10px}
+.trust span{background:rgba(255,255,255,.78);border:1px solid rgba(209,183,139,.62);border-radius:999px;padding:7px 12px;box-shadow:0 3px 8px rgba(35,31,22,.06)}
+.dia{box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.filters input,.filters select{border-radius:13px;border-color:#d8c8a9;box-shadow:0 5px 14px rgba(34,35,55,.07);background:rgba(255,252,245,.96);min-height:52px}
+.chip{border-radius:999px;border-color:#dfd1b8;box-shadow:0 2px 5px rgba(31,35,60,.045);transition:transform .16s,box-shadow .16s}
+.chip:active{transform:translateY(1px)}
+.chip[aria-pressed="true"]{background:linear-gradient(145deg,#263879,#111b4b);border-color:#e4ad3d;box-shadow:0 4px 12px rgba(25,35,91,.22),inset 0 1px 0 rgba(255,255,255,.2)}
+.card,.panel,.shop,.setcard{border-radius:14px;box-shadow:0 8px 22px rgba(30,34,66,.075),inset 0 1px 0 rgba(255,255,255,.8);border-color:#e1d4bd}
+.card{overflow:hidden}
+.ph{border-radius:10px}
+.btn{border-radius:10px;background:linear-gradient(145deg,#2b3c83,#111b4b);box-shadow:0 4px 10px rgba(24,34,87,.18),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn.wa{background:linear-gradient(145deg,#21a35a,#13713d)}
+.btn.alt{background:linear-gradient(180deg,#fffdf8,#f0e8d9);box-shadow:0 2px 6px rgba(30,34,66,.06)}
+.tag{border-radius:8px;box-shadow:0 3px 8px rgba(126,78,10,.16);background:linear-gradient(145deg,#f2c35f,#d38a17)}
+#fsort{border-radius:10px;min-height:42px}
+footer{border-top:1px solid rgba(186,146,75,.35);padding-top:18px}
+@media(max-width:640px){
+ .hero{min-height:300px;padding:23px 18px 20px;background:linear-gradient(100deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.93) 64%,rgba(255,250,240,.72) 100%),url('burkindi-hero-3d.webp') 68% center/auto 100% no-repeat;border-radius:16px}
+ .hero>*{max-width:100%}.hero h1{font-size:clamp(1.9rem,8vw,2.65rem)}
+ nav{margin-bottom:18px}
+}
+@media(prefers-reduced-motion:no-preference){.btn,.gear,.chip,.card{transition:transform .18s ease,box-shadow .18s ease}.btn:hover,.gear:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(24,34,87,.2)}}
+
+
+/* Finition 3D — motifs du Faso, reliefs et bannière renforcée */
+.hero{
+  min-height:340px;
+  background-color:#fff8e9;
+  background-image:
+    linear-gradient(90deg,rgba(255,250,240,.99) 0%,rgba(255,250,240,.96) 43%,rgba(255,250,240,.48) 72%,rgba(255,250,240,.18) 100%),
+    url('burkindi-hero-3d.webp'),
+    radial-gradient(circle at 82% 48%,rgba(229,163,41,.28),transparent 32%);
+  background-position:center,right 42%,center;
+  background-size:cover,auto 125%,cover;
+  background-repeat:no-repeat;
+  box-shadow:0 18px 38px rgba(18,28,73,.16),inset 0 2px 0 #fff,inset 0 -2px 0 rgba(190,143,57,.18);
+}
+.hero:after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:clamp(150px,31vw,285px);aspect-ratio:1;right:clamp(12px,4vw,42px);top:50%;
+  transform:translateY(-50%) rotate(-9deg);
+  border-radius:34% 46% 38% 48%;
+  border:2px solid rgba(229,163,41,.62);
+  background:
+    radial-gradient(circle at 35% 28%,rgba(255,255,255,.8),transparent 17%),
+    repeating-conic-gradient(from 8deg at 50% 50%,rgba(229,163,41,.22) 0deg 8deg,rgba(20,31,79,.08) 8deg 16deg),
+    radial-gradient(ellipse at 50% 48%,rgba(255,248,225,.72) 0 28%,rgba(27,40,95,.15) 29% 31%,rgba(229,163,41,.34) 32% 37%,rgba(255,255,255,.18) 38% 52%,rgba(20,31,79,.12) 53% 58%,transparent 59%);
+  box-shadow:12px 18px 28px rgba(17,27,70,.20),inset 0 3px 10px rgba(255,255,255,.72),inset 0 -10px 18px rgba(27,40,95,.12);
+  opacity:.78;
+}
+.hero:before{
+  content:"";position:absolute;z-index:0;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,transparent 48%,rgba(229,163,41,.12)),repeating-linear-gradient(135deg,transparent 0 18px,rgba(27,40,95,.025) 18px 20px);
+}
+.hero>*{z-index:2}
+.brand .logo{filter:drop-shadow(0 5px 0 rgba(111,68,8,.35)) drop-shadow(0 8px 10px rgba(0,0,0,.28));}
+.card,.panel,.shop,.setcard{transform:translateZ(0);}
+.card{box-shadow:0 10px 0 rgba(27,40,95,.035),0 13px 25px rgba(30,34,66,.10),inset 0 1px 0 rgba(255,255,255,.95);}
+.btn{box-shadow:0 5px 0 #10183e,0 8px 15px rgba(24,34,87,.20),inset 0 1px 0 rgba(255,255,255,.30);}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #10183e,0 4px 8px rgba(24,34,87,.16);}
+.chip,.filters input,.filters select{box-shadow:0 5px 0 rgba(27,40,95,.035),0 7px 15px rgba(34,35,55,.07),inset 0 1px 0 #fff;}
+@media(max-width:640px){
+ .hero{min-height:315px;background-image:linear-gradient(90deg,rgba(255,250,240,.98) 0%,rgba(255,250,240,.92) 58%,rgba(255,250,240,.62) 100%),url('burkindi-hero-3d.webp'),radial-gradient(circle at 82% 48%,rgba(229,163,41,.25),transparent 34%);background-position:center, right center,center;background-size:cover,auto 100%,cover;}
+ .hero:after{width:clamp(118px,38vw,170px);right:8px;top:auto;bottom:10px;transform:rotate(-9deg);opacity:.48;}
+ .hero>*{max-width:100%;}
+}
+@media(prefers-reduced-motion:no-preference){.card:hover{transform:translateY(-3px);box-shadow:0 13px 0 rgba(27,40,95,.035),0 18px 30px rgba(30,34,66,.14),inset 0 1px 0 #fff}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="bogo" width="48" height="20" patternUnits="userSpaceOnUse">
+    <rect width="48" height="20" class="pb"/>
+    <path d="M0 8L6 3L12 8L18 3L24 8L30 3L36 8L42 3L48 8" class="pz" fill="none" stroke-width="2"/>
+    <circle cx="6" cy="15" r="1.7" class="pd"/><circle cx="18" cy="15" r="1.7" class="pd"/><circle cx="30" cy="15" r="1.7" class="pd"/><circle cx="42" cy="15" r="1.7" class="pd"/>
+    <path d="M24 12L27 15L24 18L21 15Z" class="pm"/><path d="M48 12L51 15L48 18L45 15Z" class="pm"/><path d="M0 12L3 15L0 18L-3 15Z" class="pm"/>
+  </pattern>
+</defs></svg>
+
+<div class="band">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="6" fill="#E3A23B"/><path d="M12 9h9c4 0 6 2.2 6 5 0 2-1 3.4-3 4 2.4.5 4 2 4 4.6 0 3.2-2.4 5.4-6.4 5.4H12z" fill="#1B2257"/><path d="M17 14v3.6h3c1.2 0 2-.7 2-1.8s-.8-1.8-2-1.8zm0 8.2v4.2h3.4c1.4 0 2.3-.8 2.3-2.1s-.9-2.1-2.3-2.1z" fill="#E3A23B"/></svg>
+        <div class="brand-t"><b>BURKINDI</b><span>Commerce</span></div>
+      </div>
+      <div class="tools">
+        <span class="proto" data-i18n="proto"></span>
+        <a href="#parametres" class="gear" id="gear" aria-label="Paramètres / Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a>
+      </div>
+    </header>
+  </div>
+  <svg class="weave" aria-hidden="true"><rect width="100%" height="20" fill="url(#bogo)"/></svg>
+</div>
+
+<div class="wrap">
+  <nav id="nav" aria-label="Navigation">
+    <a href="#annonces" data-v="annonces" data-i18n="n_list"></a>
+    <a href="#vendre" data-v="vendre" data-i18n="n_sell"></a>
+    <a href="#messages" data-v="messages" data-i18n="n_msg"></a>
+    <a href="#compte" data-v="compte" data-i18n="n_acc"></a>
+  </nav>
+
+  <main>
+    <section id="v-annonces" data-view>
+      <div class="hero">
+        <span class="kicker" data-i18n="slogan"></span>
+        <h1 data-i18n="h_title"></h1>
+        <p data-i18n="h_sub"></p>
+        <div class="trust"><span><i class="dia"></i><b data-i18n="tr1"></b></span><span><i class="dia"></i><b data-i18n="tr2"></b></span><span><i class="dia"></i><b data-i18n="tr3"></b></span></div>
+      </div>
+      <div class="filters">
+        <input id="q" type="search" data-i18n-ph="search" aria-label="Recherche">
+        <select id="fcountry" aria-label="Pays"></select>
+      </div>
+      <div class="chips" id="cats"></div>
+      <div id="shopHead" hidden></div>
+      <div class="countrow"><span id="count"></span><select id="fsort" aria-label="Tri"><option value="new" data-i18n="sort_new"></option><option value="asc" data-i18n="sort_asc"></option><option value="desc" data-i18n="sort_desc"></option></select></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="v-vendre" data-view hidden>
+      <h2 data-i18n="s_title"></h2>
+      <p class="meta" data-i18n="s_sub" style="margin:6px 0 14px"></p>
+      <div id="sellNote"></div>
+      <p class="meta" id="noPhotos" data-i18n="no_photos" hidden></p>
+      <div class="panel" id="sellPanel" hidden>
+        <form id="sellForm">
+          <div id="photoBlock">
+            <div style="font-weight:700;font-size:.92rem;margin-bottom:6px" data-i18n="s_photos"></div>
+            <label class="drop"><span data-i18n="s_add"></span><span class="meta" data-i18n="s_hint"></span><input id="s_files" type="file" accept="image/*" multiple></label>
+            <div class="thumbs" id="thumbs" style="margin-top:10px"></div>
+          </div>
+          <label><span data-i18n="s_name"></span><input id="s_title" required maxlength="80"></label>
+          <div class="row2">
+            <label><span data-i18n="s_cat"></span><select id="s_cat"></select></label>
+            <label><span data-i18n="s_cond"></span><select id="s_cond"></select></label>
+          </div>
+          <div class="row2">
+            <label><span data-i18n="s_price"></span><input id="s_price" type="number" min="1" step="any" required inputmode="decimal"></label>
+            <label><span data-i18n="s_cur"></span><select id="s_cur"><option>XOF</option><option>GHS</option><option>NGN</option><option>KES</option><option>USD</option></select></label>
+          </div>
+          <div class="row2">
+            <label><span data-i18n="country"></span><select id="s_country"></select></label>
+            <label><span data-i18n="city"></span><input id="s_city" required maxlength="40"></label>
+          </div>
+          <label><span data-i18n="s_deliv"></span><select id="s_deliv"></select></label>
+          <label><span data-i18n="s_desc"></span><textarea id="s_desc" maxlength="400"></textarea></label>
+          <label><span data-i18n="vd_lbl"></span><input id="s_vid" type="url" maxlength="300" inputmode="url" autocomplete="off" data-i18n-ph="vd_ph"><span class="meta" data-i18n="vd_hint"></span></label>
+          <button class="btn" type="submit" id="s_go" data-i18n="s_go"></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="v-messages" data-view hidden>
+      <h2 data-i18n="m_title"></h2>
+      <p class="note" data-i18n="m_note"></p>
+      <div class="threads" id="threads"></div>
+      <div id="chatBox"></div>
+      <div class="pay">
+        <b data-i18n="pay_title"></b>
+        <div class="chips"><span class="chip">Orange Money</span><span class="chip">Moov Money</span><span class="chip">MTN MoMo</span><span class="chip">Wave</span></div>
+        <span class="meta" data-i18n="pay_note"></span>
+      </div>
+    </section>
+
+    <section id="v-parametres" data-view hidden>
+      <h2 data-i18n="st_title"></h2>
+      <div id="setTop"></div>
+      <div class="setgroup"><h3 data-i18n="st_pref"></h3>
+        <label class="setrow"><span class="si">🌐</span><span class="st"><b data-i18n="st_lang"></b></span><select id="lang" class="lang2" aria-label="Langue / Language"><option value="fr">Français</option><option value="en">English</option><option value="pt">Português</option><option value="ar">العربية</option></select></label>
+      </div>
+      <div class="setgroup"><h3 data-i18n="st_help"></h3>
+        <a class="setrow" id="supportLink" target="_blank" rel="noopener" href="#"><span class="si">💬</span><span class="st"><b data-i18n="st_support"></b><small data-i18n="st_support_s"></small></span><span class="chev">›</span></a>
+        <a class="setrow" href="#conditions"><span class="si">📄</span><span class="st"><b data-i18n="terms"></b></span><span class="chev">›</span></a>
+      </div>
+      <div id="setBottom"></div>
+    </section>
+
+    <section id="v-conditions" data-view hidden>
+      <h2 data-i18n="tc_title"></h2>
+      <ol class="terms" id="termsList"></ol>
+      <p><a class="btn alt" href="#parametres" data-i18n="st_back"></a></p>
+    </section>
+
+    <section id="v-compte" data-view hidden>
+      <h2 data-i18n="a_title" style="margin-bottom:14px"></h2>
+      <div class="panel" id="accBox"></div>
+    </section>
+  </main>
+
+  <footer>
+    <svg class="weave" aria-hidden="true" style="border-radius:0"><rect width="100%" height="20" fill="url(#bogo)"/></svg>
+    <p data-i18n="foot"></p>
+  </footer>
+</div>
+
+<div class="ov" id="ov" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div></div>
+<div class="toast" id="toast" hidden></div>
+<script type="module">
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, query, where, orderBy, limit, onSnapshot, Timestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+var L={
+fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Annonces',n_sell:'Vendre',n_msg:'Messages',n_acc:'Compte',
+ h_title:'Achetez et vendez d’un pays à l’autre.',h_sub:'Particuliers et commerçants d’Afrique, au même endroit.',
+ tr1:'Vendeurs vérifiés',tr2:'Paiement mobile',tr3:'Livraison entre pays',
+ search:'Rechercher un produit…',all_c:'Tous les pays',cat_all:'Tout',cat_fashion:'Mode',cat_food:'Alimentation',cat_tech:'Électronique',cat_beauty:'Beauté',cat_craft:'Artisanat',
+ favs:'Favoris',count:'annonce(s)',none:'Aucune annonce ne correspond.',by:'Vendeur',msg:'Message',wa:'WhatsApp',wa_msg:'Bonjour, je suis intéressé(e) par votre annonce Burkindi :',
+ fav_add:'Ajouter aux favoris',fav_del:'Retirer des favoris',close:'Fermer',ver:'Vérifié',
+ d_cond:'État',cond_new:'Neuf',cond_used:'Occasion',cond_refurb:'Reconditionné',d_loc:'Lieu',d_deliv:'Livraison',dv_pickup:'Retrait sur place',dv_national:'Dans le pays',dv_border:'Entre pays',d_seller:'Vendeur',d_cat:'Catégorie',sales:'ventes',
+ tip:'Conseil : rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé.',
+ s_title:'Publier une annonce',s_sub:'Ajoutez jusqu’à 3 photos : une annonce avec photos reçoit plus de messages.',s_photos:'Photos',s_add:'Appuyer pour ajouter des photos',s_hint:'3 photos maximum, JPG ou PNG',s_name:'Nom du produit',s_cat:'Catégorie',s_cond:'État',s_price:'Prix',s_cur:'Devise',country:'Pays',city:'Ville',s_deliv:'Livraison',s_desc:'Description',s_go:'Publier l’annonce',s_ok:'Annonce publiée.',s_max:'3 photos maximum.',
+ m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
+ pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
+ a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
+ foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
+en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
+ h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
+ tr1:'Verified sellers',tr2:'Mobile payment',tr3:'Cross-border delivery',
+ search:'Search for a product…',all_c:'All countries',cat_all:'All',cat_fashion:'Fashion',cat_food:'Food',cat_tech:'Electronics',cat_beauty:'Beauty',cat_craft:'Crafts',
+ favs:'Favorites',count:'listing(s)',none:'No listing matches.',by:'Seller',msg:'Message',wa:'WhatsApp',wa_msg:'Hello, I am interested in your Burkindi listing:',
+ fav_add:'Add to favorites',fav_del:'Remove from favorites',close:'Close',ver:'Verified',
+ d_cond:'Condition',cond_new:'New',cond_used:'Used',cond_refurb:'Refurbished',d_loc:'Location',d_deliv:'Delivery',dv_pickup:'Pickup only',dv_national:'Within the country',dv_border:'Across borders',d_seller:'Seller',d_cat:'Category',sales:'sales',
+ tip:'Tip: meet the seller in a public place and pay only on receipt, or through a protected payment.',
+ s_title:'Post a listing',s_sub:'Add up to 3 photos: listings with photos get more messages.',s_photos:'Photos',s_add:'Tap to add photos',s_hint:'Up to 3 photos, JPG or PNG',s_name:'Product name',s_cat:'Category',s_cond:'Condition',s_price:'Price',s_cur:'Currency',country:'Country',city:'City',s_deliv:'Delivery',s_desc:'Description',s_go:'Publish listing',s_ok:'Listing published.',s_max:'Up to 3 photos.',
+ m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
+ pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
+ a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
+ foot:'Burkindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
+pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
+ h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
+ tr1:'Vendedores verificados',tr2:'Pagamento móvel',tr3:'Entrega entre países',
+ search:'Procurar um produto…',all_c:'Todos os países',cat_all:'Tudo',cat_fashion:'Moda',cat_food:'Alimentação',cat_tech:'Eletrónica',cat_beauty:'Beleza',cat_craft:'Artesanato',
+ favs:'Favoritos',count:'anúncio(s)',none:'Nenhum anúncio corresponde.',by:'Vendedor',msg:'Mensagem',wa:'WhatsApp',wa_msg:'Olá, tenho interesse no seu anúncio no Burkindi:',
+ fav_add:'Adicionar aos favoritos',fav_del:'Remover dos favoritos',close:'Fechar',ver:'Verificado',
+ d_cond:'Estado',cond_new:'Novo',cond_used:'Usado',cond_refurb:'Recondicionado',d_loc:'Local',d_deliv:'Entrega',dv_pickup:'Levantamento no local',dv_national:'Dentro do país',dv_border:'Entre países',d_seller:'Vendedor',d_cat:'Categoria',sales:'vendas',
+ tip:'Dica: encontre o vendedor num local público e pague apenas na receção, ou com pagamento protegido.',
+ s_title:'Publicar um anúncio',s_sub:'Adicione até 3 fotos: anúncios com fotos recebem mais mensagens.',s_photos:'Fotos',s_add:'Toque para adicionar fotos',s_hint:'Até 3 fotos, JPG ou PNG',s_name:'Nome do produto',s_cat:'Categoria',s_cond:'Estado',s_price:'Preço',s_cur:'Moeda',country:'País',city:'Cidade',s_deliv:'Entrega',s_desc:'Descrição',s_go:'Publicar anúncio',s_ok:'Anúncio publicado.',s_max:'Até 3 fotos.',
+ m_title:'Mensagens',m_none:'Sem conversas. Toque em Mensagem num anúncio.',m_ph:'A sua mensagem…',m_send:'Enviar',m_hi:'Olá, este produto ainda está disponível?',m_re:'Olá! Sim, está disponível. Para que país devemos entregar?',
+ pay_title:'Pagamento móvel',pay_note:'Em breve: pague e receba com a sua carteira móvel.',
+ a_title:'A minha conta',a_type:'Sou',a_ind:'Particular',a_mer:'Comerciante',a_fn:'Nome completo',a_ph:'Telefone',a_pw:'Palavra-passe',a_go:'Criar a minha conta',a_ok:'Conta criada.',a_out:'Terminar sessão',a_mine:'Os meus anúncios',a_none:'Ainda não publicou nada.',a_ver:'Verificação pendente',you:'Você',
+ foot:'Burkindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
+ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا حدود',n_list:'الإعلانات',n_sell:'بيع',n_msg:'الرسائل',n_acc:'الحساب',
+ h_title:'اشترِ وبِع من بلد إلى آخر.',h_sub:'أفراد وتجار من كل أنحاء أفريقيا في مكان واحد.',
+ tr1:'بائعون موثّقون',tr2:'الدفع عبر الجوال',tr3:'توصيل بين البلدان',
+ search:'ابحث عن منتج…',all_c:'كل البلدان',cat_all:'الكل',cat_fashion:'أزياء',cat_food:'غذاء',cat_tech:'إلكترونيات',cat_beauty:'جمال',cat_craft:'حِرف يدوية',
+ favs:'المفضلة',count:'إعلان',none:'لا توجد إعلانات مطابقة.',by:'البائع',msg:'رسالة',wa:'واتساب',wa_msg:'مرحبًا، أنا مهتم بإعلانك على بوكيندي:',
+ fav_add:'أضف إلى المفضلة',fav_del:'أزل من المفضلة',close:'إغلاق',ver:'موثّق',
+ d_cond:'الحالة',cond_new:'جديد',cond_used:'مستعمل',cond_refurb:'مجدد',d_loc:'الموقع',d_deliv:'التوصيل',dv_pickup:'استلام من المكان',dv_national:'داخل البلد',dv_border:'بين البلدان',d_seller:'البائع',d_cat:'الفئة',sales:'مبيعات',
+ tip:'نصيحة: قابل البائع في مكان عام ولا تدفع إلا عند الاستلام أو عبر دفع محمي.',
+ s_title:'نشر إعلان',s_sub:'أضف حتى 3 صور: الإعلانات المصوّرة تتلقى رسائل أكثر.',s_photos:'الصور',s_add:'اضغط لإضافة صور',s_hint:'حتى 3 صور، JPG أو PNG',s_name:'اسم المنتج',s_cat:'الفئة',s_cond:'الحالة',s_price:'السعر',s_cur:'العملة',country:'البلد',city:'المدينة',s_deliv:'التوصيل',s_desc:'الوصف',s_go:'نشر الإعلان',s_ok:'تم نشر الإعلان.',s_max:'حتى 3 صور.',
+ m_title:'الرسائل',m_none:'لا توجد محادثات. اضغط «رسالة» من أي إعلان.',m_ph:'اكتب رسالتك…',m_send:'إرسال',m_hi:'مرحبًا، هل هذا المنتج متوفر؟',m_re:'مرحبًا! نعم، متوفر. إلى أي بلد نوصل؟',
+ pay_title:'الدفع عبر الجوال',pay_note:'قريبًا: ادفع واستلم المال عبر محفظتك على الجوال.',
+ a_title:'حسابي',a_type:'أنا',a_ind:'فرد',a_mer:'تاجر',a_fn:'الاسم الكامل',a_ph:'الهاتف',a_pw:'كلمة المرور',a_go:'إنشاء حسابي',a_ok:'تم إنشاء الحساب.',a_out:'تسجيل الخروج',a_mine:'إعلاناتي',a_none:'لم تنشر أي شيء بعد.',a_ver:'التحقق قيد الانتظار',you:'أنت',
+ foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نموذج أولي: الإعلانات والبائعون والمحادثات أمثلة.'}
+};
+var CATS=['fashion','food','tech','beauty','craft'];
+var CCS=['BF','ML','CI','GH','NG','KE','SN','CM'];
+
+/* Illustrations drawn in code so every sample listing has a picture. Each one carries its own background. */
+function art(k){
+  var o='<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">',s='';
+  if(k==='cloth'){
+    s='<rect width="240" height="180" fill="#E4B45A"/><g transform="rotate(-5 120 90)"><rect x="28" y="26" width="184" height="128" fill="#F4EBD8"/>';
+    var c=['#23306F','#B5432A','#23306F','#E4B45A','#23306F','#B5432A'];
+    for(var i=0;i<6;i++)s+='<rect x="'+(34+i*30)+'" y="26" width="20" height="128" fill="'+c[i]+'"/>';
+    for(var j=0;j<4;j++)s+='<path d="M28 '+(50+j*28)+'h184" stroke="#F4EBD8" stroke-width="3" stroke-dasharray="6 6" opacity=".7"/>';
+    s+='</g>';
+  }else if(k==='shea'){
+    s='<rect width="240" height="180" fill="#CFE0C4"/><rect x="72" y="50" width="96" height="24" rx="6" fill="#8A5A2B"/><rect x="78" y="70" width="84" height="76" rx="10" fill="#F2E6C9" stroke="#7A5A2B" stroke-width="3"/><rect x="88" y="88" width="64" height="38" fill="#23306F"/><path d="M88 107l8-8 8 8 8-8 8 8 8-8 8 8 8-8" stroke="#E4B45A" stroke-width="3" fill="none"/><path d="M180 140q20-30 6-50q-24 18-6 50z" fill="#3B7A3A"/>';
+  }else if(k==='rice'){
+    s='<rect width="240" height="180" fill="#E9C98A"/><path d="M72 52h96l16 100q-64 18-128 0z" fill="#E8DDC3" stroke="#6B5530" stroke-width="3"/><rect x="94" y="40" width="52" height="16" rx="7" fill="#B5432A"/><circle cx="120" cy="104" r="22" fill="#23306F"/>';
+    for(var r=0;r<5;r++)s+='<ellipse cx="'+(108+r*6)+'" cy="104" rx="2.4" ry="7" fill="#F4EBD8" transform="rotate('+(r*14-28)+' '+(108+r*6)+' 104)"/>';
+  }else if(k==='phone'){
+    s='<rect width="240" height="180" fill="#C9D1E8"/><rect x="84" y="20" width="72" height="140" rx="12" fill="#1B1F3B"/><rect x="91" y="34" width="58" height="108" rx="4" fill="#3C57B8"/><circle cx="120" cy="70" r="12" fill="#F0A500"/><path d="M91 142V104l18-18 14 14 12-10 14 14v38z" fill="#23306F"/><rect x="108" y="24" width="24" height="4" rx="2" fill="#3A3F66"/>';
+  }else if(k==='coffee'){
+    s='<rect width="240" height="180" fill="#D9B68E"/><path d="M74 36h92l12 120H62z" fill="#3B2418"/><rect x="62" y="30" width="116" height="14" rx="4" fill="#2A1910"/><rect x="82" y="78" width="76" height="46" rx="4" fill="#F1E3C4"/><ellipse cx="120" cy="101" rx="14" ry="19" fill="#6B3F22"/><path d="M120 83q-6 18 0 36" stroke="#F1E3C4" stroke-width="3" fill="none"/>';
+  }else if(k==='sandals'){
+    s='<rect width="240" height="180" fill="#BFE0D8"/><g transform="rotate(-10 78 90)"><rect x="52" y="30" width="52" height="124" rx="26" fill="#8A5A2B"/><path d="M52 78q26 -22 52 0M52 100q26 -22 52 0" stroke="#23306F" stroke-width="7" fill="none"/></g><g transform="rotate(10 162 90)"><rect x="136" y="30" width="52" height="124" rx="26" fill="#8A5A2B"/><path d="M136 78q26 -22 52 0M136 100q26 -22 52 0" stroke="#23306F" stroke-width="7" fill="none"/></g>';
+  }else if(k==='mango'){
+    s='<rect width="240" height="180" fill="#F2C27A"/>';
+    var m=[[84,98,-20],[126,84,8],[158,112,28]];
+    for(var q=0;q<3;q++){var a=m[q];s+='<g transform="rotate('+a[2]+' '+a[0]+' '+a[1]+')"><ellipse cx="'+a[0]+'" cy="'+a[1]+'" rx="26" ry="38" fill="#E58A1F"/><ellipse cx="'+(a[0]+8)+'" cy="'+(a[1]+6)+'" rx="12" ry="24" fill="#D9531E" opacity=".75"/><path d="M'+a[0]+' '+(a[1]-36)+'q16 -14 26 -4q-10 14 -26 4z" fill="#3B7A3A"/></g>';}
+  }else{
+    s='<rect width="240" height="180" fill="#E3D3B3"/><path d="M68 84Q120 66 172 84L158 148Q120 160 82 148Z" fill="#B98A4A"/>';
+    for(var h=0;h<5;h++)s+='<path d="M'+(70+h*2)+' '+(96+h*13)+'Q120 '+(84+h*13)+' '+(170-h*2)+' '+(96+h*13)+'" stroke="#7A5A2B" stroke-width="2.4" fill="none"/>';
+    for(var v=0;v<7;v++)s+='<path d="M'+(80+v*13)+' 88L'+(86+v*11)+' 152" stroke="#7A5A2B" stroke-width="2" opacity=".6"/>';
+    s+='<path d="M72 86Q120 8 168 86" stroke="#7A5A2B" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  }
+  return o+s+'</svg>';
+}
+var DEFART={fashion:'cloth',food:'rice',tech:'phone',beauty:'shea',craft:'basket'};
+var ARTS=['cloth','shea','rice','phone','coffee','sandals','mango','basket'];
+var L2={
+fr:{st_title:'Paramètres',st_acc:'Compte',st_edit:'Modifier mon profil',st_edit_s:'Nom, téléphone, pays, type de compte',st_pw:'Changer le mot de passe',st_pw_s:'Recevoir un e-mail pour choisir un nouveau mot de passe',st_login:'Se connecter',st_login_s:'Connectez-vous pour gérer votre compte et votre boutique',st_pref:'Préférences',st_lang:'Langue',st_help:'Aide et informations',st_support:'Contacter le support',st_support_s:'Écrire sur WhatsApp',st_sup_msg:'Bonjour, j’ai besoin d’aide sur Burkindi Commerce.',st_admin:'Administration',st_norep:'Aucun signalement.',st_back:'← Paramètres',st_pw_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',st_pw_no:'Impossible d’envoyer l’e-mail.',st_rep:'Signalements',ed_btn:'Modifier l’annonce',ed_save:'Enregistrer',ed_cancel:'Annuler',ed_ok:'Annonce modifiée.',ed_note:'Les photos ne se changent pas ici : republiez l’annonce pour les modifier.',sold_btn:'Marquer comme vendu',unsold_btn:'Remettre en vente',sold_b:'VENDU',sold_ok:'Annonce marquée comme vendue.',unsold_ok:'Annonce remise en vente.',rp_btn:'Signaler cette annonce',rp_t:'Pourquoi signalez-vous cette annonce ?',rp_1:'Arnaque ou faux prix',rp_2:'Produit interdit',rp_3:'Annonce en double',rp_4:'Autre problème',rp_ok:'Merci, votre signalement a été envoyé.',rp_login:'Connectez-vous pour signaler une annonce.',sh_btn:'Partager',share_msg:'Regarde cette annonce sur Burkindi Commerce :',shop_share:'Partager la boutique',shop_msg:'Découvre cette boutique sur Burkindi Commerce :',nf:'Annonce introuvable.',sort_new:'Plus récentes',sort_asc:'Prix croissant',sort_desc:'Prix décroissant',terms:'Conditions d’utilisation et confidentialité',tc_title:'Conditions d’utilisation et confidentialité',tc_1:'Burkindi Commerce met en relation acheteurs et vendeurs. Nous ne vendons pas les articles et ne sommes pas partie aux transactions.',tc_2:'Le vendeur est seul responsable de son annonce : description, prix, état et livraison doivent être exacts. Les produits illégaux, dangereux, contrefaits ou trompeurs sont interdits.',tc_3:'Rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé. Ne payez jamais à l’avance à un inconnu.',tc_4:'Les annonces signalées peuvent être retirées et les comptes abusifs bloqués, sans préavis.',tc_5:'Données : nous gardons votre e-mail, votre nom, votre téléphone, vos annonces et vos messages pour faire fonctionner le service. Votre numéro est visible dans le bouton WhatsApp de vos annonces. Nous ne vendons pas vos données.',tc_6:'Vous pouvez supprimer vos annonces à tout moment. Pour supprimer votre compte ou vos données, écrivez-nous sur WhatsApp au +226 67 00 28 40.',b_novid:'Pack vidéo : republiez l’annonce avec un lien vidéo pour y avoir accès.',vd_lbl:'Vidéo publicité (facultatif)',vd_ph:'Collez le lien YouTube, TikTok ou Facebook',vd_hint:'Votre vidéo doit d’abord être publiée sur YouTube, TikTok ou Facebook. Collez ensuite son lien ici.',vd_bad:'Lien vidéo non reconnu. Utilisez un lien YouTube, TikTok ou Facebook.',vd_t:'Vidéo',vd_open:'Ouvrir la vidéo',proto:'Bêta',tr1:'Particuliers et commerçants',tr2:'Contact WhatsApp direct',tr3:'Annonces dans plusieurs pays',
+ foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Version bêta.',
+ loading:'Chargement…',slow:'La connexion est lente. Les annonces peuvent ne pas être à jour.',offline:'Impossible de joindre le service. Vérifiez votre connexion.',
+ empty_t:'Aucune annonce pour le moment.',empty_b:'Publier la première annonce',need_acc:'Connectez-vous ou créez votre compte pour publier une annonce.',
+ phone_note:'Ce numéro sera visible par les acheteurs (pour WhatsApp). Indiquez l’indicatif du pays.',
+ a_save:'Enregistrer',a_edit:'Modifier mon profil',a_cancel:'Annuler',a_email:'Adresse e-mail',a_pw_hint:'6 caractères minimum',
+ a_signup:'Créer un compte',a_login:'Se connecter',a_to_login:'J’ai déjà un compte',a_to_signup:'Je n’ai pas encore de compte',a_reset:'Mot de passe oublié ?',a_reset_ok:'E-mail envoyé. Vérifiez votre boîte de réception.',a_logout:'Se déconnecter',
+ e_bad:'E-mail ou mot de passe incorrect.',e_exists:'Cette adresse e-mail a déjà un compte.',e_weak:'Mot de passe trop court (6 caractères minimum).',e_mail:'Adresse e-mail invalide.',e_net:'Problème de connexion. Réessayez.',e_many:'Trop d’essais. Réessayez plus tard.',e_first:'Saisissez d’abord votre e-mail.',
+ del:'Supprimer l’annonce',del_ok:'Confirmer la suppression',deleted:'Annonce supprimée.',err:'Échec de l’enregistrement. Réessayez.',publishing:'Publication…',
+ m_note:'Messagerie privée entre acheteurs et vendeurs.',m_login:'Connectez-vous pour envoyer des messages.',m_own:'C’est votre annonce.',m_first:'Écrivez votre premier message.',m_pick:'Choisissez une conversation.',b_discover:'Publicité découverte',b_popular:'Publicité populaire',b_video:'Pack vidéo',b_premium:'Publicité premium',b_featured:'Annonce en vedette',b_vedette:'En vedette',b_spons:'Sponsorisé',b_btn:'Mettre en avant mon annonce',b_how:'Choisissez une offre. WhatsApp s’ouvre avec votre demande : nous vous envoyons le moyen de paiement (Orange Money, Moov, MTN, Wave). Votre annonce passe en haut dès réception du paiement.',b_days:'jours',b_active:'Mise en avant jusqu’au',b_msg:'Bonjour, je souhaite mettre en avant mon annonce « {t} » (réf. {id}) sur Burkindi Commerce : {o}, {d} jours, {p} FCFA. Merci de m’envoyer le moyen de paiement.',sh_title:'Ma boutique',sh_name:'Nom de la boutique',sh_desc:'Présentation (300 caractères max)',sh_logo:'Logo (facultatif)',sh_edit:'Modifier ma boutique',sh_create:'Créer ma boutique',sh_view:'Voir ma boutique',sh_all:'Toutes les annonces',sh_none:'Créez votre boutique : nom, logo et présentation visibles par les acheteurs.',sh_ver:'Vérifier ce vendeur',sh_unver:'Retirer le badge Vérifié',ad_title:'Administration',ad_off:'Retirer la mise en avant',ad_ok:'Mise à jour.'},
+en:{st_title:'Settings',st_acc:'Account',st_edit:'Edit my profile',st_edit_s:'Name, phone, country, account type',st_pw:'Change password',st_pw_s:'Get an email to choose a new password',st_login:'Sign in',st_login_s:'Sign in to manage your account and shop',st_pref:'Preferences',st_lang:'Language',st_help:'Help and information',st_support:'Contact support',st_support_s:'Write on WhatsApp',st_sup_msg:'Hello, I need help with Burkindi Commerce.',st_admin:'Administration',st_norep:'No reports.',st_back:'← Settings',st_pw_ok:'Email sent. Check your inbox.',st_pw_no:'Could not send the email.',st_rep:'Reports',ed_btn:'Edit listing',ed_save:'Save',ed_cancel:'Cancel',ed_ok:'Listing updated.',ed_note:'Photos cannot be changed here: repost the listing to change them.',sold_btn:'Mark as sold',unsold_btn:'Put back on sale',sold_b:'SOLD',sold_ok:'Listing marked as sold.',unsold_ok:'Listing back on sale.',rp_btn:'Report this listing',rp_t:'Why are you reporting this listing?',rp_1:'Scam or fake price',rp_2:'Prohibited item',rp_3:'Duplicate listing',rp_4:'Other problem',rp_ok:'Thank you, your report was sent.',rp_login:'Sign in to report a listing.',sh_btn:'Share',share_msg:'Look at this listing on Burkindi Commerce:',shop_share:'Share the shop',shop_msg:'Discover this shop on Burkindi Commerce:',nf:'Listing not found.',sort_new:'Newest',sort_asc:'Price: low to high',sort_desc:'Price: high to low',terms:'Terms of use and privacy',tc_title:'Terms of use and privacy',tc_1:'Burkindi Commerce connects buyers and sellers. We do not sell the items and are not a party to transactions.',tc_2:'The seller alone is responsible for the listing: description, price, condition and delivery must be accurate. Illegal, dangerous, counterfeit or misleading items are forbidden.',tc_3:'Meet the seller in a public place and pay only on receipt, or through a protected payment. Never pay in advance to a stranger.',tc_4:'Reported listings may be removed and abusive accounts blocked, without notice.',tc_5:'Data: we keep your email, name, phone number, listings and messages to run the service. Your number is visible through the WhatsApp button on your listings. We do not sell your data.',tc_6:'You can delete your listings at any time. To delete your account or data, message us on WhatsApp at +226 67 00 28 40.',b_novid:'Video pack: repost the listing with a video link to unlock it.',vd_lbl:'Promo video (optional)',vd_ph:'Paste a YouTube, TikTok or Facebook link',vd_hint:'Your video must first be posted on YouTube, TikTok or Facebook. Then paste its link here.',vd_bad:'Video link not recognised. Use a YouTube, TikTok or Facebook link.',vd_t:'Video',vd_open:'Open video',proto:'Beta',tr1:'Individuals and traders',tr2:'Direct WhatsApp contact',tr3:'Listings in many countries',
+ foot:'Burkindi Commerce · Founder: Zoundi Christian · Beta version.',
+ loading:'Loading…',slow:'The connection is slow. Listings may be out of date.',offline:'Cannot reach the service. Check your connection.',
+ empty_t:'No listings yet.',empty_b:'Post the first listing',need_acc:'Sign in or create your account to post a listing.',
+ phone_note:'This number will be visible to buyers (for WhatsApp). Include the country code.',
+ a_save:'Save',a_edit:'Edit my profile',a_cancel:'Cancel',a_email:'Email address',a_pw_hint:'6 characters minimum',
+ a_signup:'Create account',a_login:'Sign in',a_to_login:'I already have an account',a_to_signup:'I do not have an account yet',a_reset:'Forgot your password?',a_reset_ok:'Email sent. Check your inbox.',a_logout:'Sign out',
+ e_bad:'Wrong email or password.',e_exists:'This email already has an account.',e_weak:'Password too short (6 characters minimum).',e_mail:'Invalid email address.',e_net:'Connection problem. Try again.',e_many:'Too many attempts. Try again later.',e_first:'Enter your email first.',
+ del:'Delete listing',del_ok:'Confirm deletion',deleted:'Listing deleted.',err:'Could not save. Please try again.',publishing:'Publishing…',
+ m_note:'Private messages between buyers and sellers.',m_login:'Sign in to send messages.',m_own:'This is your own listing.',m_first:'Write your first message.',m_pick:'Choose a conversation.',b_discover:'Discovery ad',b_popular:'Popular ad',b_video:'Video pack',b_premium:'Premium ad',b_featured:'Featured listing',b_vedette:'Featured',b_spons:'Sponsored',b_btn:'Promote my listing',b_how:'Choose an offer. WhatsApp opens with your request: we send you the payment details (Orange Money, Moov, MTN, Wave). Your listing moves to the top once payment is received.',b_days:'days',b_active:'Promoted until',b_msg:'Hello, I would like to promote my listing “{t}” (ref. {id}) on Burkindi Commerce: {o}, {d} days, {p} FCFA. Please send me the payment details.',sh_title:'My shop',sh_name:'Shop name',sh_desc:'About your shop (300 characters max)',sh_logo:'Logo (optional)',sh_edit:'Edit my shop',sh_create:'Create my shop',sh_view:'View my shop',sh_all:'All listings',sh_none:'Create your shop: a name, logo and description that buyers can see.'},
+pt:{st_title:'Definições',st_acc:'Conta',st_edit:'Editar o meu perfil',st_edit_s:'Nome, telefone, país, tipo de conta',st_pw:'Alterar palavra-passe',st_pw_s:'Receber um e-mail para escolher uma nova palavra-passe',st_login:'Iniciar sessão',st_login_s:'Inicie sessão para gerir a conta e a loja',st_pref:'Preferências',st_lang:'Idioma',st_help:'Ajuda e informações',st_support:'Contactar o suporte',st_support_s:'Escrever no WhatsApp',st_sup_msg:'Olá, preciso de ajuda com o Burkindi Commerce.',st_admin:'Administração',st_norep:'Sem denúncias.',st_back:'← Definições',st_pw_ok:'E-mail enviado. Verifique a sua caixa de entrada.',st_pw_no:'Não foi possível enviar o e-mail.',st_rep:'Denúncias',ed_btn:'Editar anúncio',ed_save:'Guardar',ed_cancel:'Cancelar',ed_ok:'Anúncio atualizado.',ed_note:'As fotos não se alteram aqui: volte a publicar o anúncio para as mudar.',sold_btn:'Marcar como vendido',unsold_btn:'Voltar a pôr à venda',sold_b:'VENDIDO',sold_ok:'Anúncio marcado como vendido.',unsold_ok:'Anúncio de volta à venda.',rp_btn:'Denunciar este anúncio',rp_t:'Porque está a denunciar este anúncio?',rp_1:'Burla ou preço falso',rp_2:'Produto proibido',rp_3:'Anúncio duplicado',rp_4:'Outro problema',rp_ok:'Obrigado, a sua denúncia foi enviada.',rp_login:'Inicie sessão para denunciar um anúncio.',sh_btn:'Partilhar',share_msg:'Veja este anúncio no Burkindi Commerce:',shop_share:'Partilhar a loja',shop_msg:'Descubra esta loja no Burkindi Commerce:',nf:'Anúncio não encontrado.',sort_new:'Mais recentes',sort_asc:'Preço crescente',sort_desc:'Preço decrescente',terms:'Termos de uso e privacidade',tc_title:'Termos de uso e privacidade',tc_1:'O Burkindi Commerce liga compradores e vendedores. Não vendemos os artigos e não somos parte nas transações.',tc_2:'O vendedor é o único responsável pelo anúncio: descrição, preço, estado e entrega devem ser exatos. Produtos ilegais, perigosos, falsificados ou enganosos são proibidos.',tc_3:'Encontre o vendedor num local público e pague apenas na receção, ou por pagamento protegido. Nunca pague adiantado a um desconhecido.',tc_4:'Anúncios denunciados podem ser removidos e contas abusivas bloqueadas, sem aviso.',tc_5:'Dados: guardamos o seu e-mail, nome, telefone, anúncios e mensagens para o serviço funcionar. O seu número é visível no botão WhatsApp dos seus anúncios. Não vendemos os seus dados.',tc_6:'Pode apagar os seus anúncios a qualquer momento. Para apagar a conta ou os dados, escreva-nos no WhatsApp: +226 67 00 28 40.',b_novid:'Pack vídeo: volte a publicar o anúncio com um link de vídeo para o ativar.',vd_lbl:'Vídeo publicitário (opcional)',vd_ph:'Cole o link do YouTube, TikTok ou Facebook',vd_hint:'O seu vídeo deve primeiro ser publicado no YouTube, TikTok ou Facebook. Depois cole o link aqui.',vd_bad:'Link de vídeo não reconhecido. Use um link do YouTube, TikTok ou Facebook.',vd_t:'Vídeo',vd_open:'Abrir vídeo',proto:'Beta',tr1:'Particulares e comerciantes',tr2:'Contacto direto por WhatsApp',tr3:'Anúncios em vários países',
+ foot:'Burkindi Commerce · Fundador: Zoundi Christian · Versão beta.',
+ loading:'A carregar…',slow:'A ligação está lenta. Os anúncios podem estar desatualizados.',offline:'Não foi possível contactar o serviço. Verifique a ligação.',
+ empty_t:'Ainda não há anúncios.',empty_b:'Publicar o primeiro anúncio',need_acc:'Inicie sessão ou crie a sua conta para publicar um anúncio.',
+ phone_note:'Este número será visível para os compradores (para WhatsApp). Inclua o indicativo do país.',
+ a_save:'Guardar',a_edit:'Editar o meu perfil',a_cancel:'Cancelar',a_email:'Endereço de e-mail',a_pw_hint:'Mínimo de 6 caracteres',
+ a_signup:'Criar conta',a_login:'Iniciar sessão',a_to_login:'Já tenho conta',a_to_signup:'Ainda não tenho conta',a_reset:'Esqueceu-se da palavra-passe?',a_reset_ok:'E-mail enviado. Verifique a caixa de entrada.',a_logout:'Terminar sessão',
+ e_bad:'E-mail ou palavra-passe incorretos.',e_exists:'Este e-mail já tem uma conta.',e_weak:'Palavra-passe demasiado curta (mínimo 6 caracteres).',e_mail:'Endereço de e-mail inválido.',e_net:'Problema de ligação. Tente novamente.',e_many:'Demasiadas tentativas. Tente mais tarde.',e_first:'Indique primeiro o seu e-mail.',
+ del:'Eliminar anúncio',del_ok:'Confirmar eliminação',deleted:'Anúncio eliminado.',err:'Não foi possível guardar. Tente novamente.',publishing:'A publicar…',
+ m_note:'Mensagens privadas entre compradores e vendedores.',m_login:'Inicie sessão para enviar mensagens.',m_own:'Este é o seu anúncio.',m_first:'Escreva a sua primeira mensagem.',m_pick:'Escolha uma conversa.',b_discover:'Anúncio descoberta',b_popular:'Anúncio popular',b_video:'Pack vídeo',b_premium:'Anúncio premium',b_featured:'Anúncio em destaque',b_vedette:'Em destaque',b_spons:'Patrocinado',b_btn:'Promover o meu anúncio',b_how:'Escolha uma oferta. O WhatsApp abre com o seu pedido: enviamos-lhe os dados de pagamento (Orange Money, Moov, MTN, Wave). O anúncio sobe ao topo quando recebermos o pagamento.',b_days:'dias',b_active:'Promovido até',b_msg:'Olá, quero promover o meu anúncio «{t}» (ref. {id}) no Burkindi Commerce: {o}, {d} dias, {p} FCFA. Envie-me os dados de pagamento, por favor.',sh_title:'A minha loja',sh_name:'Nome da loja',sh_desc:'Apresentação (máx. 300 caracteres)',sh_logo:'Logótipo (opcional)',sh_edit:'Editar a minha loja',sh_create:'Criar a minha loja',sh_view:'Ver a minha loja',sh_all:'Todos os anúncios',sh_none:'Crie a sua loja: nome, logótipo e apresentação visíveis para os compradores.'},
+ar:{st_title:'الإعدادات',st_acc:'الحساب',st_edit:'تعديل ملفي الشخصي',st_edit_s:'الاسم والهاتف والبلد ونوع الحساب',st_pw:'تغيير كلمة المرور',st_pw_s:'استلام بريد لاختيار كلمة مرور جديدة',st_login:'تسجيل الدخول',st_login_s:'سجّل الدخول لإدارة حسابك ومتجرك',st_pref:'التفضيلات',st_lang:'اللغة',st_help:'المساعدة والمعلومات',st_support:'التواصل مع الدعم',st_support_s:'الكتابة على واتساب',st_sup_msg:'مرحباً، أحتاج مساعدة في Burkindi Commerce.',st_admin:'الإدارة',st_norep:'لا توجد بلاغات.',st_back:'← الإعدادات',st_pw_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',st_pw_no:'تعذر إرسال البريد.',st_rep:'البلاغات',ed_btn:'تعديل الإعلان',ed_save:'حفظ',ed_cancel:'إلغاء',ed_ok:'تم تعديل الإعلان.',ed_note:'لا يمكن تغيير الصور هنا: أعد نشر الإعلان لتغييرها.',sold_btn:'تحديد كمباع',unsold_btn:'إعادة العرض للبيع',sold_b:'مباع',sold_ok:'تم تحديد الإعلان كمباع.',unsold_ok:'عاد الإعلان للبيع.',rp_btn:'الإبلاغ عن هذا الإعلان',rp_t:'لماذا تبلّغ عن هذا الإعلان؟',rp_1:'احتيال أو سعر مزيّف',rp_2:'منتج ممنوع',rp_3:'إعلان مكرر',rp_4:'مشكلة أخرى',rp_ok:'شكراً، تم إرسال بلاغك.',rp_login:'سجّل الدخول للإبلاغ عن إعلان.',sh_btn:'مشاركة',share_msg:'شاهد هذا الإعلان على Burkindi Commerce:',shop_share:'مشاركة المتجر',shop_msg:'اكتشف هذا المتجر على Burkindi Commerce:',nf:'الإعلان غير موجود.',sort_new:'الأحدث',sort_asc:'السعر تصاعدياً',sort_desc:'السعر تنازلياً',terms:'شروط الاستخدام والخصوصية',tc_title:'شروط الاستخدام والخصوصية',tc_1:'Burkindi Commerce يربط بين المشترين والبائعين. نحن لا نبيع السلع ولسنا طرفاً في المعاملات.',tc_2:'البائع وحده مسؤول عن إعلانه: يجب أن يكون الوصف والسعر والحالة والتوصيل دقيقة. السلع غير القانونية أو الخطرة أو المقلدة أو المضللة ممنوعة.',tc_3:'قابل البائع في مكان عام ولا تدفع إلا عند الاستلام أو عبر دفع محمي. لا تدفع مقدماً لشخص لا تعرفه.',tc_4:'قد تُحذف الإعلانات المبلّغ عنها وتُحظر الحسابات المسيئة دون إشعار.',tc_5:'البيانات: نحتفظ ببريدك واسمك وهاتفك وإعلاناتك ورسائلك لتشغيل الخدمة. رقمك ظاهر عبر زر واتساب في إعلاناتك. لا نبيع بياناتك.',tc_6:'يمكنك حذف إعلاناتك في أي وقت. لحذف حسابك أو بياناتك راسلنا على واتساب: ‎+226 67 00 28 40.',b_novid:'باقة الفيديو: أعد نشر الإعلان مع رابط فيديو لتفعيلها.',vd_lbl:'فيديو إعلاني (اختياري)',vd_ph:'الصق رابط يوتيوب أو تيك توك أو فيسبوك',vd_hint:'يجب نشر الفيديو أولاً على يوتيوب أو تيك توك أو فيسبوك، ثم الصق رابطه هنا.',vd_bad:'رابط الفيديو غير معروف. استخدم رابط يوتيوب أو تيك توك أو فيسبوك.',vd_t:'فيديو',vd_open:'فتح الفيديو',proto:'تجريبي',tr1:'أفراد وتجار',tr2:'تواصل مباشر عبر واتساب',tr3:'إعلانات في عدة بلدان',
+ foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نسخة تجريبية.',
+ loading:'جارٍ التحميل…',slow:'الاتصال بطيء. قد لا تكون الإعلانات محدّثة.',offline:'تعذّر الوصول إلى الخدمة. تحقق من اتصالك.',
+ empty_t:'لا توجد إعلانات بعد.',empty_b:'انشر أول إعلان',need_acc:'سجّل الدخول أو أنشئ حسابك لنشر إعلان.',
+ phone_note:'سيكون هذا الرقم ظاهرًا للمشترين (لواتساب). أضف رمز البلد.',
+ a_save:'حفظ',a_edit:'تعديل ملفي',a_cancel:'إلغاء',a_email:'البريد الإلكتروني',a_pw_hint:'6 أحرف على الأقل',
+ a_signup:'إنشاء حساب',a_login:'تسجيل الدخول',a_to_login:'لدي حساب بالفعل',a_to_signup:'ليس لدي حساب بعد',a_reset:'نسيت كلمة المرور؟',a_reset_ok:'تم إرسال البريد. تحقق من صندوق الوارد.',a_logout:'تسجيل الخروج',
+ e_bad:'البريد الإلكتروني أو كلمة المرور غير صحيحة.',e_exists:'هذا البريد لديه حساب بالفعل.',e_weak:'كلمة المرور قصيرة جدًا (6 أحرف على الأقل).',e_mail:'عنوان بريد إلكتروني غير صالح.',e_net:'مشكلة في الاتصال. حاول مرة أخرى.',e_many:'محاولات كثيرة. حاول لاحقًا.',e_first:'أدخل بريدك الإلكتروني أولًا.',
+ del:'حذف الإعلان',del_ok:'تأكيد الحذف',deleted:'تم حذف الإعلان.',err:'تعذّر الحفظ. حاول مرة أخرى.',publishing:'جارٍ النشر…',
+ m_note:'رسائل خاصة بين المشترين والبائعين.',m_login:'سجّل الدخول لإرسال الرسائل.',m_own:'هذا إعلانك.',m_first:'اكتب رسالتك الأولى.',m_pick:'اختر محادثة.',b_discover:'إعلان الاكتشاف',b_popular:'إعلان شائع',b_video:'باقة الفيديو',b_premium:'إعلان مميز',b_featured:'إعلان في الواجهة',b_vedette:'في الواجهة',b_spons:'ممول',b_btn:'ترويج إعلاني',b_how:'اختر عرضًا. يفتح واتساب بطلبك وسنرسل لك طريقة الدفع (Orange Money وMoov وMTN وWave). يصعد إعلانك إلى الأعلى فور استلام الدفع.',b_days:'يومًا',b_active:'مروَّج حتى',b_msg:'مرحبًا، أريد ترويج إعلاني «{t}» (المرجع {id}) على Burkindi Commerce: {o}، {d} يومًا، {p} فرنك. أرسلوا لي طريقة الدفع من فضلكم.',sh_title:'متجري',sh_name:'اسم المتجر',sh_desc:'نبذة عن المتجر (300 حرف كحد أقصى)',sh_logo:'الشعار (اختياري)',sh_edit:'تعديل متجري',sh_create:'إنشاء متجري',sh_view:'عرض متجري',sh_all:'كل الإعلانات',sh_none:'أنشئ متجرك: اسم وشعار ونبذة يراها المشترون.'}
+};
+Object.keys(L2).forEach(function(k){Object.keys(L2[k]).forEach(function(j){L[k][j]=L2[k][j]})});
+
+var firebaseConfig={
+  apiKey:"AIzaSyBapHc-A2E0-BGDJFmpZgmawfmddLMPLzM",
+  authDomain:"bukindi-commerce.firebaseapp.com",
+  projectId:"bukindi-commerce",
+  storageBucket:"bukindi-commerce.firebasestorage.app",
+  messagingSenderId:"46730821561",
+  appId:"1:46730821561:web:e3d0941873ba14284a4068"
+};
+
+/* Contact WhatsApp (chiffres seulement, avec l'indicatif, sans +) qui reçoit les demandes de mise en avant. */
+var PAY_WA='22667002840';
+/* Identifiant (UID) du compte administrateur : voir Firebase > Authentication > Utilisateurs. */
+var ADMIN_UID='d8sfGyunXpaNkFWYzYJrNzhrx5V2';
+var BT=[{k:'discover',d:7,p:2500},{k:'popular',d:15,p:5000},{k:'video',d:15,p:5000,vid:1},{k:'premium',d:30,p:10000},{k:'featured',d:30,p:15000}];
+var BT_RANK={discover:1,popular:2,video:2,premium:3,featured:4};
+var Pa=[],Pb=[],Px=[],pendingOpen='',pendingTried={},editOpen=false,reportOpen=false,sortBy='new',boostOpen=false,shops={},sellerFilter='',shopEditing=false,shopLogoNew=null;
+var P=[],lang='fr',cat='all',favOnly=false,favs={},profile=null,editing=false,mode='login',cur=null,chats=[],msgs=[],unsubChats=null,unsubMsgs=null,draft=null,sendBusy=false,seen={},photos=[],openId=null,gi=0,lastFocus=null,confirmDel=false;
+var app=null,auth=null,db=null,uid=null,status='loading',authReady=false,busy=false,favQ=Promise.resolve();
+try{lang=localStorage.getItem('bk-lang')||'fr';if(!L[lang])lang='fr'}catch(e){}
+var $=function(i){return document.getElementById(i)};
+function t(k){return (L[lang]&&L[lang][k])||L.fr[k]||k}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function loc(){return lang==='ar'?'ar-u-nu-latn':lang}
+function country(cc){try{return new Intl.DisplayNames([loc()],{type:'region'}).of(cc)||cc}catch(e){return cc}}
+function money(p,c){try{return new Intl.NumberFormat(loc(),{style:'currency',currency:c,maximumFractionDigits:0}).format(p)}catch(e){return p+' '+c}}
+function ttl(p){return p.t?(p.t[lang]||p.t.fr||''):p.title}
+function desc(p){return p.d?(p.d[lang]||p.d.fr||''):p.text}
+function byId(id){return P.filter(function(x){return String(x.id)===String(id)})[0]}
+function toast(m){var el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){el.hidden=true},2800)}
+var HEART='<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C1 8.6 2.9 5 6.3 5c2 0 3.7 1.1 4.7 2.7h2C14 6.1 15.700 5 17.700 5 21.100 5 23 8.600 21.600 11.800 19.500 16.400 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+var WAI='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.700 13.600L3 21l4.500-1.200A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8.500c0 3.500 3 6.500 6.500 6.500l1-2-2.200-1-1 1c-1-.5-2-1.500-2.500-2.500l1-1-1-2.200z" fill="currentColor"/></svg>';
+var CHK='<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.600 2 3.200-.2 1 3 2.600 1.900-1 3.100 1 3.100-2.600 1.900-1 3-3.200-.2L12 22l-2.600-2-3.200.2-1-3L2.600 15.300l1-3.100-1-3.100L5.200 7.200l1-3 3.200.2z" fill="currentColor"/><path d="M8 12l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+
+/* Everything read from the database is treated as untrusted text. */
+function cleanShop(d){var lg=d.logo;return {name:String(d.name||'').slice(0,60),desc:String(d.desc||'').slice(0,300),cc:String(d.cc||''),v:d.v?1:0,
+  logo:(typeof lg==='string'&&lg.indexOf('data:image/jpeg;base64,')===0&&lg.length<80000)?lg:''}}
+function shopOf(p){return shops[p.ownerId]||null}
+function sellerName(p){var sh=shopOf(p);return (sh&&sh.name)||p.seller}
+function isV(p){var sh=shopOf(p);return !!(p.v||(sh&&sh.v))}
+function renderShopHead(){
+  var h=$('shopHead');if(!h)return;
+  if(!sellerFilter){h.hidden=true;h.innerHTML='';return}
+  var sh=shops[sellerFilter]||null,any=P.filter(function(x){return x.ownerId===sellerFilter})[0];
+  var name=(sh&&sh.name)||(any&&any.seller)||'—';
+  var ver=!!((sh&&sh.v)||P.some(function(x){return x.ownerId===sellerFilter&&x.v}));
+  var logo=sh&&sh.logo?'<img class="shoplogo" src="'+esc(sh.logo)+'" alt="">':'<div class="shoplogo ini" aria-hidden="true">'+esc(name.charAt(0).toUpperCase())+'</div>';
+  h.innerHTML='<div class="shop">'+logo+'<div class="shopinfo"><h2>'+esc(name)+(ver?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh&&sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+(sh&&sh.cc?'<div class="meta">'+esc(country(sh.cc))+'</div>':'')+'</div>'+
+    '<div class="btnrow"><button class="btn alt sm" type="button" data-shopclear="1">'+esc(t('sh_all'))+'</button><a class="btn alt sm" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(t('shop_msg')+' '+name+' '+BASE+'#b='+sellerFilter)+'">'+esc(t('shop_share'))+'</a>'+(isAdmin()?'<button class="btn alt sm" type="button" data-shopver="'+esc(sellerFilter)+'">'+esc(t(sh&&sh.v?'sh_unver':'sh_ver'))+'</button>':'')+'</div></div>';
+  h.hidden=false;
+}
+function shopBox(){
+  var sh=shops[uid]||null;
+  if(shopEditing){
+    var pv=shopLogoNew||(sh&&sh.logo)||'';
+    return '<form id="shopForm" class="shopform"><b>'+esc(t('sh_title'))+'</b>'+
+    '<label><span>'+esc(t('sh_name'))+'</span><input id="sh_name" maxlength="60" required value="'+esc((sh&&sh.name)||(profile?profile.name:''))+'"></label>'+
+    '<label><span>'+esc(t('sh_desc'))+'</span><textarea id="sh_desc" maxlength="300" rows="3">'+esc((sh&&sh.desc)||'')+'</textarea></label>'+
+    '<label><span>'+esc(t('sh_logo'))+'</span><input id="sh_file" type="file" accept="image/*"></label>'+
+    '<div id="sh_prev">'+(pv?'<img class="shoplogo" src="'+esc(pv)+'" alt="">':'')+'</div>'+
+    '<div class="btnrow"><button class="btn" type="submit">'+esc(t('a_save'))+'</button><button class="btn alt" type="button" data-shopcancel="1">'+esc(t('a_cancel'))+'</button></div></form>';
+  }
+  if(!sh)return '<div class="shopform"><b>'+esc(t('sh_title'))+'</b><p class="meta" style="margin:0">'+esc(t('sh_none'))+'</p><div class="btnrow"><button class="btn" type="button" data-shopedit="1">'+esc(t('sh_create'))+'</button></div></div>';
+  return '<div class="shopform"><b>'+esc(t('sh_title'))+'</b><div class="shop">'+(sh.logo?'<img class="shoplogo" src="'+esc(sh.logo)+'" alt="">':'<div class="shoplogo ini" aria-hidden="true">'+esc((sh.name||'?').charAt(0).toUpperCase())+'</div>')+
+    '<div class="shopinfo"><h2>'+esc(sh.name)+(sh.v?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+'</div>'+
+    '<div class="btnrow"><button class="btn alt sm" type="button" data-shopedit="1">'+esc(t('sh_edit'))+'</button><button class="btn alt sm" type="button" data-myshop="1">'+esc(t('sh_view'))+'</button></div></div></div>';
+}
+async function saveShop(){
+  if(!uid||!profile||busy)return;
+  var name=$('sh_name').value.trim(),desc=$('sh_desc').value.trim();
+  if(!name){toast(t('err'));return}
+  var data={name:name.slice(0,60),desc:desc.slice(0,300),cc:profile.cc,ts:Date.now()};
+  if(shopLogoNew)data.logo=shopLogoNew;
+  busy=true;
+  try{await setDoc(doc(db,'shops',uid),data,{merge:true});shopEditing=false;shopLogoNew=null;renderAcc();renderGrid();toast(t('a_ok'))}
+  catch(e){toast(t('err'))}
+  finally{busy=false}
+}
+function setShopVerified(id){
+  var cur=shops[id]&&shops[id].v;
+  setDoc(doc(db,'shops',id),{v:cur?0:1},{merge:true}).then(function(){toast(t('ad_ok'))}).catch(function(){toast(t('err'))});
+}
+function tsMs(x){return typeof x==='number'?x:(x&&typeof x.toMillis==='function')?x.toMillis():0}
+function boostRank(p){return p.bt&&p.bu>Date.now()?BT_RANK[p.bt]:0}
+function mergeP(){var m={};Pa.concat(Pb,Px).forEach(function(p){m[p.id]=p});P=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return boostRank(b)-boostRank(a)||b.ts-a.ts})}
+function isAdmin(){return !!uid&&!!ADMIN_UID&&uid===ADMIN_UID}
+function fmtN(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function payLink(txt){return 'https://wa.me/'+PAY_WA+'?text='+encodeURIComponent(txt)}
+function clean(id,d){
+  return {id:id,cat:CATS.indexOf(d.cat)>-1?d.cat:'craft',art:ARTS.indexOf(d.art)>-1?d.art:'',cc:String(d.cc||''),city:String(d.city||''),
+   price:Number(d.price)||0,cur:/^[A-Z]{3}$/.test(d.cur)?d.cur:'XOF',cond:['new','used','refurb'].indexOf(d.cond)>-1?d.cond:'new',
+   dv:['pickup','national','border'].indexOf(d.dv)>-1?d.dv:'pickup',seller:String(d.seller||''),ownerId:String(d.ownerId||''),phone:String(d.phone||''),
+   title:String(d.title||''),text:String(d.text||''),t:null,d:null,
+   imgs:Array.isArray(d.imgs)?d.imgs.filter(function(x){return typeof x==='string'&&x.indexOf('data:image/jpeg;base64,')===0&&x.length<400000}).slice(0,3):[],
+   v:d.v?1:0,r:0,n:0,ts:Number(d.ts)||0,bt:BT_RANK[d.bt]?d.bt:'',bu:tsMs(d.bu),vid:String(d.vid||'').slice(0,300),sold:d.sold?1:0};
+}
+function vidInfo(u){
+  u=String(u||'').trim();var m;
+  if(!/^https:\/\//i.test(u)||u.length>300)return null;
+  if((m=u.match(/^https:\/\/(?:www\.|m\.)?youtube\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/)([\w-]{11})/i))||(m=u.match(/^https:\/\/youtu\.be\/([\w-]{11})/i)))
+    return {k:'yt',src:'https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0',port:0};
+  if((m=u.match(/^https:\/\/(?:www\.)?tiktok\.com\/@[\w.-]+\/video\/(\d{8,25})/i)))
+    return {k:'tt',src:'https://www.tiktok.com/embed/v2/'+m[1],port:1};
+  if(/^https:\/\/(?:www\.|m\.|web\.)?facebook\.com\/[^\s]+/i.test(u)&&/(\/videos?\/|\/reel\/|\/watch|[?&]v=)/i.test(u)||/^https:\/\/fb\.watch\/[\w-]+/i.test(u))
+    return {k:'fb',src:'https://www.facebook.com/plugins/video.php?show_text=false&href='+encodeURIComponent(u),port:0};
+  return null;
+}
+function vidBox(p){
+  var v=vidInfo(p.vid);if(!v)return '';
+  return '<div class="vid'+(v.port?' port':'')+'"><iframe src="'+esc(v.src)+'" title="'+esc(t('vd_t'))+'" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture; fullscreen"></iframe></div><a class="meta" href="'+esc(p.vid)+'" target="_blank" rel="noopener">'+esc(t('vd_open'))+' ↗</a>';
+}
+function media(p,i){var s=p.imgs[i||0];return s?'<img src="'+esc(s)+'" alt="" loading="lazy">':art(p.art||DEFART[p.cat]||'basket')}
+function waLink(p){var base=p.phone&&/\d/.test(p.phone)?'https://wa.me/'+p.phone.replace(/\D/g,''):'https://wa.me/';return base+'?text='+encodeURIComponent(t('wa_msg')+' '+ttl(p))}
+
+function fillSelect(el,items,keep){var v=keep?el.value:null;el.innerHTML=items.map(function(i){return '<option value="'+i[0]+'">'+esc(i[1])+'</option>'}).join('');if(v!==null&&items.some(function(i){return i[0]===v}))el.value=v}
+function applyLang(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(function(e){e.textContent=t(e.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(e){e.placeholder=t(e.dataset.i18nPh)});
+  $('lang').value=lang;
+  $('supportLink').href='https://wa.me/'+PAY_WA+'?text='+encodeURIComponent(t('st_sup_msg'));
+  var tl=$('termsList');if(tl)tl.innerHTML=[1,2,3,4,5,6].map(function(i){return '<li>'+esc(t('tc_'+i))+'</li>'}).join('');
+  var cs=CCS.map(function(c){return [c,country(c)]});
+  fillSelect($('fcountry'),[['all',t('all_c')]].concat(cs),true);
+  fillSelect($('s_country'),cs,true);
+  fillSelect($('s_cat'),CATS.map(function(c){return [c,t('cat_'+c)]}),true);
+  fillSelect($('s_cond'),[['new',t('cond_new')],['used',t('cond_used')],['refurb',t('cond_refurb')]],true);
+  fillSelect($('s_deliv'),[['pickup',t('dv_pickup')],['national',t('dv_national')],['border',t('dv_border')]],true);
+  renderCats();renderGrid();renderThreads();renderAcc();renderSellGate();renderThumbs();if(openId)renderSheet();
+}
+function renderCats(){
+  $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'">'+esc(t('cat_'+c))+'</button>'}).join('')+
+   '<button type="button" class="chip fav" data-favonly="1" aria-pressed="'+favOnly+'">'+HEART.replace('width="20" height="20"','width="16" height="16"')+esc(t('favs'))+'</button>';
+}
+function who(p){return '<div class="who"><button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?'<span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</div>'}
+function renderGrid(){
+  var g=$('grid');renderShopHead();
+  if(status==='loading'||status==='offline'){$('count').textContent='';g.innerHTML='<div class="empty" style="grid-column:1/-1">'+esc(t(status==='loading'?'loading':'offline'))+'</div>';return}
+  var q=$('q').value.trim().toLowerCase(),fc=$('fcountry').value;
+  var list=P.filter(function(p){
+    return (!sellerFilter||p.ownerId===sellerFilter)&&(!p.sold||!!sellerFilter)&&(cat==='all'||p.cat===cat)&&(fc==='all'||p.cc===fc)&&(!favOnly||favs[p.id])&&(!q||(ttl(p)+' '+p.city+' '+desc(p)).toLowerCase().indexOf(q)>-1);
+  });
+  if(sortBy!=='new')list=list.slice().sort(function(a,b){return sortBy==='asc'?a.price-b.price:b.price-a.price});
+  $('count').textContent=list.length+' '+t('count')+(status==='slow'?' · '+t('slow'):'');
+  if(!P.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px"><b>'+esc(t('empty_t'))+'</b></p><a class="btn" href="#vendre">'+esc(t('empty_b'))+'</a></div>';return}
+  g.innerHTML=list.length?list.map(function(p){
+    var f=!!favs[p.id];
+    return '<article class="card'+(boostRank(p)===4?' vedette':'')+(p.sold?' sold':'')+'"><button class="ph" data-open="'+esc(p.id)+'" aria-label="'+esc(ttl(p))+'">'+media(p)+(p.sold?'<span class="soldb">'+esc(t('sold_b'))+'</span>':'')+(vidInfo(p.vid)?'<span class="vbadge" aria-hidden="true">▶ '+esc(t('vd_t'))+'</span>':'')+'</button>'+
+    '<button class="heart" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'" aria-label="'+esc(t(f?'fav_del':'fav_add'))+'">'+HEART+'</button>'+
+    '<div class="body"><span class="tag">'+esc(money(p.price,p.cur))+'</span>'+(boostRank(p)?'<span class="spons">'+esc(t(boostRank(p)===4?'b_vedette':'b_spons'))+'</span>':'')+'<h3><button type="button" data-open="'+esc(p.id)+'">'+esc(ttl(p))+'</button></h3>'+
+    '<div class="meta">'+esc(p.city)+', '+esc(country(p.cc))+'</div>'+who(p)+
+    '<div class="acts"><a class="btn wa sm" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn alt sm" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button></div></div></article>';
+  }).join(''):'<div class="empty" style="grid-column:1/-1">'+esc(t('none'))+'</div>';
+}
+function renderSheet(){
+  var p=byId(openId);if(!p)return;
+  var n=p.imgs.length?p.imgs.length:1;if(gi>=n)gi=0;
+  var th='';if(n>1){th='<div class="gal-th">';for(var i=0;i<n;i++)th+='<button type="button" data-gi="'+i+'" aria-pressed="'+(i===gi)+'">'+media(p,i)+'</button>';th+='</div>'}
+  var f=!!favs[p.id],canDel=!!uid&&(p.ownerId===uid||isAdmin()),own=!!uid&&p.ownerId===uid;
+  if(editOpen&&own){$('sheet').innerHTML='<button class="x" id="xbtn" type="button" aria-label="'+esc(t('close'))+'">×</button><div class="det">'+editForm(p)+'</div>';return}
+  $('sheet').innerHTML='<button class="x" id="xbtn" type="button" aria-label="'+esc(t('close'))+'">×</button><div class="sheet-grid"><div><div class="gal-main">'+media(p,gi)+'</div>'+th+'</div>'+
+  '<div class="det"><h2 id="sheetTitle">'+esc(ttl(p))+(p.sold?' <span class="soldb inl">'+esc(t('sold_b'))+'</span>':'')+'</h2><div class="big">'+esc(money(p.price,p.cur))+'</div>'+
+  (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+vidBox(p)+
+  '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd><button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</dd></dl>'+
+  '<div class="btnrow"><a class="btn wa" href="'+esc(waLink(p))+'" target="_blank" rel="noopener">'+WAI+esc(t('wa'))+'</a><button class="btn" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
+  '<div class="btnrow"><a class="btn alt" href="'+esc(shareLink(p))+'" target="_blank" rel="noopener">'+esc(t('sh_btn'))+'</a>'+(own?'<button class="btn alt" data-edit="1">'+esc(t('ed_btn'))+'</button><button class="btn alt" data-sold="'+esc(p.id)+'">'+esc(t(p.sold?'unsold_btn':'sold_btn'))+'</button>':'<button class="btn alt" data-report="1">'+esc(t('rp_btn'))+'</button>')+'</div>'+reportBox(p)+
+  (canDel?'<button class="btn alt" data-del="'+esc(p.id)+'" style="color:var(--danger)">'+esc(t(confirmDel?'del_ok':'del'))+'</button>':'')+
+  (uid&&p.ownerId===uid?boostPanel(p):'')+(isAdmin()?adminPanel(p):'')+
+  '<p class="tip">'+esc(t('tip'))+'</p></div></div>';
+}
+var BASE=location.origin+location.pathname;
+function shareLink(p){return 'https://wa.me/?text='+encodeURIComponent(t('share_msg')+' '+ttl(p)+' ('+money(p.price,p.cur)+') '+BASE+'#a='+p.id)}
+function reportBox(p){
+  if(!reportOpen||(uid&&p.ownerId===uid))return '';
+  return '<div class="boost"><b>'+esc(t('rp_t'))+'</b>'+[1,2,3,4].map(function(i){return '<button type="button" class="btn alt" data-rpreason="'+i+'">'+esc(t('rp_'+i))+'</button>'}).join('')+'</div>';
+}
+function editForm(p){
+  return '<form id="editForm" class="shopform" data-id="'+esc(p.id)+'"><b>'+esc(t('ed_btn'))+'</b>'+
+  '<label><span>'+esc(t('s_name'))+'</span><input id="e_title" required maxlength="80" value="'+esc(p.title)+'"></label>'+
+  '<label><span>'+esc(t('s_price'))+' ('+esc(p.cur)+')</span><input id="e_price" type="number" min="1" step="any" required inputmode="decimal" value="'+esc(String(p.price))+'"></label>'+
+  '<label><span>'+esc(t('s_desc'))+'</span><textarea id="e_desc" maxlength="400" rows="4">'+esc(p.text)+'</textarea></label>'+
+  '<label><span>'+esc(t('vd_lbl'))+'</span><input id="e_vid" type="url" maxlength="300" inputmode="url" value="'+esc(p.vid)+'" placeholder="'+esc(t('vd_ph'))+'"></label>'+
+  '<p class="meta" style="margin:0">'+esc(t('ed_note'))+'</p>'+
+  '<div class="btnrow"><button class="btn" type="submit">'+esc(t('ed_save'))+'</button><button class="btn alt" type="button" data-editcancel="1">'+esc(t('ed_cancel'))+'</button></div></form>';
+}
+function saveEdit(form){
+  var id=form.dataset.id,title=$('e_title').value.trim(),price=parseFloat($('e_price').value),vid=$('e_vid').value.trim();
+  if(!title||!(price>0)){toast(t('err'));return}
+  if(vid&&!vidInfo(vid)){toast(t('vd_bad'));return}
+  updateDoc(doc(db,'listings',id),{title:title,price:price,text:$('e_desc').value.trim(),vid:vid}).then(function(){editOpen=false;toast(t('ed_ok'));if(openId)renderSheet()}).catch(function(){toast(t('err'))});
+}
+function setSold(id){
+  var p=byId(id);if(!p||!uid||p.ownerId!==uid)return;
+  updateDoc(doc(db,'listings',id),{sold:!p.sold}).then(function(){toast(t(p.sold?'unsold_ok':'sold_ok'))}).catch(function(){toast(t('err'))});
+}
+function sendReport(n){
+  var r=['scam','banned','dup','other'][(+n)-1];if(!r||!uid||!openId)return;
+  addDoc(collection(db,'reports'),{listingId:String(openId),reason:r,by:uid,ts:Date.now()}).then(function(){reportOpen=false;toast(t('rp_ok'));if(openId)renderSheet()}).catch(function(){toast(t('err'))});
+}
+function tryPending(){
+  if(!pendingOpen)return;
+  var id=pendingOpen;
+  if(byId(id)){pendingOpen='';openSheet(id);return}
+  if(status==='ready'&&db&&!pendingTried[id]){
+    pendingTried[id]=1;
+    getDoc(doc(db,'listings',id)).then(function(sn){
+      pendingOpen='';
+      if(sn.exists()){Px=[clean(sn.id,sn.data()||{})];mergeP();renderGrid();openSheet(id)}else toast(t('nf'));
+    }).catch(function(){pendingOpen='';toast(t('nf'))});
+  }
+}
+function boostPanel(p){
+  var h='<div class="boost"><button type="button" class="btn" data-boostbtn="1">'+esc(t('b_btn'))+'</button>';
+  if(boostOpen){
+    h+='<p class="meta" style="margin:0">'+esc(t('b_how'))+'</p>';
+    BT.forEach(function(o){
+      if(o.vid&&!vidInfo(p.vid))return;
+      var txt=t('b_msg').split('{id}').join(p.id).split('{o}').join(t('b_'+o.k)).split('{d}').join(o.d).split('{p}').join(fmtN(o.p)).split('{t}').join(ttl(p));
+      h+='<a class="btn alt boosto" target="_blank" rel="noopener" href="'+esc(payLink(txt))+'"><span>'+esc(t('b_'+o.k))+' · '+o.d+' '+esc(t('b_days'))+'</span><b>'+fmtN(o.p)+' FCFA</b></a>';
+    });
+  }
+  if(!vidInfo(p.vid))h+='<p class="meta" style="margin:0">'+esc(t('b_novid'))+'</p>';
+  if(boostRank(p))h+='<p class="meta" style="margin:0">'+esc(t('b_active'))+' '+esc(new Date(p.bu).toLocaleDateString(lang))+'</p>';
+  return h+'</div>';
+}
+function adminPanel(p){
+  return '<div class="boost"><b>'+esc(t('ad_title'))+'</b>'+BT.map(function(o){return '<button type="button" class="btn alt" data-setboost="'+o.k+'" data-id="'+esc(p.id)+'">'+esc(t('b_'+o.k))+' · '+o.d+' j</button>'}).join('')+'<button type="button" class="btn alt" data-setboost="" data-id="'+esc(p.id)+'">'+esc(t('ad_off'))+'</button></div>';
+}
+function setBoost(id,k){
+  var o=BT.filter(function(x){return x.k===k})[0];
+  var data=o?{bt:k,bu:Timestamp.fromMillis(Date.now()+o.d*864e5)}:{bt:'',bu:Timestamp.fromMillis(0)};
+  updateDoc(doc(db,'listings',id),data).then(function(){toast(t('ad_ok'))}).catch(function(){toast(t('err'))});
+}
+function openSheet(id){lastFocus=document.activeElement;openId=id;editOpen=false;reportOpen=false;gi=0;confirmDel=false;boostOpen=false;renderSheet();$('ov').hidden=false;document.body.style.overflow='hidden';setTimeout(function(){var x=$('xbtn');if(x)x.focus()},0)}
+function closeSheet(){openId=null;editOpen=false;reportOpen=false;confirmDel=false;$('ov').hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)try{lastFocus.focus()}catch(e){}}
+function isUnread(c){return !!c.lastFrom&&c.lastFrom!==uid&&c.ts>(seen[c.id]||0)}
+function updateUnread(){
+  var a=document.querySelector('#nav a[data-v=messages]');if(!a)return;
+  if(uid&&chats.some(isUnread))a.setAttribute('data-unread','1');else a.removeAttribute('data-unread');
+}
+function renderThreads(){
+  var box=$('chatBox');
+  if(!uid){$('threads').innerHTML='';box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_login'))+' <a href="#compte">'+esc(t('n_acc'))+'</a></div>';return}
+  var list=chats.slice();if(draft&&!list.some(function(c){return c.id===draft.id}))list.unshift(draft);
+  $('threads').innerHTML=list.map(function(c){var lb=c.other+' · '+c.title;if(lb.length>40)lb=lb.slice(0,38)+'…';return '<button type="button" class="chip" data-th="'+esc(c.id)+'" aria-pressed="'+(c.id===cur)+'">'+esc(lb)+(isUnread(c)?' •':'')+'</button>'}).join('');
+  if(!list.length){box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_none'))+'</div>';return}
+  var c=list.filter(function(x){return x.id===cur})[0];
+  if(!c){if(cur===null){openChat(list[0].id)}else{cur=null;box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_pick'))+'</div>'}return}
+  if(box.dataset.cur!==c.id||box.dataset.lang!==lang||!$('sendForm')){
+    box.dataset.cur=c.id;box.dataset.lang=lang;
+    box.innerHTML='<div class="chathead" id="chatHead"></div><div class="chat" id="chat"></div><form class="send" id="sendForm"><input id="msgIn" maxlength="1000" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button></form>';
+  }
+  $('chatHead').textContent=c.title+' · '+c.other;
+  var ch=$('chat');
+  ch.innerHTML=msgs.length?msgs.map(function(m){return '<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
+  ch.scrollTop=ch.scrollHeight;
+}
+function cleanChat(id,d){
+  var m=Array.isArray(d.members)?d.members.slice(0,2).map(String):[];
+  var buyer=m[0]===uid;
+  return {id:id,members:m,listingId:String(d.listingId||''),title:String(d.title||'').slice(0,80),bn:String(d.bn||'').slice(0,60),sn:String(d.sn||'').slice(0,60),
+    other:String((buyer?d.sn:d.bn)||'').slice(0,60)||'—',last:String(d.last||'').slice(0,200),lastFrom:String(d.lastFrom||''),ts:Number(d.ts)||0};
+}
+function seenLoad(){try{seen=JSON.parse(localStorage.getItem('bk-seen-'+uid)||'{}')||{}}catch(e){seen={}}}
+function seenSave(){try{localStorage.setItem('bk-seen-'+uid,JSON.stringify(seen))}catch(e){}}
+function markSeen(){
+  var c=chats.filter(function(x){return x.id===cur})[0];
+  if(c&&c.ts>(seen[c.id]||0)){seen[c.id]=c.ts;seenSave()}
+  updateUnread();
+}
+function startChats(){
+  if(unsubChats)unsubChats();
+  var me=uid;
+  unsubChats=onSnapshot(query(collection(db,'chats'),where('members','array-contains',me)),function(s){
+    chats=s.docs.map(function(d){return cleanChat(d.id,d.data()||{})}).sort(function(a,b){return b.ts-a.ts});
+    if(draft&&chats.some(function(c){return c.id===draft.id}))draft=null;
+    if(location.hash==='#messages')markSeen();else updateUnread();
+    renderThreads();
+  },function(){});
+}
+function stopChats(){
+  if(unsubChats){unsubChats();unsubChats=null}
+  if(unsubMsgs){unsubMsgs();unsubMsgs=null}
+  chats=[];msgs=[];cur=null;draft=null;seen={};updateUnread();
+}
+function openChat(id){
+  cur=id;msgs=[];
+  if(unsubMsgs){unsubMsgs();unsubMsgs=null}
+  var isNew=draft&&draft.id===id&&!draft.sent;
+  if(!isNew){
+    unsubMsgs=onSnapshot(query(collection(db,'chats',id,'msgs'),orderBy('ts','desc'),limit(100)),function(s){
+      if(cur!==id)return;
+      msgs=s.docs.map(function(d){var x=d.data()||{};return {from:String(x.from||''),text:String(x.text||'').slice(0,1000),ts:Number(x.ts)||0}}).sort(function(a,b){return a.ts-b.ts});
+      if(location.hash==='#messages')markSeen();
+      renderThreads();
+    },function(){});
+  }
+  renderThreads();
+}
+async function sendMsg(){
+  var inp=$('msgIn');if(!inp||!uid||!cur||sendBusy)return;
+  var v=inp.value.trim().slice(0,1000);if(!v)return;
+  var c=(draft&&draft.id===cur)?draft:chats.filter(function(x){return x.id===cur})[0];if(!c)return;
+  sendBusy=true;var now=Date.now(),first=!!(c.draft&&!c.sent);
+  try{
+    if(first){await setDoc(doc(db,'chats',c.id),{members:c.members,listingId:c.listingId,title:c.title,bn:c.bn,sn:c.sn,last:v.slice(0,200),lastFrom:uid,ts:now});c.sent=true}
+    await addDoc(collection(db,'chats',c.id,'msgs'),{from:uid,text:v,ts:now});
+    if(!first)await updateDoc(doc(db,'chats',c.id),{last:v.slice(0,200),lastFrom:uid,ts:now});
+    inp.value='';
+    if(first)openChat(c.id);
+  }catch(e){toast(t('err'))}
+  finally{sendBusy=false}
+}
+function startChatWith(p){
+  if(!uid){if(openId)closeSheet();toast(t('m_login'));location.hash='#compte';show();return}
+  if(p.ownerId===uid){toast(t('m_own'));return}
+  var id=p.id+'_'+uid;
+  if(!chats.some(function(c){return c.id===id}))draft={id:id,members:[uid,p.ownerId],listingId:String(p.id),title:String(p.title).slice(0,80),bn:profile?profile.name:'',sn:p.seller||'',other:p.seller||'—',last:'',lastFrom:'',ts:0,draft:true};
+  openChat(id);if(openId)closeSheet();location.hash='#messages';show();
+}
+function renderThumbs(){
+  $('thumbs').innerHTML=photos.map(function(s,i){return '<div class="thumb"><img src="'+s.url+'" alt=""><button type="button" data-rm="'+i+'" aria-label="×">×</button></div>'}).join('');
+}
+function renderSellGate(){
+  var note=$('sellNote'),panel=$('sellPanel'),msg='',link=false;
+  if(!authReady&&status!=='offline'){note.innerHTML='';panel.hidden=true;return}
+  if(status==='offline'){msg=t('offline')}
+  else if(!uid||!profile){msg=t('need_acc');link=true}
+  note.innerHTML=msg?'<div class="empty" style="max-width:600px"><p style="margin:0 0 '+(link?'12':'0')+'px">'+esc(msg)+'</p>'+(link?'<a class="btn" href="#compte">'+esc(t('a_go'))+'</a>':'')+'</div>':'';
+  panel.hidden=!!msg;
+}
+function profileFields(p){
+  return '<div><div style="font-weight:700;font-size:.92rem;margin-bottom:6px">'+esc(t('a_type'))+'</div><div class="seg"><label><input type="radio" name="atype" value="ind"'+(p.type!=='mer'?' checked':'')+'> '+esc(t('a_ind'))+'</label><label><input type="radio" name="atype" value="mer"'+(p.type==='mer'?' checked':'')+'> '+esc(t('a_mer'))+'</label></div></div>'+
+  '<label><span>'+esc(t('a_fn'))+'</span><input id="a_name" required maxlength="60" autocomplete="name" value="'+esc(p.name)+'"></label>'+
+  '<div class="row2"><label><span>'+esc(t('country'))+'</span><select id="a_cc">'+CCS.map(function(c){return '<option value="'+c+'"'+(c===p.cc?' selected':'')+'>'+esc(country(c))+'</option>'}).join('')+'</select></label>'+
+  '<label><span>'+esc(t('a_ph'))+'</span><input id="a_tel" type="tel" required maxlength="24" inputmode="tel" placeholder="+226 70 00 00 00" dir="ltr" value="'+esc(p.tel)+'"></label></div>'+
+  '<span class="meta">'+esc(t('phone_note'))+'</span>';
+}
+function renderAcc(){renderAcc0();renderSettings()}
+function renderAcc0(){
+  var b=$('accBox');
+  if(status==='offline'){b.innerHTML='<div class="empty">'+esc(t('offline'))+'</div>';return}
+  if(!authReady){b.innerHTML='<div class="empty">'+esc(t('loading'))+'</div>';return}
+  if(!uid){
+    var su=mode==='signup';
+    b.innerHTML='<form id="authForm" novalidate>'+
+    '<label><span>'+esc(t('a_email'))+'</span><input id="au_email" type="email" required autocomplete="email" inputmode="email" dir="ltr"></label>'+
+    '<label><span>'+esc(t('a_pw'))+'</span><input id="au_pw" type="password" required minlength="6" autocomplete="'+(su?'new-password':'current-password')+'" dir="ltr"></label>'+
+    (su?'<span class="meta">'+esc(t('a_pw_hint'))+'</span>'+profileFields({type:'ind',name:'',cc:'BF',tel:''}):'')+
+    '<button class="btn" type="submit">'+esc(t(su?'a_signup':'a_login'))+'</button>'+
+    '<div class="btnrow"><button class="btn alt" type="button" data-mode="'+(su?'login':'signup')+'">'+esc(t(su?'a_to_login':'a_to_signup'))+'</button>'+(su?'':'<button class="btn alt" type="button" data-reset="1">'+esc(t('a_reset'))+'</button>')+'</div></form>';
+    return;
+  }
+  if(!profile||editing){
+    var p=profile||{type:'ind',name:'',cc:'BF',tel:''};
+    b.innerHTML='<form id="accForm">'+profileFields(p)+
+    '<div class="btnrow"><button class="btn" type="submit">'+esc(t('a_save'))+'</button>'+(profile?'<button class="btn alt" type="button" id="cancelEdit">'+esc(t('a_cancel'))+'</button>':'<button class="btn alt" type="button" id="out">'+esc(t('a_logout'))+'</button>')+'</div></form>';
+    return;
+  }
+  var mm=P.filter(function(x){return x.ownerId===uid}).map(function(p){return '<li>'+esc(ttl(p))+' · '+esc(money(p.price,p.cur))+'</li>'}).join('');
+  b.innerHTML='<div class="profile"><div class="avatar">'+esc(profile.name.charAt(0).toUpperCase())+'</div><div><h2 style="font-size:1.25rem">'+esc(profile.name)+'</h2><div class="meta" dir="ltr" style="text-align:start">'+esc(profile.tel)+'</div></div>'+
+  '<div class="chips"><span class="badge">'+esc(profile.type==='mer'?t('a_mer'):t('a_ind'))+'</span><span class="badge">'+esc(country(profile.cc))+'</span></div>'+
+  '<div><b>'+esc(t('a_mine'))+'</b>'+(mm?'<ul>'+mm+'</ul>':'<p class="meta">'+esc(t('a_none'))+'</p>')+'</div>'+
+  '<div class="btnrow"><a class="btn" href="#parametres">⚙ '+esc(t('st_title'))+'</a>'+(shops[uid]?'<button class="btn alt" type="button" data-myshop="1">'+esc(t('sh_view'))+'</button>':'')+'</div></div>';
+}
+var reports=[],unsubRep=null;
+function srow(ic,lab,sub,tag,attr){return '<'+tag+(tag==='button'?' type="button"':'')+' class="setrow" '+attr+'><span class="si">'+ic+'</span><span class="st"><b>'+esc(lab)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</span><span class="chev">›</span></'+tag+'>'}
+function renderSettings(){
+  var top=$('setTop'),bot=$('setBottom');if(!top||!bot)return;
+  if(!(shopEditing&&$('shopForm'))){
+    var h='<div class="setgroup"><h3>'+esc(t('st_acc'))+'</h3>';
+    if(!authReady)h+='<p class="meta">'+esc(t('loading'))+'</p>';
+    else if(!uid)h+=srow('👤',t('st_login'),t('st_login_s'),'a','href="#compte"');
+    else{
+      if(profile)h+=srow('👤',t('st_edit'),t('st_edit_s'),'button','data-setedit="1"');
+      h+=srow('🔑',t('st_pw'),t('st_pw_s'),'button','data-setpw="1"');
+      if(profile)h+='<div class="setcard">'+shopBox()+'</div>';
+    }
+    top.innerHTML=h+'</div>';
+  }
+  var b='';
+  if(isAdmin()){
+    var RL={scam:'rp_1',banned:'rp_2',dup:'rp_3',other:'rp_4'};
+    b+='<div class="setgroup"><h3>'+esc(t('st_admin'))+' · '+esc(t('st_rep'))+'</h3>'+(reports.length?reports.map(function(r){return srow('⚠️',t(RL[r.r]||'rp_4'),r.l+' · '+new Date(r.ts).toLocaleDateString(lang),'a','href="#a='+esc(r.l)+'"')}).join(''):'<p class="meta">'+esc(t('st_norep'))+'</p>')+'</div>';
+  }
+  if(uid)b+='<div class="setgroup"><button class="setrow danger" id="out" type="button"><span class="si">🚪</span><span class="st"><b>'+esc(t('a_logout'))+'</b></span></button></div>';
+  bot.innerHTML=b;
+}
+function startReports(){
+  if(unsubRep||!db||!isAdmin())return;
+  unsubRep=onSnapshot(query(collection(db,'reports'),orderBy('ts','desc'),limit(30)),function(sn){
+    reports=sn.docs.map(function(d){var x=d.data()||{};return {id:d.id,l:String(x.listingId||'').replace(/[^\w-]/g,''),r:String(x.reason||''),ts:Number(x.ts)||0}});renderSettings();
+  },function(){});
+}
+function stopReports(){if(unsubRep){unsubRep();unsubRep=null}reports=[]}
+async function doPw(){
+  var em=auth&&auth.currentUser&&auth.currentUser.email;if(!em){toast(t('st_pw_no'));return}
+  try{await sendPasswordResetEmail(auth,em);toast(t('st_pw_ok'))}catch(e){toast(t('st_pw_no'))}
+}
+function show(){
+  var h=location.hash||'#annonces',v=h.slice(1),m;
+  if((m=h.match(/^#a=([\w-]{1,40})$/))){pendingOpen=m[1];v='annonces'}
+  else if((m=h.match(/^#b=([\w-]{1,40})$/))){sellerFilter=m[1];v='annonces';renderGrid()}
+  if(m){try{history.replaceState(null,'',location.pathname+location.search+'#annonces')}catch(e){}}
+  if(['annonces','vendre','messages','compte','conditions','parametres'].indexOf(v)<0)v='annonces';
+  document.querySelectorAll('[data-view]').forEach(function(s){s.hidden=s.id!=='v-'+v});
+  if(v==='messages'&&uid)markSeen();
+  tryPending();
+  if(v==='parametres')renderSettings();
+  document.querySelectorAll('#nav a').forEach(function(a){if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+}
+/* Photos are resized in the browser and stored inside the listing itself (about 40 KB each, 3 at most). */
+function readImg(file){return readImgSz(file,640)}
+function readImgSz(file,max){return new Promise(function(res){
+  var u=URL.createObjectURL(file),im=new Image();
+  im.onload=function(){var m=max,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);try{c.toBlob(function(b){res(b)},'image/jpeg',.65)}catch(e){res(null)}};
+  im.onerror=function(){URL.revokeObjectURL(u);res(null)};im.src=u;
+})}
+function blobToDataUrl(b){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(fr.result)};fr.onerror=function(){rej(fr.error)};fr.readAsDataURL(b)})}
+function authMsg(e){
+  var c=(e&&e.code)||'';
+  if(c==='auth/email-already-in-use')return t('e_exists');
+  if(c==='auth/weak-password')return t('e_weak');
+  if(c==='auth/invalid-email')return t('e_mail');
+  if(c==='auth/too-many-requests')return t('e_many');
+  if(c==='auth/network-request-failed')return t('e_net');
+  if(c==='auth/invalid-credential'||c==='auth/wrong-password'||c==='auth/user-not-found'||c==='auth/invalid-login-credentials')return t('e_bad');
+  return t('err');
+}
+
+/* ---- data ---- */
+function startListings(){
+  var timer=setTimeout(function(){if(status==='loading'){status='slow';renderGrid()}},10000);
+  onSnapshot(query(collection(db,'listings'),orderBy('ts','desc'),limit(40)),function(s){
+    clearTimeout(timer);
+    Pa=s.docs.map(function(d){return clean(d.id,d.data()||{})});mergeP();
+    status='ready';renderGrid();renderAcc();tryPending();
+    if(openId){if(byId(openId))renderSheet();else closeSheet()}
+  },function(){clearTimeout(timer);status='offline';renderGrid();renderAcc();renderSellGate()});
+  onSnapshot(query(collection(db,'shops'),limit(300)),function(s){
+    shops={};s.docs.forEach(function(d){shops[d.id]=cleanShop(d.data()||{})});
+    renderGrid();if(!shopEditing)renderAcc();if(openId)renderSheet();
+  },function(){});
+  onSnapshot(query(collection(db,'listings'),where('bu','>',Timestamp.now()),orderBy('bu','desc'),limit(20)),function(s){
+    Pb=s.docs.map(function(d){return clean(d.id,d.data()||{})});mergeP();
+    renderGrid();if(openId){if(byId(openId))renderSheet();else closeSheet()}
+  },function(){});
+}
+function saveFavs(){var snap=JSON.parse(JSON.stringify(favs)),me=uid;favQ=favQ.then(function(){return setDoc(doc(db,'users',me,'private','favs'),{ids:snap})}).catch(function(){toast(t('err'))})}
+async function loadUser(u){
+  try{
+    var ps=await getDoc(doc(db,'users',u.uid,'private','profile'));
+    if(ps.exists()){var d=ps.data()||{};profile={type:d.type==='mer'?'mer':'ind',name:String(d.name||''),cc:String(d.cc||'BF'),tel:String(d.tel||'')}}
+  }catch(e){}
+  try{
+    var fs=await getDoc(doc(db,'users',u.uid,'private','favs'));
+    if(fs.exists()){var ids=(fs.data()||{}).ids;if(ids&&typeof ids==='object'){Object.keys(ids).forEach(function(k){if(ids[k])favs[k]=true})}}
+  }catch(e){}
+}
+async function doAuth(form){
+  var email=$('au_email').value.trim(),pw=$('au_pw').value;
+  var btn=form.querySelector('button[type=submit]');
+  if(!email||!pw){toast(t(!email?'e_mail':'e_weak'));return}
+  var prof=null;
+  if(mode==='signup'){
+    prof={type:form.querySelector('input[name=atype]:checked').value,name:$('a_name').value.trim(),cc:$('a_cc').value,tel:$('a_tel').value.trim()};
+    if(!prof.name||!prof.tel){toast(t('err'));return}
+  }
+  btn.disabled=true;
+  try{
+    if(prof){
+      var cred=await createUserWithEmailAndPassword(auth,email,pw);
+      profile=prof;
+      await setDoc(doc(db,'users',cred.user.uid,'private','profile'),prof);
+      renderAcc();renderSellGate();toast(t('a_ok'));
+    }else{
+      await signInWithEmailAndPassword(auth,email,pw);
+    }
+  }catch(e){toast(authMsg(e))}
+  finally{btn.disabled=false}
+}
+async function doReset(){
+  var el=$('au_email'),email=el?el.value.trim():'';
+  if(!email){toast(t('e_first'));return}
+  try{await sendPasswordResetEmail(auth,email);toast(t('a_reset_ok'))}catch(e){toast(authMsg(e))}
+}
+async function postListing(form){
+  if(busy||!uid||!profile)return;busy=true;
+  var btn=$('s_go');btn.disabled=true;btn.textContent=t('publishing');
+  try{
+    var imgs=[];for(var i=0;i<photos.length;i++)imgs.push(await blobToDataUrl(photos[i].blob));
+    var cc=$('s_cat').value,vid=$('s_vid').value.trim();
+    if(vid&&!vidInfo(vid)){toast(t('vd_bad'));busy=false;btn.disabled=false;btn.textContent=t('s_go');return}
+    await addDoc(collection(db,'listings'),{title:$('s_title').value.trim(),cat:cc,art:DEFART[cc],imgs:imgs,cc:$('s_country').value,city:$('s_city').value.trim(),
+      price:parseFloat($('s_price').value),cur:$('s_cur').value,cond:$('s_cond').value,dv:$('s_deliv').value,text:$('s_desc').value.trim(),vid:vid,
+      seller:profile.name,ownerId:uid,phone:profile.tel,v:0,ts:Date.now()});
+    photos.forEach(function(p){URL.revokeObjectURL(p.url)});photos=[];form.reset();renderThumbs();
+    toast(t('s_ok'));location.hash='#annonces';show();
+  }catch(e){toast(t('err'))}
+  finally{busy=false;btn.disabled=false;btn.textContent=t('s_go')}
+}
+function saveProfile(form){
+  var p={type:form.querySelector('input[name=atype]:checked').value,name:$('a_name').value.trim(),cc:$('a_cc').value,tel:$('a_tel').value.trim()};
+  setDoc(doc(db,'users',uid,'private','profile'),p).then(function(){profile=p;editing=false;renderAcc();renderSellGate();toast(t('a_ok'))}).catch(function(){toast(t('err'))});
+}
+function deleteListing(id){
+  if(!db)return;
+  deleteDoc(doc(db,'listings',id)).then(function(){closeSheet();toast(t('deleted'))}).catch(function(){toast(t('err'))});
+}
+
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-fav]');if(g){var id=g.dataset.fav;if(favs[id])delete favs[id];else favs[id]=true;if(uid)saveFavs();renderGrid();if(openId)renderSheet();return}
+  var m=e.target.closest('[data-msg]');if(m){var p=byId(m.dataset.msg);if(p)startChatWith(p);return}
+  var sh1=e.target.closest('[data-shop]');if(sh1){sellerFilter=sh1.dataset.shop;if(openId)closeSheet();location.hash='#annonces';show();renderGrid();window.scrollTo(0,0);return}
+  if(e.target.closest('[data-shopclear]')){sellerFilter='';renderGrid();return}
+  if(e.target.closest('[data-myshop]')){sellerFilter=uid;location.hash='#annonces';show();renderGrid();window.scrollTo(0,0);return}
+  if(e.target.closest('[data-shopedit]')){shopEditing=true;shopLogoNew=null;renderAcc();return}
+  if(e.target.closest('[data-shopcancel]')){shopEditing=false;shopLogoNew=null;renderAcc();return}
+  var sv=e.target.closest('[data-shopver]');if(sv){if(isAdmin())setShopVerified(sv.dataset.shopver);return}
+  if(e.target.closest('[data-boostbtn]')){boostOpen=!boostOpen;renderSheet();return}
+  var sb=e.target.closest('[data-setboost]');if(sb){if(isAdmin())setBoost(sb.dataset.id,sb.dataset.setboost);return}
+  if(e.target.closest('[data-setedit]')){editing=true;location.hash='#compte';show();renderAcc();return}
+  if(e.target.closest('[data-setpw]')){doPw();return}
+  if(e.target.closest('[data-edit]')){editOpen=true;renderSheet();return}
+  if(e.target.closest('[data-editcancel]')){editOpen=false;renderSheet();return}
+  var sd=e.target.closest('[data-sold]');if(sd){setSold(sd.dataset.sold);return}
+  if(e.target.closest('[data-report]')){if(!uid){toast(t('rp_login'));return}reportOpen=!reportOpen;renderSheet();return}
+  var rr=e.target.closest('[data-rpreason]');if(rr){sendReport(rr.dataset.rpreason);return}
+  var dl=e.target.closest('[data-del]');if(dl){if(!confirmDel){confirmDel=true;renderSheet()}else deleteListing(dl.dataset.del);return}
+  var o=e.target.closest('[data-open]');if(o){openSheet(o.dataset.open);return}
+  var gb=e.target.closest('[data-gi]');if(gb){gi=+gb.dataset.gi;renderSheet();return}
+  if(e.target.id==='xbtn'||e.target.id==='ov'){closeSheet();return}
+  var c=e.target.closest('[data-c]');if(c){cat=c.dataset.c;renderCats();renderGrid();return}
+  if(e.target.closest('[data-favonly]')){favOnly=!favOnly;renderCats();renderGrid();return}
+  var th=e.target.closest('[data-th]');if(th){openChat(th.dataset.th);return}
+  var rm=e.target.closest('[data-rm]');if(rm){var x=photos.splice(+rm.dataset.rm,1)[0];if(x)URL.revokeObjectURL(x.url);renderThumbs();return}
+  var md=e.target.closest('[data-mode]');if(md){mode=md.dataset.mode;renderAcc();return}
+  if(e.target.closest('[data-reset]')){doReset();return}
+  if(e.target.id==='editBtn'){editing=true;renderAcc();return}
+  if(e.target.id==='cancelEdit'){editing=false;renderAcc();return}
+  if(e.target.closest('#out')){signOut(auth).catch(function(){})}
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&openId){closeSheet();return}
+  if(e.key==='Tab'&&openId){var f=$('sheet').querySelectorAll('button,a[href]');if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+});
+$('s_files').addEventListener('change',function(e){
+  var fl=Array.prototype.slice.call(e.target.files||[]);e.target.value='';
+  if(photos.length+fl.length>3)toast(t('s_max'));
+  fl=fl.slice(0,Math.max(0,3-photos.length));
+  Promise.all(fl.map(readImg)).then(function(r){r.forEach(function(b){if(b&&photos.length<3)photos.push({blob:b,url:URL.createObjectURL(b)})});renderThumbs()});
+});
+document.addEventListener('change',function(e){
+  if(e.target.id!=='sh_file')return;
+  var f=e.target.files&&e.target.files[0];if(!f)return;
+  readImgSz(f,160).then(function(b){if(!b)return;return blobToDataUrl(b)}).then(function(u){if(!u)return;shopLogoNew=u;var pv=$('sh_prev');if(pv)pv.innerHTML='<img class="shoplogo" src="'+esc(u)+'" alt="">'}).catch(function(){toast(t('err'))});
+});
+document.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(e.target.id==='authForm')doAuth(e.target);
+  else if(e.target.id==='accForm')saveProfile(e.target);
+  else if(e.target.id==='sellForm')postListing(e.target);
+  else if(e.target.id==='shopForm')saveShop();
+  else if(e.target.id==='editForm')saveEdit(e.target);
+  else if(e.target.id==='sendForm')sendMsg();
+});
+$('q').addEventListener('input',renderGrid);
+$('fcountry').addEventListener('change',renderGrid);
+$('fsort').addEventListener('change',function(e){sortBy=e.target.value;renderGrid()});
+$('lang').addEventListener('change',function(e){lang=e.target.value;try{localStorage.setItem('bk-lang',lang)}catch(x){}applyLang()});
+window.addEventListener('hashchange',show);
+
+function init(){
+  try{app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}
+  catch(e){status='offline';authReady=true;renderGrid();renderAcc();renderSellGate();return}
+  startListings();
+  onAuthStateChanged(auth,async function(u){
+    if(u){uid=u.uid;mode='login';await loadUser(u);seenLoad();startChats();startReports()}
+    else{stopChats();stopReports();uid=null;profile=null;favs={};editing=false;shopEditing=false;shopLogoNew=null}
+    authReady=true;
+    renderGrid();renderAcc();renderSellGate();renderThreads();if(openId)renderSheet();
+  },function(){authReady=true;renderAcc();renderSellGate()});
+}
+applyLang();show();init();
+</script>
+</body>
+</html>
