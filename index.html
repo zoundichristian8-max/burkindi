@@ -307,16 +307,33 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
 
 /* Panneaux publicitaires en location */
-.ad{display:block;position:relative;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);text-decoration:none;overflow:hidden;margin:0 0 14px}
-.ad-in{display:flex;align-items:center;gap:12px;padding:10px 12px;padding-inline-end:56px;min-height:72px}
-.ad img{width:96px;height:64px;object-fit:cover;border-radius:6px;flex:none;background:var(--line)}
-.ad-ic{width:48px;height:48px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:1.4rem;flex:none}
-.ad-tx{display:grid;gap:2px;min-width:0}
-.ad-tx b{font-family:var(--display);font-size:1.05rem;line-height:1.2}
-.ad-tx span{color:var(--muted);font-size:.92rem;overflow-wrap:anywhere}
-.ad-lbl{position:absolute;top:6px;inset-inline-end:8px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.ad.free{border-style:dashed;background:transparent}
+.ad{display:block;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:0 0 14px;box-shadow:0 2px 10px rgba(0,0,0,.08);color:var(--fg)}
 .ad-inline{grid-column:1/-1;margin:0}
+.ad-mw{position:relative}
+.ad-media{display:block;position:relative;overflow:hidden;aspect-ratio:16/9;max-height:300px;background:#0d1812}
+.ad-bottom .ad-media,.ad-inline .ad-media{aspect-ratio:21/9;max-height:220px}
+.adc{position:absolute;inset:0}
+.ad-sl{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+.ad-sl.on{opacity:1}
+.ad-sl i{position:absolute;inset:-24px;background-size:cover;background-position:center;filter:blur(20px) brightness(.75)}
+.ad-sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.ad-ph{display:grid;place-items:center;padding:16px;text-align:center;background:linear-gradient(135deg,var(--band),var(--primary))}
+.ad-ph b{font-family:var(--display);font-size:1.6rem;color:#fff;line-height:1.1;overflow-wrap:anywhere}
+.ad-lbl{position:absolute;top:10px;inset-inline-start:10px;z-index:2;background:rgba(0,0,0,.55);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.ad-snd{position:absolute;top:8px;inset-inline-end:8px;z-index:2;width:42px;height:42px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.ad-dots{position:absolute;bottom:4px;left:0;right:0;z-index:2;display:flex;justify-content:center;gap:2px}
+.ad-dot{width:24px;height:24px;border:0;padding:0;background:none;display:grid;place-items:center;cursor:pointer}
+.ad-dot::before{content:"";width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.6);transition:transform .2s,background .2s}
+.ad-dot.on::before{background:var(--accent);transform:scale(1.25)}
+.ad-info{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.ad-tx{display:grid;gap:2px;min-width:0;flex:1}
+.ad-tx b{font-family:var(--display);font-size:1.08rem;line-height:1.2;overflow-wrap:anywhere}
+.ad-tx span{color:var(--muted);font-size:.92rem;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ad-cta{flex:none;background:var(--primary);color:var(--on-primary);border-radius:999px;padding:9px 18px;min-height:40px;display:inline-flex;align-items:center;font-weight:700;text-decoration:none}
+.ad.free{border-style:dashed;background:transparent;box-shadow:none;text-decoration:none}
+.ad-in{display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:72px}
+.ad-ic{width:48px;height:48px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:1.4rem;flex:none}
+@media (prefers-reduced-motion:reduce){.ad-sl{transition:none}}
 .adslots{display:grid;gap:10px;margin:14px 0}
 .adslot{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px}
 .adslot b{font-family:var(--display)}.adslot span{color:var(--muted);font-size:.92rem}
@@ -545,8 +562,9 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
- ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'1. Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'2. Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'3. Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
+ ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
  ada_t:'Gérer les publicités (admin)',ada_start:'Début',ada_img:'Image (facultatif)',ada_add:'Installer la publicité',ada_list:'Publicités installées',ada_none:'Aucune publicité installée.',ada_del:'Retirer',ada_ok:'Publicité installée.',ada_off:'Publicité retirée.',ada_conf:'Retirer cette publicité ?',ada_until:'jusqu’au',ada_on:'En cours',ada_wait:'À venir',ada_end:'Terminée',ada_bigimg:'Image trop lourde, choisissez-en une plus petite.',
+ ad_visit:'Visiter',ad_snd:'Son de la publicité',ad_snd_err:'Impossible de lire la musique.',ada_imgs:'Images (jusqu’à 4, défilement automatique)',ada_music:'Musique (MP3 court, 700 Ko maximum)',ada_music_fail:'Publicité installée, mais la musique n’a pas été enregistrée : ajoutez la règle « adsmusic » dans Firebase.',ada_toobig:'Images trop lourdes : retirez-en une ou deux.',ada_bigmusic:'Musique trop lourde (700 Ko maximum).',
  foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
 en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
  h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
@@ -560,8 +578,9 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
- ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'1. Pick a billboard and a duration, then fill in the request.',ad_s2:'2. It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'3. After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
+ ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'Pick a billboard and a duration, then fill in the request.',ad_s2:'It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
  ada_t:'Manage ads (admin)',ada_start:'Start',ada_img:'Image (optional)',ada_add:'Install the ad',ada_list:'Installed ads',ada_none:'No ad installed.',ada_del:'Remove',ada_ok:'Ad installed.',ada_off:'Ad removed.',ada_conf:'Remove this ad?',ada_until:'until',ada_on:'Running',ada_wait:'Upcoming',ada_end:'Ended',ada_bigimg:'Image too large, pick a smaller one.',
+ ad_visit:'Visit',ad_snd:'Ad sound',ad_snd_err:'Could not play the music.',ada_imgs:'Images (up to 4, auto-sliding)',ada_music:'Music (short MP3, 700 KB max)',ada_music_fail:'Ad installed, but the music was not saved: add the “adsmusic” rule in Firebase.',ada_toobig:'Images too large: remove one or two.',ada_bigmusic:'Music too large (700 KB max).',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
 pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
  h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
@@ -575,7 +594,8 @@ pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anú
  m_title:'Mensagens',m_none:'Sem conversas. Toque em Mensagem num anúncio.',m_ph:'A sua mensagem…',m_send:'Enviar',m_hi:'Olá, este produto ainda está disponível?',m_re:'Olá! Sim, está disponível. Para que país devemos entregar?',
  pay_title:'Pagamento móvel',pay_note:'Em breve: pague e receba com a sua carteira móvel.',
  a_title:'A minha conta',a_type:'Sou',a_ind:'Particular',a_mer:'Comerciante',a_fn:'Nome completo',a_ph:'Telefone',a_pw:'Palavra-passe',a_go:'Criar a minha conta',a_ok:'Conta criada.',a_out:'Terminar sessão',a_mine:'Os meus anúncios',a_none:'Ainda não publicou nada.',a_ver:'Verificação pendente',you:'Você',
- ad_lbl:'Publicidade',ad_free:'Espaço publicitário para alugar',ad_free_s:'O seu negócio ou site aqui. Toque para reservar.',ad_t:'Anunciar connosco',ad_intro:'Alugue um painel no Burkindi Commerce e mostre o seu site ou loja a todos os visitantes.',ad_s1:'1. Escolha um painel e uma duração e preencha o pedido.',ad_s2:'2. Ele chega ao WhatsApp do criador do site: conversamos para validar o conteúdo, o preço e as datas.',ad_s3:'3. Após acordo e pagamento, a sua publicidade é instalada. Nada é publicado antes dessa conversa.',ad_from:'A partir de',ad_slot_top:'Faixa no topo',ad_slot_inline:'Entre os anúncios',ad_slot_bottom:'Faixa no fundo',ad_d_top:'Acima dos anúncios, a primeira coisa vista ao abrir.',ad_d_inline:'No meio da lista, em largura total.',ad_d_bottom:'Abaixo dos anúncios, antes do rodapé.',ad_days:'dias',ad_f_slot:'Painel',ad_f_dur:'Duração',ad_f_name:'Nome do seu negócio ou site',ad_f_site:'Ligação do seu site ou página',ad_f_text:'Texto do anúncio (uma frase curta)',ad_f_date:'Início pretendido',ad_price:'Preço indicativo',ad_go:'Enviar o pedido por WhatsApp',ad_note:'A sua imagem (logótipo ou cartaz): envie-a na conversa do WhatsApp depois do pedido.',ad_err:'Indique o nome, uma ligação válida (https://…) e o texto.',ad_m_h:'Olá, gostaria de alugar um painel publicitário no Burkindi Commerce.',ad_m_img:'Envio a minha imagem logo a seguir.',ad_sent:'Pedido pronto: envie-o por WhatsApp.',st_ads:'Publicidade',st_ads_s:'Alugar um painel publicitário',
+ ad_lbl:'Publicidade',ad_free:'Espaço publicitário para alugar',ad_free_s:'O seu negócio ou site aqui. Toque para reservar.',ad_t:'Anunciar connosco',ad_intro:'Alugue um painel no Burkindi Commerce e mostre o seu site ou loja a todos os visitantes.',ad_s1:'Escolha um painel e uma duração e preencha o pedido.',ad_s2:'Ele chega ao WhatsApp do criador do site: conversamos para validar o conteúdo, o preço e as datas.',ad_s3:'Após acordo e pagamento, a sua publicidade é instalada. Nada é publicado antes dessa conversa.',ad_from:'A partir de',ad_slot_top:'Faixa no topo',ad_slot_inline:'Entre os anúncios',ad_slot_bottom:'Faixa no fundo',ad_d_top:'Acima dos anúncios, a primeira coisa vista ao abrir.',ad_d_inline:'No meio da lista, em largura total.',ad_d_bottom:'Abaixo dos anúncios, antes do rodapé.',ad_days:'dias',ad_f_slot:'Painel',ad_f_dur:'Duração',ad_f_name:'Nome do seu negócio ou site',ad_f_site:'Ligação do seu site ou página',ad_f_text:'Texto do anúncio (uma frase curta)',ad_f_date:'Início pretendido',ad_price:'Preço indicativo',ad_go:'Enviar o pedido por WhatsApp',ad_note:'A sua imagem (logótipo ou cartaz): envie-a na conversa do WhatsApp depois do pedido.',ad_err:'Indique o nome, uma ligação válida (https://…) e o texto.',ad_m_h:'Olá, gostaria de alugar um painel publicitário no Burkindi Commerce.',ad_m_img:'Envio a minha imagem logo a seguir.',ad_sent:'Pedido pronto: envie-o por WhatsApp.',st_ads:'Publicidade',st_ads_s:'Alugar um painel publicitário',
+ ad_visit:'Visitar',ad_snd:'Som do anúncio',ad_snd_err:'Não foi possível tocar a música.',
  foot:'Burkindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
 ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا حدود',n_list:'الإعلانات',n_sell:'بيع',n_msg:'الرسائل',n_acc:'الحساب',
  h_title:'اشترِ وبِع من بلد إلى آخر.',h_sub:'أفراد وتجار من كل أنحاء أفريقيا في مكان واحد.',
@@ -589,7 +609,8 @@ ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا
  m_title:'الرسائل',m_none:'لا توجد محادثات. اضغط «رسالة» من أي إعلان.',m_ph:'اكتب رسالتك…',m_send:'إرسال',m_hi:'مرحبًا، هل هذا المنتج متوفر؟',m_re:'مرحبًا! نعم، متوفر. إلى أي بلد نوصل؟',
  pay_title:'الدفع عبر الجوال',pay_note:'قريبًا: ادفع واستلم المال عبر محفظتك على الجوال.',
  a_title:'حسابي',a_type:'أنا',a_ind:'فرد',a_mer:'تاجر',a_fn:'الاسم الكامل',a_ph:'الهاتف',a_pw:'كلمة المرور',a_go:'إنشاء حسابي',a_ok:'تم إنشاء الحساب.',a_out:'تسجيل الخروج',a_mine:'إعلاناتي',a_none:'لم تنشر أي شيء بعد.',a_ver:'التحقق قيد الانتظار',you:'أنت',
- ad_lbl:'إعلان',ad_free:'مساحة إعلانية للإيجار',ad_free_s:'نشاطك أو موقعك هنا. اضغط للحجز.',ad_t:'أعلن معنا',ad_intro:'استأجر لوحة إعلانية على بوكيندي كوميرس واعرض موقعك أو متجرك على كل زوارنا.',ad_s1:'1. اختر لوحة ومدة ثم املأ الطلب.',ad_s2:'2. يصل الطلب إلى واتساب مصمم الموقع: نتحاور للاتفاق على المحتوى والسعر والتواريخ.',ad_s3:'3. بعد الاتفاق والدفع يتم تركيب إعلانك. لا يُنشر شيء قبل هذا الحوار.',ad_from:'ابتداءً من',ad_slot_top:'شريط أعلى الصفحة',ad_slot_inline:'بين الإعلانات',ad_slot_bottom:'شريط أسفل الصفحة',ad_d_top:'فوق الإعلانات، أول ما يظهر عند الفتح.',ad_d_inline:'في وسط القائمة بعرض كامل.',ad_d_bottom:'تحت الإعلانات وقبل تذييل الصفحة.',ad_days:'أيام',ad_f_slot:'اللوحة',ad_f_dur:'المدة',ad_f_name:'اسم نشاطك أو موقعك',ad_f_site:'رابط موقعك أو صفحتك',ad_f_text:'نص الإعلان (جملة قصيرة)',ad_f_date:'تاريخ البدء المفضل',ad_price:'السعر التقريبي',ad_go:'أرسل الطلب عبر واتساب',ad_note:'صورتك (الشعار أو الملصق): أرسلها في محادثة واتساب بعد الطلب.',ad_err:'أدخل الاسم ورابطًا صالحًا (https://…) والنص.',ad_m_h:'مرحبًا، أرغب في استئجار لوحة إعلانية على بوكيندي كوميرس.',ad_m_img:'سأرسل لك صورتي مباشرة بعد ذلك.',ad_sent:'الطلب جاهز: أرسله عبر واتساب.',st_ads:'الإعلان',st_ads_s:'استئجار لوحة إعلانية',
+ ad_lbl:'إعلان',ad_free:'مساحة إعلانية للإيجار',ad_free_s:'نشاطك أو موقعك هنا. اضغط للحجز.',ad_t:'أعلن معنا',ad_intro:'استأجر لوحة إعلانية على بوكيندي كوميرس واعرض موقعك أو متجرك على كل زوارنا.',ad_s1:'اختر لوحة ومدة ثم املأ الطلب.',ad_s2:'يصل الطلب إلى واتساب مصمم الموقع: نتحاور للاتفاق على المحتوى والسعر والتواريخ.',ad_s3:'بعد الاتفاق والدفع يتم تركيب إعلانك. لا يُنشر شيء قبل هذا الحوار.',ad_from:'ابتداءً من',ad_slot_top:'شريط أعلى الصفحة',ad_slot_inline:'بين الإعلانات',ad_slot_bottom:'شريط أسفل الصفحة',ad_d_top:'فوق الإعلانات، أول ما يظهر عند الفتح.',ad_d_inline:'في وسط القائمة بعرض كامل.',ad_d_bottom:'تحت الإعلانات وقبل تذييل الصفحة.',ad_days:'أيام',ad_f_slot:'اللوحة',ad_f_dur:'المدة',ad_f_name:'اسم نشاطك أو موقعك',ad_f_site:'رابط موقعك أو صفحتك',ad_f_text:'نص الإعلان (جملة قصيرة)',ad_f_date:'تاريخ البدء المفضل',ad_price:'السعر التقريبي',ad_go:'أرسل الطلب عبر واتساب',ad_note:'صورتك (الشعار أو الملصق): أرسلها في محادثة واتساب بعد الطلب.',ad_err:'أدخل الاسم ورابطًا صالحًا (https://…) والنص.',ad_m_h:'مرحبًا، أرغب في استئجار لوحة إعلانية على بوكيندي كوميرس.',ad_m_img:'سأرسل لك صورتي مباشرة بعد ذلك.',ad_sent:'الطلب جاهز: أرسله عبر واتساب.',st_ads:'الإعلان',st_ads_s:'استئجار لوحة إعلانية',
+ ad_visit:'زيارة',ad_snd:'صوت الإعلان',ad_snd_err:'تعذّر تشغيل الموسيقى.',
  foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نموذج أولي: الإعلانات والبائعون والمحادثات أمثلة.'}
 };
 var CATS=['fashion','food','tech','beauty','craft'];
@@ -824,9 +845,77 @@ function adFree(cls){return '<a class="ad free '+cls+'" href="#publicite"><div c
 function adHtml(slot,cls){
   var l=adActive(slot);if(!l.length)return adFree(cls||'');
   if(adPick[slot]===undefined)adPick[slot]=Math.floor(Math.random()*1000);
-  var a=l[adPick[slot]%l.length],im=adImg(a.img);
-  return '<a class="ad '+(cls||'')+'" href="'+esc(adUrl(a.url))+'" target="_blank" rel="noopener sponsored"><span class="ad-lbl">'+esc(t('ad_lbl'))+'</span><div class="ad-in">'+(im?'<img src="'+esc(im)+'" alt="" loading="lazy">':'')+'<div class="ad-tx"><b>'+esc(String(a.name||'').slice(0,60))+'</b><span>'+esc(String(a.text||'').slice(0,120))+'</span></div></div></a>'}
-function renderAds(){renderAdAdmin();var a=$('adTop'),b=$('adBottom');if(a)a.innerHTML=adHtml('top','ad-top');if(b)b.innerHTML=adHtml('bottom','ad-bottom')}
+  var a=l[adPick[slot]%l.length],im=a.images||[],u=esc(adUrl(a.url)),nm=esc(a.name);
+  var sl=im.length?im.map(function(x,i){var e=esc(x);return '<div class="ad-sl'+(i?'':' on')+'"><i style="background-image:url(\''+e+'\')"></i><img src="'+e+'" alt="'+nm+'"'+(i?' loading="lazy"':'')+'></div>'}).join(''):'<div class="ad-sl on ad-ph"><b>'+nm+'</b></div>';
+  var dots=im.length>1?'<div class="ad-dots">'+im.map(function(x,i){return '<button type="button" class="ad-dot'+(i?'':' on')+'" data-addot="'+i+'" aria-label="'+(i+1)+'"></button>'}).join('')+'</div>':'';
+  var snd=a.music?'<button type="button" class="ad-snd" data-adsnd="'+esc(a.id)+'" aria-pressed="false" aria-label="'+esc(t('ad_snd'))+'">🔇</button>':'';
+  return '<div class="ad '+(cls||'')+'" data-adid="'+esc(a.id)+'" data-music="'+(a.music?1:0)+'"><div class="ad-mw"><a class="ad-media" href="'+u+'" target="_blank" rel="noopener sponsored"><div class="adc" data-i="0">'+sl+'</div></a><span class="ad-lbl">'+esc(t('ad_lbl'))+'</span>'+snd+dots+'</div>'+
+   '<div class="ad-info"><div class="ad-tx"><b>'+nm+'</b><span>'+esc(a.text)+'</span></div><a class="ad-cta" href="'+u+'" target="_blank" rel="noopener sponsored">'+esc(t('ad_visit'))+' ›</a></div></div>'}
+function adSet(el,h){if(!el||el._h===h)return;el._h=h;el.innerHTML=h}
+function renderAds(){renderAdAdmin();adSet($('adTop'),adHtml('top','ad-top'));adSet($('adBottom'),adHtml('bottom','ad-bottom'));adSndUi()}
+/* Défilement automatique des images */
+function adGo(c,i){
+  c.dataset.i=i;for(var k=0;k<c.children.length;k++)c.children[k].classList.toggle('on',k===i);
+  var w=c.closest('.ad-mw');if(w)w.querySelectorAll('.ad-dot').forEach(function(d,k){d.classList.toggle('on',k===i)})
+}
+function adTick(){
+  adStopIfGone();
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('.adc').forEach(function(c){var n=c.children.length;if(n>1)adGo(c,(+c.dataset.i+1)%n)})
+}
+setInterval(adTick,4500);
+document.addEventListener('click',function(e){
+  var d=e.target.closest&&e.target.closest('[data-addot]');
+  if(d){var c=d.closest('.ad-mw').querySelector('.adc');adGo(c,+d.dataset.addot);return}
+  var b=e.target.closest&&e.target.closest('[data-adsnd]');
+  if(b){adToggle(b.dataset.adsnd)}
+});
+(function(){var x0=null;
+  document.addEventListener('touchstart',function(e){var w=e.target.closest&&e.target.closest('.ad-mw');x0=w&&e.touches[0]?e.touches[0].clientX:null},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null)return;var w=e.target.closest&&e.target.closest('.ad-mw'),x1=e.changedTouches[0]?e.changedTouches[0].clientX:x0,dx=x1-x0;x0=null;
+    if(!w||Math.abs(dx)<45)return;var c=w.querySelector('.adc'),n=c.children.length;if(n<2)return;
+    adGo(c,(+c.dataset.i+(dx<0?1:n-1))%n)
+  },{passive:true});
+})();
+/* Musique de la publicité : un seul son, repris tant que la publicité est active */
+var adAudio=new Audio(),adAudioId='',adSndOn=false,adSndBusy=false,adYield=false;
+adAudio.loop=true;adAudio.preload='none';
+try{adSndOn=localStorage.getItem('bk-adsnd')==='1'}catch(e){}
+function adSndSave(){try{localStorage.setItem('bk-adsnd',adSndOn?'1':'0')}catch(e){}}
+function adSndUi(){document.querySelectorAll('[data-adsnd]').forEach(function(b){var on=!!adAudioId&&b.dataset.adsnd===adAudioId&&!adAudio.paused;b.textContent=on?'🔊':'🔇';b.setAttribute('aria-pressed',on?'true':'false')})}
+function adStopIfGone(){
+  if(!adAudioId)return;
+  if(ADS.some(function(a){return a.id===adAudioId&&a.music&&adActive(a.slot).indexOf(a)>-1}))return;
+  adAudio.pause();adAudio.removeAttribute('src');adAudio.load();adAudioId='';adSndUi()
+}
+async function adPlay(id,quiet){
+  if(adSndBusy||!db)return;adSndBusy=true;
+  try{
+    if(adAudioId!==id||!adAudio.src){
+      var sn=await getDoc(doc(db,'adsmusic',id)),d=sn.exists()?sn.data():null;
+      if(!d||typeof d.d!=='string'||d.d.indexOf('data:audio/')!==0)throw new Error('nomusic');
+      adAudio.src=d.d;adAudioId=id
+    }
+    if(typeof MP!=='undefined'&&MP.au&&!MP.au.paused)MP.au.pause();
+    await adAudio.play()
+  }catch(e){if(!quiet)toast(t('ad_snd_err'))}
+  finally{adSndBusy=false;adSndUi()}
+}
+function adToggle(id){
+  adYield=false;
+  if(adAudioId===id&&!adAudio.paused){adAudio.pause();adSndOn=false;adSndSave();adSndUi();return}
+  adSndOn=true;adSndSave();adPlay(id,false)
+}
+/* Les navigateurs interdisent le son avant un premier toucher : si le visiteur l'avait activé, la musique reprend au premier toucher. */
+function adAuto(e){
+  if(!adSndOn||adYield||(adAudioId&&!adAudio.paused))return;
+  if(e&&e.target&&e.target.closest&&e.target.closest('[data-adsnd]'))return;
+  var el=document.querySelector('.ad[data-music="1"]');if(el)adPlay(el.dataset.adid,true)
+}
+['click','touchend','keydown'].forEach(function(ev){document.addEventListener(ev,adAuto,true)});
+document.addEventListener('play',function(e){if(e.target!==adAudio&&!adAudio.paused){adAudio.pause();adYield=true;adSndUi()}},true);
+adAudio.addEventListener('play',adSndUi);adAudio.addEventListener('pause',adSndUi);
 function adPrice(){
   var sl=AD_SLOTS.filter(function(x){return x.k===$('ad_slot').value})[0],i=AD_DAYS.indexOf(Number($('ad_dur').value));
   var el=$('adPrice');if(el&&sl&&i>-1)el.textContent=t('ad_price')+' : '+money(sl.pr[i],'XOF')
@@ -853,9 +942,12 @@ document.addEventListener('change',function(e){if(e.target.id==='ad_slot'||e.tar
 
 function ymd(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function cleanAd(id,d){
-  var dt=function(v){v=String(v||'');return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:''};
+  var dt=function(v){v=String(v||'');return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:''},im=[];
+  var one=function(x){return (typeof x==='string'&&x.indexOf('data:image/jpeg;base64,')===0&&x.length<250000)?x:adImg(x)};
+  if(Array.isArray(d.images))d.images.slice(0,4).forEach(function(x){var u=one(x);if(u)im.push(u)});
+  if(!im.length&&d.img){var u0=one(d.img);if(u0)im.push(u0)}
   return {id:id,slot:AD_SLOTS.some(function(x){return x.k===d.slot})?d.slot:'top',name:String(d.name||'').slice(0,60),text:String(d.text||'').slice(0,120),
-   url:adUrl(d.url),img:(typeof d.img==='string'&&d.img.indexOf('data:image/jpeg;base64,')===0&&d.img.length<100000)?d.img:adImg(d.img),from:dt(d.from),until:dt(d.until),ts:Number(d.ts)||0}
+   url:adUrl(d.url),images:im,music:d.music?1:0,from:dt(d.from),until:dt(d.until),ts:Number(d.ts)||0}
 }
 function adStatus(a){var n=ymd(new Date());return a.from&&a.from>n?'ada_wait':(a.until&&a.until<n?'ada_end':'ada_on')}
 function renderAdAdmin(){
@@ -871,13 +963,14 @@ function renderAdAdmin(){
      '<label><span>'+esc(t('ad_f_name'))+'</span><input id="ada_name" maxlength="60"></label>'+
      '<label><span>'+esc(t('ad_f_site'))+'</span><input id="ada_site" type="url" maxlength="200" inputmode="url" placeholder="https://" autocomplete="off"></label>'+
      '<label><span>'+esc(t('ad_f_text'))+'</span><textarea id="ada_text" maxlength="120"></textarea></label>'+
-     '<label><span>'+esc(t('ada_img'))+'</span><input id="ada_img" type="file" accept="image/*"></label>'+
+     '<label><span>'+esc(t('ada_imgs'))+'</span><input id="ada_img" type="file" accept="image/*" multiple></label>'+
+     '<label><span>'+esc(t('ada_music'))+'</span><input id="ada_music" type="file" accept="audio/*"></label>'+
      '<button class="btn" type="submit">'+esc(t('ada_add'))+'</button></form>'+
      '<h3 style="margin-top:18px">'+esc(t('ada_list'))+'</h3><div id="adaList"></div>';
     $('ada_start').value=ymd(new Date());
   }
   var l=ADS.slice().sort(function(x,y){return y.ts-x.ts});
-  $('adaList').innerHTML=l.length?l.map(function(a){return '<div class="adrow"><div><b>'+esc(a.name)+'</b><small>'+esc(t('ad_slot_'+a.slot))+' · '+esc(t(adStatus(a)))+(a.until?' · '+esc(t('ada_until'))+' '+esc(a.until):'')+'</small></div><button type="button" class="btn alt sm" data-addel="'+esc(a.id)+'">'+esc(t('ada_del'))+'</button></div>'}).join(''):'<p class="meta">'+esc(t('ada_none'))+'</p>';
+  $('adaList').innerHTML=l.length?l.map(function(a){return '<div class="adrow"><div><b>'+esc(a.name)+'</b><small>'+esc(t('ad_slot_'+a.slot))+' · '+esc(t(adStatus(a)))+(a.until?' · '+esc(t('ada_until'))+' '+esc(a.until):'')+' · 🖼 '+a.images.length+(a.music?' · 🎵':'')+'</small></div><button type="button" class="btn alt sm" data-addel="'+esc(a.id)+'">'+esc(t('ada_del'))+'</button></div>'}).join(''):'<p class="meta">'+esc(t('ada_none'))+'</p>';
 }
 var adaBusy=false;
 async function adaSubmit(){
@@ -888,17 +981,27 @@ async function adaSubmit(){
   var data={slot:$('ada_slot').value,name:nm.slice(0,60),text:tx.slice(0,120),url:site,from:st,until:ymd(e),ts:Date.now()};
   adaBusy=true;
   try{
-    var f=$('ada_img').files&&$('ada_img').files[0];
-    if(f){var b=await readImgSz(f,360);if(!b)throw new Error('img');var du=await blobToDataUrl(b);if(du.length>=100000){toast(t('ada_bigimg'));return}data.img=du}
-    await addDoc(collection(db,'ads'),data);
-    $('adaForm').reset();$('ada_start').value=ymd(new Date());toast(t('ada_ok'));
+    var fl=Array.prototype.slice.call($('ada_img').files||[],0,4),imgs=[],tot=0;
+    for(var i=0;i<fl.length;i++){var b=await readImgSz(fl[i],800);if(!b)throw new Error('img');var du=await blobToDataUrl(b);tot+=du.length;imgs.push(du)}
+    if(tot>800000){toast(t('ada_toobig'));return}
+    if(imgs.length)data.images=imgs;
+    var mf=$('ada_music').files&&$('ada_music').files[0],mu='';
+    if(mf){
+      if(mf.size>700000){toast(t('ada_bigmusic'));return}
+      var mime=/^audio\//.test(mf.type)?mf.type:'audio/mpeg';
+      mu=(await blobToDataUrl(mf)).replace(/^data:[^;,]*/,'data:'+mime)
+    }
+    var ref=await addDoc(collection(db,'ads'),data),ok=true;
+    if(mu){try{await setDoc(doc(db,'adsmusic',ref.id),{d:mu,ts:Date.now()});await updateDoc(doc(db,'ads',ref.id),{music:1})}catch(x){ok=false}}
+    $('adaForm').reset();$('ada_start').value=ymd(new Date());toast(t(ok?'ada_ok':'ada_music_fail'))
   }catch(x){toast(t('err'))}
   finally{adaBusy=false}
 }
 document.addEventListener('click',function(e){
   var b=e.target.closest&&e.target.closest('[data-addel]');if(!b||!isAdmin()||!db)return;
   if(!confirm(t('ada_conf')))return;
-  deleteDoc(doc(db,'ads',b.dataset.addel)).then(function(){toast(t('ada_off'))}).catch(function(){toast(t('err'))});
+  var id=b.dataset.addel;
+  deleteDoc(doc(db,'ads',id)).then(function(){deleteDoc(doc(db,'adsmusic',id)).catch(function(){});toast(t('ada_off'))}).catch(function(){toast(t('err'))});
 });
 function renderCats(){
   $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'"><span class="ci" aria-hidden="true">'+(CATIC[c]||'')+'</span>'+esc(t('cat_'+c))+'</button>'}).join('')+
@@ -1596,6 +1699,7 @@ function init(){
     renderGrid();renderAcc();renderSellGate();renderThreads();if(openId)renderSheet();
   },function(){authReady=true;renderAcc();renderSellGate()});
 }
+try{if(MP&&MP.au)MP.au.addEventListener('play',function(){if(!adAudio.paused){adAudio.pause();adYield=true;adSndUi()}})}catch(e){}
 applyLang();show();heroInit();init();obMaybe();
 </script>
 </body>
