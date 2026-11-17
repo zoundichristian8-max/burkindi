@@ -305,6 +305,30 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 @media (max-width:640px){.filters{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.sheet-grid{grid-template-columns:1fr}}
 @media (min-width:700px){.ov{align-items:center}.sheet{border-radius:14px}}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
+
+/* Panneaux publicitaires en location */
+.ad{display:block;position:relative;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);text-decoration:none;overflow:hidden;margin:0 0 14px}
+.ad-in{display:flex;align-items:center;gap:12px;padding:10px 12px;padding-inline-end:56px;min-height:72px}
+.ad img{width:96px;height:64px;object-fit:cover;border-radius:6px;flex:none;background:var(--line)}
+.ad-ic{width:48px;height:48px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:1.4rem;flex:none}
+.ad-tx{display:grid;gap:2px;min-width:0}
+.ad-tx b{font-family:var(--display);font-size:1.05rem;line-height:1.2}
+.ad-tx span{color:var(--muted);font-size:.92rem;overflow-wrap:anywhere}
+.ad-lbl{position:absolute;top:6px;inset-inline-end:8px;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ad.free{border-style:dashed;background:transparent}
+.ad-inline{grid-column:1/-1;margin:0}
+.adslots{display:grid;gap:10px;margin:14px 0}
+.adslot{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.adslot b{font-family:var(--display)}.adslot span{color:var(--muted);font-size:.92rem}
+.adslot em{font-style:normal;font-weight:700;color:var(--primary)}
+.adprice{margin:2px 0 12px;font-weight:700}
+#adForm label{display:grid;gap:4px;margin-bottom:12px;font-weight:700;font-size:.92rem}
+#adForm label input,#adForm label select,#adForm label textarea{font-weight:400}
+
+.adrow{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+.adrow>div{min-width:0}.adrow b{overflow-wrap:anywhere}.adrow small{display:block;color:var(--muted)}
+.adrow .btn{flex:none;color:var(--danger)}
+#adAdmin{max-width:none;margin:10px 0 18px}#adAdmin h3{margin:0 0 10px;font-family:var(--display)}
 </style>
 </head>
 <body>
@@ -361,6 +385,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
         <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="#1A8F45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.9 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9c0 3 3 6 6 6l1.2-1.3-2-1-1 .6c-.8-.4-1.6-1.2-2-2l.6-1-1-2z"/></svg><span data-i18n="tr2"></span></div>
         <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span data-i18n="tr3"></span></div>
       </div>
+      <div id="adTop"></div>
       <div class="filters">
         <div class="srow"><div class="search"><svg class="si2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" data-i18n-ph="search" aria-label="Recherche"><button type="button" class="sbtn" data-sbtn="1" aria-label="Rechercher"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button></div></div>
         <select id="fcountry" aria-label="Pays"></select>
@@ -378,6 +403,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
       </div>
       <div class="countrow"><span id="count"></span><select id="fsort" aria-label="Tri"><option value="new" data-i18n="sort_new"></option><option value="asc" data-i18n="sort_asc"></option><option value="desc" data-i18n="sort_desc"></option></select></div>
       <div class="grid" id="grid"></div>
+      <div id="adBottom" style="margin-top:14px"></div>
     </section>
 
     <section id="v-vendre" data-view hidden>
@@ -433,6 +459,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
         <label class="setrow"><span class="si">🌐</span><span class="st"><b data-i18n="st_lang"></b></span><select id="lang" class="lang2" aria-label="Langue / Language"><option value="fr">Français</option><option value="en">English</option><option value="pt">Português</option><option value="ar">العربية</option></select></label>
       </div>
       <div class="setgroup"><h3 data-i18n="st_help"></h3>
+        <a class="setrow" href="#publicite"><span class="si">📢</span><span class="st"><b data-i18n="st_ads"></b><small data-i18n="st_ads_s"></small></span><span class="chev">›</span></a>
         <a class="setrow" id="supportLink" target="_blank" rel="noopener" href="#"><span class="si">💬</span><span class="st"><b data-i18n="st_support"></b><small data-i18n="st_support_s"></small></span><span class="chev">›</span></a>
         <a class="setrow" href="#securite"><span class="si">🛡️</span><span class="st"><b data-i18n="st_safe"></b><small data-i18n="st_safe_s"></small></span><span class="chev">›</span></a>
         <a class="setrow" href="#apropos"><span class="si">ℹ️</span><span class="st"><b data-i18n="st_about"></b><small data-i18n="st_about_s"></small></span><span class="chev">›</span></a>
@@ -440,6 +467,28 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
         <a class="setrow" href="#conditions"><span class="si">📄</span><span class="st"><b data-i18n="terms"></b></span><span class="chev">›</span></a>
       </div>
       <div id="setBottom"></div>
+    </section>
+
+    <section id="v-publicite" data-view hidden>
+      <h2 data-i18n="ad_t"></h2>
+      <div class="panel" id="adAdmin" hidden></div>
+      <p class="meta" data-i18n="ad_intro" style="margin:6px 0 14px"></p>
+      <ol class="terms"><li data-i18n="ad_s1"></li><li data-i18n="ad_s2"></li><li data-i18n="ad_s3"></li></ol>
+      <div class="adslots" id="adSlots"></div>
+      <div class="panel">
+        <form id="adForm" novalidate>
+          <label><span data-i18n="ad_f_slot"></span><select id="ad_slot"></select></label>
+          <label><span data-i18n="ad_f_dur"></span><select id="ad_dur"></select></label>
+          <p class="adprice" id="adPrice"></p>
+          <label><span data-i18n="ad_f_name"></span><input id="ad_name" maxlength="60" autocomplete="organization"></label>
+          <label><span data-i18n="ad_f_site"></span><input id="ad_site" type="url" maxlength="200" inputmode="url" placeholder="https://" autocomplete="off"></label>
+          <label><span data-i18n="ad_f_text"></span><textarea id="ad_text" maxlength="120"></textarea></label>
+          <label><span data-i18n="ad_f_date"></span><input id="ad_date" type="date"></label>
+          <p class="meta" data-i18n="ad_note"></p>
+          <button class="btn wa" type="submit" data-i18n="ad_go"></button>
+        </form>
+      </div>
+      <p style="margin-top:14px"><a class="btn alt" href="#annonces" data-i18n="n_list"></a></p>
     </section>
 
     <section id="v-conditions" data-view hidden>
@@ -496,6 +545,8 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
+ ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'1. Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'2. Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'3. Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
+ ada_t:'Gérer les publicités (admin)',ada_start:'Début',ada_img:'Image (facultatif)',ada_add:'Installer la publicité',ada_list:'Publicités installées',ada_none:'Aucune publicité installée.',ada_del:'Retirer',ada_ok:'Publicité installée.',ada_off:'Publicité retirée.',ada_conf:'Retirer cette publicité ?',ada_until:'jusqu’au',ada_on:'En cours',ada_wait:'À venir',ada_end:'Terminée',ada_bigimg:'Image trop lourde, choisissez-en une plus petite.',
  foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
 en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
  h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
@@ -509,6 +560,8 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
+ ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'1. Pick a billboard and a duration, then fill in the request.',ad_s2:'2. It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'3. After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
+ ada_t:'Manage ads (admin)',ada_start:'Start',ada_img:'Image (optional)',ada_add:'Install the ad',ada_list:'Installed ads',ada_none:'No ad installed.',ada_del:'Remove',ada_ok:'Ad installed.',ada_off:'Ad removed.',ada_conf:'Remove this ad?',ada_until:'until',ada_on:'Running',ada_wait:'Upcoming',ada_end:'Ended',ada_bigimg:'Image too large, pick a smaller one.',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
 pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
  h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
@@ -522,6 +575,7 @@ pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anú
  m_title:'Mensagens',m_none:'Sem conversas. Toque em Mensagem num anúncio.',m_ph:'A sua mensagem…',m_send:'Enviar',m_hi:'Olá, este produto ainda está disponível?',m_re:'Olá! Sim, está disponível. Para que país devemos entregar?',
  pay_title:'Pagamento móvel',pay_note:'Em breve: pague e receba com a sua carteira móvel.',
  a_title:'A minha conta',a_type:'Sou',a_ind:'Particular',a_mer:'Comerciante',a_fn:'Nome completo',a_ph:'Telefone',a_pw:'Palavra-passe',a_go:'Criar a minha conta',a_ok:'Conta criada.',a_out:'Terminar sessão',a_mine:'Os meus anúncios',a_none:'Ainda não publicou nada.',a_ver:'Verificação pendente',you:'Você',
+ ad_lbl:'Publicidade',ad_free:'Espaço publicitário para alugar',ad_free_s:'O seu negócio ou site aqui. Toque para reservar.',ad_t:'Anunciar connosco',ad_intro:'Alugue um painel no Burkindi Commerce e mostre o seu site ou loja a todos os visitantes.',ad_s1:'1. Escolha um painel e uma duração e preencha o pedido.',ad_s2:'2. Ele chega ao WhatsApp do criador do site: conversamos para validar o conteúdo, o preço e as datas.',ad_s3:'3. Após acordo e pagamento, a sua publicidade é instalada. Nada é publicado antes dessa conversa.',ad_from:'A partir de',ad_slot_top:'Faixa no topo',ad_slot_inline:'Entre os anúncios',ad_slot_bottom:'Faixa no fundo',ad_d_top:'Acima dos anúncios, a primeira coisa vista ao abrir.',ad_d_inline:'No meio da lista, em largura total.',ad_d_bottom:'Abaixo dos anúncios, antes do rodapé.',ad_days:'dias',ad_f_slot:'Painel',ad_f_dur:'Duração',ad_f_name:'Nome do seu negócio ou site',ad_f_site:'Ligação do seu site ou página',ad_f_text:'Texto do anúncio (uma frase curta)',ad_f_date:'Início pretendido',ad_price:'Preço indicativo',ad_go:'Enviar o pedido por WhatsApp',ad_note:'A sua imagem (logótipo ou cartaz): envie-a na conversa do WhatsApp depois do pedido.',ad_err:'Indique o nome, uma ligação válida (https://…) e o texto.',ad_m_h:'Olá, gostaria de alugar um painel publicitário no Burkindi Commerce.',ad_m_img:'Envio a minha imagem logo a seguir.',ad_sent:'Pedido pronto: envie-o por WhatsApp.',st_ads:'Publicidade',st_ads_s:'Alugar um painel publicitário',
  foot:'Burkindi Commerce · Fundador: Zoundi Christian · Protótipo: anúncios, vendedores e conversas são exemplos.'},
 ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا حدود',n_list:'الإعلانات',n_sell:'بيع',n_msg:'الرسائل',n_acc:'الحساب',
  h_title:'اشترِ وبِع من بلد إلى آخر.',h_sub:'أفراد وتجار من كل أنحاء أفريقيا في مكان واحد.',
@@ -535,6 +589,7 @@ ar:{proto:'نموذج أولي',slogan:'التجارة الأفريقية بلا
  m_title:'الرسائل',m_none:'لا توجد محادثات. اضغط «رسالة» من أي إعلان.',m_ph:'اكتب رسالتك…',m_send:'إرسال',m_hi:'مرحبًا، هل هذا المنتج متوفر؟',m_re:'مرحبًا! نعم، متوفر. إلى أي بلد نوصل؟',
  pay_title:'الدفع عبر الجوال',pay_note:'قريبًا: ادفع واستلم المال عبر محفظتك على الجوال.',
  a_title:'حسابي',a_type:'أنا',a_ind:'فرد',a_mer:'تاجر',a_fn:'الاسم الكامل',a_ph:'الهاتف',a_pw:'كلمة المرور',a_go:'إنشاء حسابي',a_ok:'تم إنشاء الحساب.',a_out:'تسجيل الخروج',a_mine:'إعلاناتي',a_none:'لم تنشر أي شيء بعد.',a_ver:'التحقق قيد الانتظار',you:'أنت',
+ ad_lbl:'إعلان',ad_free:'مساحة إعلانية للإيجار',ad_free_s:'نشاطك أو موقعك هنا. اضغط للحجز.',ad_t:'أعلن معنا',ad_intro:'استأجر لوحة إعلانية على بوكيندي كوميرس واعرض موقعك أو متجرك على كل زوارنا.',ad_s1:'1. اختر لوحة ومدة ثم املأ الطلب.',ad_s2:'2. يصل الطلب إلى واتساب مصمم الموقع: نتحاور للاتفاق على المحتوى والسعر والتواريخ.',ad_s3:'3. بعد الاتفاق والدفع يتم تركيب إعلانك. لا يُنشر شيء قبل هذا الحوار.',ad_from:'ابتداءً من',ad_slot_top:'شريط أعلى الصفحة',ad_slot_inline:'بين الإعلانات',ad_slot_bottom:'شريط أسفل الصفحة',ad_d_top:'فوق الإعلانات، أول ما يظهر عند الفتح.',ad_d_inline:'في وسط القائمة بعرض كامل.',ad_d_bottom:'تحت الإعلانات وقبل تذييل الصفحة.',ad_days:'أيام',ad_f_slot:'اللوحة',ad_f_dur:'المدة',ad_f_name:'اسم نشاطك أو موقعك',ad_f_site:'رابط موقعك أو صفحتك',ad_f_text:'نص الإعلان (جملة قصيرة)',ad_f_date:'تاريخ البدء المفضل',ad_price:'السعر التقريبي',ad_go:'أرسل الطلب عبر واتساب',ad_note:'صورتك (الشعار أو الملصق): أرسلها في محادثة واتساب بعد الطلب.',ad_err:'أدخل الاسم ورابطًا صالحًا (https://…) والنص.',ad_m_h:'مرحبًا، أرغب في استئجار لوحة إعلانية على بوكيندي كوميرس.',ad_m_img:'سأرسل لك صورتي مباشرة بعد ذلك.',ad_sent:'الطلب جاهز: أرسله عبر واتساب.',st_ads:'الإعلان',st_ads_s:'استئجار لوحة إعلانية',
  foot:'بوكيندي كوميرس · المؤسس: زوندي كريستيان · نموذج أولي: الإعلانات والبائعون والمحادثات أمثلة.'}
 };
 var CATS=['fashion','food','tech','beauty','craft'];
@@ -737,7 +792,7 @@ function applyLang(){
   document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-i18n]').forEach(function(e){e.textContent=t(e.dataset.i18n)});
   document.querySelectorAll('[data-i18n-ph]').forEach(function(e){e.placeholder=t(e.dataset.i18nPh)});
-  $('lang').value=lang;
+  $('lang').value=lang;renderAdPage();renderAds();
   $('supportLink').href='https://wa.me/'+PAY_WA+'?text='+encodeURIComponent(t('st_sup_msg'));
   var sl=$('safeList');if(sl)sl.innerHTML=[1,2,3,4,5,6,7,8].map(function(i){return '<li>'+esc(t('sf_'+i))+'</li>'}).join('');
   var ab=$('aboutBox');if(ab)ab.innerHTML=[1,2,3,4].map(function(i){return '<p>'+esc(t('ab_p'+i))+'</p>'}).join('')+'<p><b>'+esc(t('ab_by'))+'</b></p>';
@@ -752,13 +807,106 @@ function applyLang(){
   renderCats();renderGrid();renderThreads();renderAcc();renderSellGate();renderThumbs();if(openId)renderSheet();
 }
 var CATIC={all:'🛍️',fashion:'👗',food:'🛒',tech:'📱',beauty:'💄',craft:'🏺'};
+
+/* ===== Panneaux publicitaires en location =====
+   Les publicités sont gérées depuis l’application : connectez-vous avec le compte administrateur,
+   ouvrez Paramètres > « Gérer les publicités ». Elles sont enregistrées dans la collection Firestore « ads ».
+   Passé la date de fin, une publicité disparaît toute seule et l’espace redevient à louer. */
+var ADS=[];
+var AD_SLOTS=[{k:'top',pr:[5000,9000,15000]},{k:'inline',pr:[3500,6000,10000]},{k:'bottom',pr:[2000,3500,5000]}];
+var AD_DAYS=[7,15,30],adPick={};
+function adUrl(u){return /^https?:\/\//i.test(String(u||''))?String(u):''}
+function adImg(u){u=String(u||'');return (/^https:\/\//i.test(u)||/^data:image\/(jpeg|png|webp);base64,/i.test(u))?u:''}
+function adActive(slot){var n=Date.now();return ADS.filter(function(a){
+  var f=a.from?Date.parse(a.from+'T00:00:00'):0,u=a.until?Date.parse(a.until+'T23:59:59'):Infinity;
+  return a.slot===slot&&adUrl(a.url)&&f<=n&&n<=u})}
+function adFree(cls){return '<a class="ad free '+cls+'" href="#publicite"><div class="ad-in"><span class="ad-ic" aria-hidden="true">📢</span><div class="ad-tx"><b>'+esc(t('ad_free'))+'</b><span>'+esc(t('ad_free_s'))+'</span></div></div></a>'}
+function adHtml(slot,cls){
+  var l=adActive(slot);if(!l.length)return adFree(cls||'');
+  if(adPick[slot]===undefined)adPick[slot]=Math.floor(Math.random()*1000);
+  var a=l[adPick[slot]%l.length],im=adImg(a.img);
+  return '<a class="ad '+(cls||'')+'" href="'+esc(adUrl(a.url))+'" target="_blank" rel="noopener sponsored"><span class="ad-lbl">'+esc(t('ad_lbl'))+'</span><div class="ad-in">'+(im?'<img src="'+esc(im)+'" alt="" loading="lazy">':'')+'<div class="ad-tx"><b>'+esc(String(a.name||'').slice(0,60))+'</b><span>'+esc(String(a.text||'').slice(0,120))+'</span></div></div></a>'}
+function renderAds(){renderAdAdmin();var a=$('adTop'),b=$('adBottom');if(a)a.innerHTML=adHtml('top','ad-top');if(b)b.innerHTML=adHtml('bottom','ad-bottom')}
+function adPrice(){
+  var sl=AD_SLOTS.filter(function(x){return x.k===$('ad_slot').value})[0],i=AD_DAYS.indexOf(Number($('ad_dur').value));
+  var el=$('adPrice');if(el&&sl&&i>-1)el.textContent=t('ad_price')+' : '+money(sl.pr[i],'XOF')
+}
+function renderAdPage(){
+  var box=$('adSlots');if(!box)return;
+  box.innerHTML=AD_SLOTS.map(function(x){return '<div class="adslot"><b>'+esc(t('ad_slot_'+x.k))+'</b><span>'+esc(t('ad_d_'+x.k))+'</span><em>'+esc(t('ad_from'))+' '+esc(money(x.pr[0],'XOF'))+' / '+AD_DAYS[0]+' '+esc(t('ad_days'))+'</em></div>'}).join('');
+  var sv=$('ad_slot').value,dv=$('ad_dur').value;
+  $('ad_slot').innerHTML=AD_SLOTS.map(function(x){return '<option value="'+x.k+'">'+esc(t('ad_slot_'+x.k))+'</option>'}).join('');
+  $('ad_dur').innerHTML=AD_DAYS.map(function(d){return '<option value="'+d+'">'+d+' '+esc(t('ad_days'))+'</option>'}).join('');
+  if(sv)$('ad_slot').value=sv;if(dv)$('ad_dur').value=dv;
+  adPrice();
+}
+function adSubmit(){
+  var nm=$('ad_name').value.trim(),site=$('ad_site').value.trim(),tx=$('ad_text').value.trim();
+  if(!nm||!tx||!adUrl(site)){toast(t('ad_err'));return}
+  var sl=AD_SLOTS.filter(function(x){return x.k===$('ad_slot').value})[0]||AD_SLOTS[0],d=Number($('ad_dur').value)||AD_DAYS[0],i=Math.max(0,AD_DAYS.indexOf(d)),dt=$('ad_date').value;
+  var m=[t('ad_m_h'),'',t('ad_f_slot')+' : '+t('ad_slot_'+sl.k),t('ad_f_dur')+' : '+d+' '+t('ad_days'),t('ad_price')+' : '+money(sl.pr[i],'XOF'),t('ad_f_name')+' : '+nm,t('ad_f_site')+' : '+site,t('ad_f_text')+' : '+tx];
+  if(dt)m.push(t('ad_f_date')+' : '+dt);
+  m.push('',t('ad_m_img'));
+  window.open(payLink(m.join('\n')),'_blank','noopener');toast(t('ad_sent'));
+}
+document.addEventListener('change',function(e){if(e.target.id==='ad_slot'||e.target.id==='ad_dur')adPrice()});
+
+function ymd(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function cleanAd(id,d){
+  var dt=function(v){v=String(v||'');return /^\d{4}-\d{2}-\d{2}$/.test(v)?v:''};
+  return {id:id,slot:AD_SLOTS.some(function(x){return x.k===d.slot})?d.slot:'top',name:String(d.name||'').slice(0,60),text:String(d.text||'').slice(0,120),
+   url:adUrl(d.url),img:(typeof d.img==='string'&&d.img.indexOf('data:image/jpeg;base64,')===0&&d.img.length<100000)?d.img:adImg(d.img),from:dt(d.from),until:dt(d.until),ts:Number(d.ts)||0}
+}
+function adStatus(a){var n=ymd(new Date());return a.from&&a.from>n?'ada_wait':(a.until&&a.until<n?'ada_end':'ada_on')}
+function renderAdAdmin(){
+  var box=$('adAdmin');if(!box)return;
+  if(!isAdmin()){box.hidden=true;box.innerHTML='';return}
+  box.hidden=false;
+  if(!$('adaForm')||box.dataset.lang!==lang){
+    box.dataset.lang=lang;
+    box.innerHTML='<h3>'+esc(t('ada_t'))+'</h3><form id="adaForm" novalidate>'+
+     '<label><span>'+esc(t('ad_f_slot'))+'</span><select id="ada_slot">'+AD_SLOTS.map(function(x){return '<option value="'+x.k+'">'+esc(t('ad_slot_'+x.k))+'</option>'}).join('')+'</select></label>'+
+     '<label><span>'+esc(t('ad_f_dur'))+'</span><select id="ada_dur">'+AD_DAYS.map(function(d){return '<option value="'+d+'">'+d+' '+esc(t('ad_days'))+'</option>'}).join('')+'</select></label>'+
+     '<label><span>'+esc(t('ada_start'))+'</span><input id="ada_start" type="date"></label>'+
+     '<label><span>'+esc(t('ad_f_name'))+'</span><input id="ada_name" maxlength="60"></label>'+
+     '<label><span>'+esc(t('ad_f_site'))+'</span><input id="ada_site" type="url" maxlength="200" inputmode="url" placeholder="https://" autocomplete="off"></label>'+
+     '<label><span>'+esc(t('ad_f_text'))+'</span><textarea id="ada_text" maxlength="120"></textarea></label>'+
+     '<label><span>'+esc(t('ada_img'))+'</span><input id="ada_img" type="file" accept="image/*"></label>'+
+     '<button class="btn" type="submit">'+esc(t('ada_add'))+'</button></form>'+
+     '<h3 style="margin-top:18px">'+esc(t('ada_list'))+'</h3><div id="adaList"></div>';
+    $('ada_start').value=ymd(new Date());
+  }
+  var l=ADS.slice().sort(function(x,y){return y.ts-x.ts});
+  $('adaList').innerHTML=l.length?l.map(function(a){return '<div class="adrow"><div><b>'+esc(a.name)+'</b><small>'+esc(t('ad_slot_'+a.slot))+' · '+esc(t(adStatus(a)))+(a.until?' · '+esc(t('ada_until'))+' '+esc(a.until):'')+'</small></div><button type="button" class="btn alt sm" data-addel="'+esc(a.id)+'">'+esc(t('ada_del'))+'</button></div>'}).join(''):'<p class="meta">'+esc(t('ada_none'))+'</p>';
+}
+var adaBusy=false;
+async function adaSubmit(){
+  if(!isAdmin()||!db||adaBusy)return;
+  var nm=$('ada_name').value.trim(),site=$('ada_site').value.trim(),tx=$('ada_text').value.trim(),st=$('ada_start').value||ymd(new Date());
+  if(!nm||!tx||!adUrl(site)){toast(t('ad_err'));return}
+  var days=Number($('ada_dur').value)||7,e=new Date(st+'T00:00:00');e.setDate(e.getDate()+days-1);
+  var data={slot:$('ada_slot').value,name:nm.slice(0,60),text:tx.slice(0,120),url:site,from:st,until:ymd(e),ts:Date.now()};
+  adaBusy=true;
+  try{
+    var f=$('ada_img').files&&$('ada_img').files[0];
+    if(f){var b=await readImgSz(f,360);if(!b)throw new Error('img');var du=await blobToDataUrl(b);if(du.length>=100000){toast(t('ada_bigimg'));return}data.img=du}
+    await addDoc(collection(db,'ads'),data);
+    $('adaForm').reset();$('ada_start').value=ymd(new Date());toast(t('ada_ok'));
+  }catch(x){toast(t('err'))}
+  finally{adaBusy=false}
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest&&e.target.closest('[data-addel]');if(!b||!isAdmin()||!db)return;
+  if(!confirm(t('ada_conf')))return;
+  deleteDoc(doc(db,'ads',b.dataset.addel)).then(function(){toast(t('ada_off'))}).catch(function(){toast(t('err'))});
+});
 function renderCats(){
   $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'"><span class="ci" aria-hidden="true">'+(CATIC[c]||'')+'</span>'+esc(t('cat_'+c))+'</button>'}).join('')+
    '<button type="button" class="chip fav" data-favonly="1" aria-pressed="'+favOnly+'">'+HEART.replace('width="20" height="20"','width="16" height="16"')+esc(t('favs'))+'</button>';
 }
 function who(p){return '<div class="who">'+sav(p.ownerId,sellerName(p))+'<button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?'<span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+rate(p.ownerId)+'</div>'}
 function renderGrid(){
-  var g=$('grid');renderShopHead();
+  var g=$('grid');renderShopHead();renderAds();
   if(status==='loading'||status==='offline'){$('count').textContent='';g.innerHTML='<div class="empty" style="grid-column:1/-1">'+esc(t(status==='loading'?'loading':'offline'))+'</div>';return}
   var q=$('q').value.trim().toLowerCase(),fc=$('fcountry').value;
   var list=P.filter(function(p){
@@ -768,13 +916,13 @@ function renderGrid(){
   var fa=fAct();$('fbadge').textContent=fa?'('+fa+')':'';$('fclearTop').hidden=!(fa||q||fc!=='all'||cat!=='all');
   $('count').textContent=list.length+' '+t('count')+(status==='slow'?' · '+t('slow'):'');
   if(!P.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px"><b>'+esc(t('empty_t'))+'</b></p><a class="btn" href="#vendre">'+esc(t('empty_b'))+'</a></div>';return}
-  g.innerHTML=list.length?list.map(function(p){
+  g.innerHTML=list.length?list.map(function(p,i){
     var f=!!favs[p.id];
     return '<article class="card'+(boostRank(p)===4?' vedette':'')+(p.sold?' sold':'')+'"><button class="ph" data-open="'+esc(p.id)+'" aria-label="'+esc(ttl(p))+'">'+media(p)+(p.sold?'<span class="soldb">'+esc(t('sold_b'))+'</span>':'')+(vidInfo(p.vid)?'<span class="vbadge" aria-hidden="true">▶ '+esc(t('vd_t'))+'</span>':'')+'</button>'+
     '<button class="heart" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'" aria-label="'+esc(t(f?'fav_del':'fav_add'))+'">'+HEART+'</button>'+
     '<div class="body"><span class="tag">'+esc(money(p.price,p.cur))+'</span>'+(isNew(p)?'<span class="newb">'+esc(t('new_b'))+'</span>':'')+(boostRank(p)?'<span class="spons">'+esc(t(boostRank(p)===4?'b_vedette':'b_spons'))+'</span>':'')+'<h3><button type="button" data-open="'+esc(p.id)+'">'+esc(ttl(p))+'</button></h3>'+
     '<div class="meta">'+esc(p.city)+', '+esc(country(p.cc))+'</div>'+who(p)+
-    '<div class="acts"><button class="btn sm" type="button" data-share="'+esc(p.id)+'">'+SHIC+' '+esc(t('sh_btn'))+'</button><button class="btn alt sm" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button></div></div></article>';
+    '<div class="acts"><button class="btn sm" type="button" data-share="'+esc(p.id)+'">'+SHIC+' '+esc(t('sh_btn'))+'</button><button class="btn alt sm" data-msg="'+esc(p.id)+'">'+esc(t('msg'))+'</button></div></div></article>'+(i===5&&list.length>6?adHtml('inline','ad-inline'):'');
   }).join(''):'<div class="empty" style="grid-column:1/-1"><p style="margin:0 0 12px">'+esc(t(fa?'fl_none':'none'))+'</p>'+((fa||q||fc!=='all'||cat!=='all')?'<button type="button" class="btn alt sm" data-fclear="1">'+esc(t('fl_clear'))+'</button>':'')+'</div>';
 }
 
@@ -1113,6 +1261,7 @@ function renderSettings(){
   if(isAdmin()){
     var RL={scam:'rp_1',banned:'rp_2',dup:'rp_3',other:'rp_4'};
     b+='<div class="setgroup"><h3>'+esc(t('st_admin'))+' · '+esc(t('st_rep'))+'</h3>'+(reports.length?reports.map(function(r){return srow('⚠️',t(RL[r.r]||'rp_4'),r.l+' · '+new Date(r.ts).toLocaleDateString(lang),'a','href="#a='+esc(r.l)+'"')}).join(''):'<p class="meta">'+esc(t('st_norep'))+'</p>')+'</div>';
+    b+='<div class="setgroup">'+srow('📢',t('ada_t'),'','a','href="#publicite"')+'</div>';
   }
   if(uid)b+='<div class="setgroup"><button class="setrow danger" id="out" type="button"><span class="si">🚪</span><span class="st"><b>'+esc(t('a_logout'))+'</b></span></button></div>';
   bot.innerHTML=b;
@@ -1133,7 +1282,7 @@ function show(){
   if((m=h.match(/^#a=([\w-]{1,40})$/))){pendingOpen=m[1];v='annonces'}
   else if((m=h.match(/^#b=([\w-]{1,40})$/))){sellerFilter=m[1];v='annonces';renderGrid()}
   if(m){try{history.replaceState(null,'',location.pathname+location.search+'#annonces')}catch(e){}}
-  if(['annonces','vendre','messages','compte','conditions','parametres','securite','apropos'].indexOf(v)<0)v='annonces';
+  if(['annonces','vendre','messages','compte','conditions','parametres','securite','apropos','publicite'].indexOf(v)<0)v='annonces';
   document.querySelectorAll('[data-view]').forEach(function(s){s.hidden=s.id!=='v-'+v});
   if(v==='messages'&&uid)markSeen();
   tryPending();
@@ -1168,6 +1317,9 @@ function startListings(){
     status='ready';renderGrid();renderAcc();tryPending();
     if(openId){if(byId(openId))renderSheet();else closeSheet()}
   },function(){clearTimeout(timer);status='offline';renderGrid();renderAcc();renderSellGate()});
+  onSnapshot(query(collection(db,'ads'),limit(60)),function(s){
+    ADS=s.docs.map(function(d){return cleanAd(d.id,d.data()||{})});renderAds();
+  },function(){});
   onSnapshot(query(collection(db,'avatars'),limit(300)),function(s){
     avs={};s.docs.forEach(function(d){var x=d.data()||{};if(typeof x.d==='string'&&x.d.indexOf('data:image/jpeg;base64,')===0&&x.d.length<50000)avs[d.id]=x.d});
     renderGrid();renderAcc();if(openId&&!editOpen)renderSheet();
@@ -1423,6 +1575,8 @@ document.addEventListener('submit',function(e){
   else if(e.target.id==='shopForm')saveShop();
   else if(e.target.id==='editForm')saveEdit(e.target);
   else if(e.target.id==='sendForm')sendMsg();
+  else if(e.target.id==='adForm')adSubmit();
+  else if(e.target.id==='adaForm')adaSubmit();
 });
 $('q').addEventListener('input',renderGrid);
 $('fpanel').addEventListener('input',renderGrid);$('fpanel').addEventListener('change',renderGrid);
