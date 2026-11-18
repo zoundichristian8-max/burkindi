@@ -344,7 +344,7 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
 
 .adrow{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
 .adrow>div{min-width:0}.adrow b{overflow-wrap:anywhere}.adrow small{display:block;color:var(--muted)}
-.adrow .btn{flex:none;color:var(--danger)}
+.adrow>.btn{flex:none;color:var(--danger)}.adbtns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}.adbtns .btn{padding:4px 10px;white-space:nowrap;width:auto}
 #adAdmin{max-width:none;margin:10px 0 18px}#adAdmin h3{margin:0 0 10px;font-family:var(--display)}
 </style>
 </head>
@@ -563,8 +563,8 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
  ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
- ada_t:'Gérer les publicités (admin)',ada_start:'Début',ada_img:'Image (facultatif)',ada_add:'Installer la publicité',ada_list:'Publicités installées',ada_none:'Aucune publicité installée.',ada_del:'Retirer',ada_ok:'Publicité installée.',ada_off:'Publicité retirée.',ada_conf:'Retirer cette publicité ?',ada_until:'jusqu’au',ada_on:'En cours',ada_wait:'À venir',ada_end:'Terminée',ada_bigimg:'Image trop lourde, choisissez-en une plus petite.',
- ad_visit:'Visiter',ad_snd:'Son de la publicité',ad_snd_err:'Impossible de lire la musique.',ada_imgs:'Images (jusqu’à 4, défilement automatique)',ada_music:'Musique (MP3 court, 700 Ko maximum)',ada_music_fail:'Publicité installée, mais la musique n’a pas été enregistrée : ajoutez la règle « adsmusic » dans Firebase.',ada_toobig:'Images trop lourdes : retirez-en une ou deux.',ada_bigmusic:'Musique trop lourde (700 Ko maximum).',
+ ada_t:'Gérer les publicités (admin)',ada_start:'Début',ada_img:'Image (facultatif)',ada_add:'Installer la publicité',ada_list:'Publicités installées',ada_none:'Aucune publicité installée.',ada_del:'Retirer',ada_ext:'Prolonger',ada_d:'j',ada_pause:'Suspendre',ada_resume:'Reprendre',ada_paused:'Suspendue',ada_ext_ok:'Publicité prolongée.',ada_pause_ok:'Publicité suspendue.',ada_resume_ok:'Publicité reprise.',ada_ok:'Publicité installée.',ada_off:'Publicité retirée.',ada_conf:'Retirer cette publicité ?',ada_until:'jusqu’au',ada_on:'En cours',ada_wait:'À venir',ada_end:'Terminée',ada_bigimg:'Image trop lourde, choisissez-en une plus petite.',
+ ad_visit:'Visiter',ad_snd:'Son de la publicité',ad_snd_err:'Impossible de lire la musique.',ada_imgs:'Images (jusqu’à 4, défilement automatique)',ada_music:'Musique (MP3, 3 Mo maximum)',ada_music_fail:'Publicité installée, mais la musique n’a pas été enregistrée : ajoutez la règle « adsmusic » dans Firebase.',ada_toobig:'Images trop lourdes : retirez-en une ou deux.',ada_bigmusic:'Musique trop lourde (3 Mo maximum).',
  foot:'Burkindi Commerce · Fondateur : Zoundi Christian · Maquette : les annonces, vendeurs et conversations sont des exemples.'},
 en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings',n_sell:'Sell',n_msg:'Messages',n_acc:'Account',
  h_title:'Buy and sell across borders.',h_sub:'Individuals and traders across Africa, in one place.',
@@ -579,8 +579,8 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
  ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'Pick a billboard and a duration, then fill in the request.',ad_s2:'It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
- ada_t:'Manage ads (admin)',ada_start:'Start',ada_img:'Image (optional)',ada_add:'Install the ad',ada_list:'Installed ads',ada_none:'No ad installed.',ada_del:'Remove',ada_ok:'Ad installed.',ada_off:'Ad removed.',ada_conf:'Remove this ad?',ada_until:'until',ada_on:'Running',ada_wait:'Upcoming',ada_end:'Ended',ada_bigimg:'Image too large, pick a smaller one.',
- ad_visit:'Visit',ad_snd:'Ad sound',ad_snd_err:'Could not play the music.',ada_imgs:'Images (up to 4, auto-sliding)',ada_music:'Music (short MP3, 700 KB max)',ada_music_fail:'Ad installed, but the music was not saved: add the “adsmusic” rule in Firebase.',ada_toobig:'Images too large: remove one or two.',ada_bigmusic:'Music too large (700 KB max).',
+ ada_t:'Manage ads (admin)',ada_start:'Start',ada_img:'Image (optional)',ada_add:'Install the ad',ada_list:'Installed ads',ada_none:'No ad installed.',ada_del:'Remove',ada_ext:'Extend',ada_d:'d',ada_pause:'Pause',ada_resume:'Resume',ada_paused:'Paused',ada_ext_ok:'Ad extended.',ada_pause_ok:'Ad paused.',ada_resume_ok:'Ad resumed.',ada_ok:'Ad installed.',ada_off:'Ad removed.',ada_conf:'Remove this ad?',ada_until:'until',ada_on:'Running',ada_wait:'Upcoming',ada_end:'Ended',ada_bigimg:'Image too large, pick a smaller one.',
+ ad_visit:'Visit',ad_snd:'Ad sound',ad_snd_err:'Could not play the music.',ada_imgs:'Images (up to 4, auto-sliding)',ada_music:'Music (MP3, 3 MB max)',ada_music_fail:'Ad installed, but the music was not saved: add the “adsmusic” rule in Firebase.',ada_toobig:'Images too large: remove one or two.',ada_bigmusic:'Music too large (3 MB max).',
  foot:'Burkindi Commerce · Founder: Zoundi Christian · Prototype: listings, sellers and conversations are examples.'},
 pt:{proto:'Protótipo',slogan:'O comércio africano sem fronteiras',n_list:'Anúncios',n_sell:'Vender',n_msg:'Mensagens',n_acc:'Conta',
  h_title:'Compre e venda de um país a outro.',h_sub:'Particulares e comerciantes de toda a África, num só lugar.',
@@ -840,7 +840,7 @@ function adUrl(u){return /^https?:\/\//i.test(String(u||''))?String(u):''}
 function adImg(u){u=String(u||'');return (/^https:\/\//i.test(u)||/^data:image\/(jpeg|png|webp);base64,/i.test(u))?u:''}
 function adActive(slot){var n=Date.now();return ADS.filter(function(a){
   var f=a.from?Date.parse(a.from+'T00:00:00'):0,u=a.until?Date.parse(a.until+'T23:59:59'):Infinity;
-  return a.slot===slot&&adUrl(a.url)&&f<=n&&n<=u})}
+  return !a.off&&a.slot===slot&&adUrl(a.url)&&f<=n&&n<=u})}
 function adFree(cls){return '<a class="ad free '+cls+'" href="#publicite"><div class="ad-in"><span class="ad-ic" aria-hidden="true">📢</span><div class="ad-tx"><b>'+esc(t('ad_free'))+'</b><span>'+esc(t('ad_free_s'))+'</span></div></div></a>'}
 function adHtml(slot,cls){
   var l=adActive(slot);if(!l.length)return adFree(cls||'');
@@ -852,7 +852,21 @@ function adHtml(slot,cls){
   return '<div class="ad '+(cls||'')+'" data-adid="'+esc(a.id)+'" data-music="'+(a.music?1:0)+'"><div class="ad-mw"><a class="ad-media" href="'+u+'" target="_blank" rel="noopener sponsored"><div class="adc" data-i="0">'+sl+'</div></a><span class="ad-lbl">'+esc(t('ad_lbl'))+'</span>'+snd+dots+'</div>'+
    '<div class="ad-info"><div class="ad-tx"><b>'+nm+'</b><span>'+esc(a.text)+'</span></div><a class="ad-cta" href="'+u+'" target="_blank" rel="noopener sponsored">'+esc(t('ad_visit'))+' ›</a></div></div>'}
 function adSet(el,h){if(!el||el._h===h)return;el._h=h;el.innerHTML=h}
-function renderAds(){renderAdAdmin();adSet($('adTop'),adHtml('top','ad-top'));adSet($('adBottom'),adHtml('bottom','ad-bottom'));adSndUi()}
+function renderAds(){renderAdAdmin();adSet($('adTop'),adHtml('top','ad-top'));adSet($('adBottom'),adHtml('bottom','ad-bottom'));adSndUi();adWatch()}
+/* Statistiques des publicités : vues (1 par visiteur et par session) et clics */
+function adBump(id,f){
+  if(!id||!db||isAdmin())return;
+  var k='ad'+f+id;if(counted[k])return;counted[k]=1;
+  try{if(sessionStorage.getItem('bk-'+k))return;sessionStorage.setItem('bk-'+k,'1')}catch(e){}
+  var d={};d[f]=increment(1);updateDoc(doc(db,'ads',id),d).catch(function(){})
+}
+var adIO=null;
+function adWatch(){
+  var els=document.querySelectorAll('.ad[data-adid]');if(!els.length)return;
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){adBump(e.dataset.adid,'imp')});return}
+  if(!adIO)adIO=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting&&x.intersectionRatio>=0.5){adBump(x.target.dataset.adid,'imp');adIO.unobserve(x.target)}})},{threshold:[0.5]});
+  els.forEach(function(e){if(!counted['adimp'+e.dataset.adid])adIO.observe(e)})
+}
 /* Défilement automatique des images */
 function adGo(c,i){
   c.dataset.i=i;for(var k=0;k<c.children.length;k++)c.children[k].classList.toggle('on',k===i);
@@ -868,7 +882,9 @@ document.addEventListener('click',function(e){
   var d=e.target.closest&&e.target.closest('[data-addot]');
   if(d){var c=d.closest('.ad-mw').querySelector('.adc');adGo(c,+d.dataset.addot);return}
   var b=e.target.closest&&e.target.closest('[data-adsnd]');
-  if(b){adToggle(b.dataset.adsnd)}
+  if(b){adToggle(b.dataset.adsnd);return}
+  var l=e.target.closest&&e.target.closest('.ad .ad-media,.ad .ad-cta');
+  if(l){var w=l.closest('.ad[data-adid]');if(w)adBump(w.dataset.adid,'clk')}
 });
 (function(){var x0=null;
   document.addEventListener('touchstart',function(e){var w=e.target.closest&&e.target.closest('.ad-mw');x0=w&&e.touches[0]?e.touches[0].clientX:null},{passive:true});
@@ -895,7 +911,10 @@ async function adPlay(id,quiet){
     if(adAudioId!==id||!adAudio.src){
       var sn=await getDoc(doc(db,'adsmusic',id)),d=sn.exists()?sn.data():null;
       if(!d||typeof d.d!=='string'||d.d.indexOf('data:audio/')!==0)throw new Error('nomusic');
-      adAudio.src=d.d;adAudioId=id
+      var full=d.d,nn=Math.min(8,Math.max(1,Math.floor(Number(d.n))||1));
+      if(nn>1){var rest=await Promise.all(Array.apply(null,Array(nn-1)).map(function(_,i){return getDoc(doc(db,'adsmusic',id+'_'+(i+1)))}));
+        rest.forEach(function(r){var y=r.exists()?r.data():null;if(!y||typeof y.d!=='string')throw new Error('nomusic');full+=y.d})}
+      adAudio.src=full;adAudioId=id
     }
     if(typeof MP!=='undefined'&&MP.au&&!MP.au.paused)MP.au.pause();
     await adAudio.play()
@@ -947,9 +966,9 @@ function cleanAd(id,d){
   if(Array.isArray(d.images))d.images.slice(0,4).forEach(function(x){var u=one(x);if(u)im.push(u)});
   if(!im.length&&d.img){var u0=one(d.img);if(u0)im.push(u0)}
   return {id:id,slot:AD_SLOTS.some(function(x){return x.k===d.slot})?d.slot:'top',name:String(d.name||'').slice(0,60),text:String(d.text||'').slice(0,120),
-   url:adUrl(d.url),images:im,music:d.music?1:0,from:dt(d.from),until:dt(d.until),ts:Number(d.ts)||0}
+   url:adUrl(d.url),images:im,music:d.music?1:0,from:dt(d.from),until:dt(d.until),off:d.off?1:0,ts:Number(d.ts)||0,imp:Math.max(0,Math.floor(Number(d.imp))||0),clk:Math.max(0,Math.floor(Number(d.clk))||0)}
 }
-function adStatus(a){var n=ymd(new Date());return a.from&&a.from>n?'ada_wait':(a.until&&a.until<n?'ada_end':'ada_on')}
+function adStatus(a){var n=ymd(new Date());if(a.off)return 'ada_paused';return a.from&&a.from>n?'ada_wait':(a.until&&a.until<n?'ada_end':'ada_on')}
 function renderAdAdmin(){
   var box=$('adAdmin');if(!box)return;
   if(!isAdmin()){box.hidden=true;box.innerHTML='';return}
@@ -970,7 +989,7 @@ function renderAdAdmin(){
     $('ada_start').value=ymd(new Date());
   }
   var l=ADS.slice().sort(function(x,y){return y.ts-x.ts});
-  $('adaList').innerHTML=l.length?l.map(function(a){return '<div class="adrow"><div><b>'+esc(a.name)+'</b><small>'+esc(t('ad_slot_'+a.slot))+' · '+esc(t(adStatus(a)))+(a.until?' · '+esc(t('ada_until'))+' '+esc(a.until):'')+' · 🖼 '+a.images.length+(a.music?' · 🎵':'')+'</small></div><button type="button" class="btn alt sm" data-addel="'+esc(a.id)+'">'+esc(t('ada_del'))+'</button></div>'}).join(''):'<p class="meta">'+esc(t('ada_none'))+'</p>';
+  $('adaList').innerHTML=l.length?l.map(function(a){return '<div class="adrow"><div><b>'+esc(a.name)+'</b><small>'+esc(t('ad_slot_'+a.slot))+' · '+esc(t(adStatus(a)))+(a.until?' · '+esc(t('ada_until'))+' '+esc(a.until):'')+' · 🖼 '+a.images.length+(a.music?' · 🎵':'')+'<br>👁 '+a.imp+' · 👆 '+a.clk+(a.imp?' · '+(Math.round(a.clk*1000/a.imp)/10)+' %':'')+'</small><span class="adbtns">'+esc(t('ada_ext'))+' '+[7,15,30].map(function(n){return '<button type="button" class="btn alt sm" data-adext="'+n+'" data-adid2="'+esc(a.id)+'">+'+n+' '+esc(t('ada_d'))+'</button>'}).join('')+'<button type="button" class="btn alt sm" data-adpause="'+esc(a.id)+'">'+esc(t(a.off?'ada_resume':'ada_pause'))+'</button></span></div><button type="button" class="btn alt sm" data-addel="'+esc(a.id)+'">'+esc(t('ada_del'))+'</button></div>'}).join(''):'<p class="meta">'+esc(t('ada_none'))+'</p>';
 }
 var adaBusy=false;
 async function adaSubmit(){
@@ -987,21 +1006,33 @@ async function adaSubmit(){
     if(imgs.length)data.images=imgs;
     var mf=$('ada_music').files&&$('ada_music').files[0],mu='';
     if(mf){
-      if(mf.size>700000){toast(t('ada_bigmusic'));return}
+      if(mf.size>3000000){toast(t('ada_bigmusic'));return}
       var mime=/^audio\//.test(mf.type)?mf.type:'audio/mpeg';
       mu=(await blobToDataUrl(mf)).replace(/^data:[^;,]*/,'data:'+mime)
     }
     var ref=await addDoc(collection(db,'ads'),data),ok=true;
-    if(mu){try{await setDoc(doc(db,'adsmusic',ref.id),{d:mu,ts:Date.now()});await updateDoc(doc(db,'ads',ref.id),{music:1})}catch(x){ok=false}}
+    if(mu){try{
+      var CH=900000,n=Math.ceil(mu.length/CH);
+      for(var ci=n-1;ci>=0;ci--){var pc={d:mu.slice(ci*CH,(ci+1)*CH),ts:Date.now()};if(ci===0)pc.n=n;await setDoc(doc(db,'adsmusic',ci?ref.id+'_'+ci:ref.id),pc)}
+      await updateDoc(doc(db,'ads',ref.id),{music:1})}catch(x){ok=false}}
     $('adaForm').reset();$('ada_start').value=ymd(new Date());toast(t(ok?'ada_ok':'ada_music_fail'))
   }catch(x){toast(t('err'))}
   finally{adaBusy=false}
 }
 document.addEventListener('click',function(e){
+  var x=e.target.closest&&e.target.closest('[data-adext],[data-adpause]');
+  if(x&&isAdmin()&&db){
+    if(x.dataset.adpause){var a1=ADS.filter(function(q){return q.id===x.dataset.adpause})[0];if(!a1)return;
+      updateDoc(doc(db,'ads',a1.id),{off:a1.off?false:true}).then(function(){toast(t(a1.off?'ada_resume_ok':'ada_pause_ok'))}).catch(function(){toast(t('err'))});return}
+    var a2=ADS.filter(function(q){return q.id===x.dataset.adid2})[0];if(!a2)return;
+    var base=a2.until&&a2.until>=ymd(new Date())?new Date(a2.until+'T00:00:00'):new Date();base.setHours(0,0,0,0);
+    base.setDate(base.getDate()+(+x.dataset.adext));
+    var up={until:ymd(base)};
+    updateDoc(doc(db,'ads',a2.id),up).then(function(){toast(t('ada_ext_ok'))}).catch(function(){toast(t('err'))});return}
   var b=e.target.closest&&e.target.closest('[data-addel]');if(!b||!isAdmin()||!db)return;
   if(!confirm(t('ada_conf')))return;
   var id=b.dataset.addel;
-  deleteDoc(doc(db,'ads',id)).then(function(){deleteDoc(doc(db,'adsmusic',id)).catch(function(){});toast(t('ada_off'))}).catch(function(){toast(t('err'))});
+  deleteDoc(doc(db,'ads',id)).then(function(){[0,1,2,3,4,5,6,7].forEach(function(i){deleteDoc(doc(db,'adsmusic',i?id+'_'+i:id)).catch(function(){})});toast(t('ada_off'))}).catch(function(){toast(t('err'))});
 });
 function renderCats(){
   $('cats').innerHTML=['all'].concat(CATS).map(function(c){return '<button type="button" class="chip" data-c="'+c+'" aria-pressed="'+(c===cat)+'"><span class="ci" aria-hidden="true">'+(CATIC[c]||'')+'</span>'+esc(t('cat_'+c))+'</button>'}).join('')+
