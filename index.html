@@ -150,6 +150,13 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .chathead{font-weight:700;margin-bottom:8px;overflow-wrap:anywhere}
 #nav a[data-unread]::after{content:"";position:absolute;top:6px;left:calc(50% + 10px);width:10px;height:10px;border-radius:50%;background:var(--madder);border:2px solid var(--surface)}
 .msg small{display:block;opacity:.7;font-size:12px;margin-top:2px}
+.msg.vo{display:flex;flex-direction:column;gap:6px;min-width:230px}.msg.vo audio{width:100%;height:38px}
+.msg.vo .vosv{align-self:flex-start;font-size:13px;padding:4px 10px;border-radius:8px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.send .vobtn{flex:none;width:44px;padding:0;font-size:20px}
+.send.rec #msgIn,.send.rec>button[type=submit]{display:none}
+.vorec{display:none;flex:1;align-items:center;gap:8px;font-weight:700}.send.rec .vorec{display:flex}
+.vorec i{width:10px;height:10px;border-radius:50%;background:#d11;animation:vopl 1s infinite}@keyframes vopl{50%{opacity:.25}}
+.chathead .callrow{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;font-weight:400}.chathead .callrow .btn{padding:5px 12px}
 .pay{margin-top:20px;display:grid;gap:8px}
 .pay .chip{cursor:default}
 .empty{color:var(--muted);padding:28px;border:2px dashed var(--line);border-radius:8px;text-align:center}
@@ -559,7 +566,7 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  d_cond:'État',cond_new:'Neuf',cond_used:'Occasion',cond_refurb:'Reconditionné',d_loc:'Lieu',d_deliv:'Livraison',dv_pickup:'Retrait sur place',dv_national:'Dans le pays',dv_border:'Entre pays',d_seller:'Vendeur',d_cat:'Catégorie',sales:'ventes',
  tip:'Conseil : rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé.',
  s_title:'Publier une annonce',s_sub:'Ajoutez jusqu’à 3 photos : une annonce avec photos reçoit plus de messages.',s_photos:'Photos',s_add:'Appuyer pour ajouter des photos',s_hint:'3 photos maximum, JPG ou PNG',s_name:'Nom du produit',s_cat:'Catégorie',s_cond:'État',s_price:'Prix',s_cur:'Devise',country:'Pays',city:'Ville',s_deliv:'Livraison',s_desc:'Description',s_go:'Publier l’annonce',s_ok:'Annonce publiée.',s_max:'3 photos maximum.',
- m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
+ vo_rec:'Message vocal',vo_stop:'Envoyer',vo_cancel:'Annuler',vo_save:'Enregistrer',vo_saved:'Vocal enregistré dans Téléchargements.',vo_nomic:'Micro non autorisé ou indisponible.',vo_long:'1 minute maximum.',vo_lbl:'Message vocal',vo_call:'Appeler',vo_wa:'Appel WhatsApp',vo_pre:'🎤 Message vocal',m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
  ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
@@ -575,7 +582,7 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  d_cond:'Condition',cond_new:'New',cond_used:'Used',cond_refurb:'Refurbished',d_loc:'Location',d_deliv:'Delivery',dv_pickup:'Pickup only',dv_national:'Within the country',dv_border:'Across borders',d_seller:'Seller',d_cat:'Category',sales:'sales',
  tip:'Tip: meet the seller in a public place and pay only on receipt, or through a protected payment.',
  s_title:'Post a listing',s_sub:'Add up to 3 photos: listings with photos get more messages.',s_photos:'Photos',s_add:'Tap to add photos',s_hint:'Up to 3 photos, JPG or PNG',s_name:'Product name',s_cat:'Category',s_cond:'Condition',s_price:'Price',s_cur:'Currency',country:'Country',city:'City',s_deliv:'Delivery',s_desc:'Description',s_go:'Publish listing',s_ok:'Listing published.',s_max:'Up to 3 photos.',
- m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
+ vo_rec:'Voice message',vo_stop:'Send',vo_cancel:'Cancel',vo_save:'Save',vo_saved:'Voice note saved in Downloads.',vo_nomic:'Microphone not allowed or unavailable.',vo_long:'1 minute maximum.',vo_lbl:'Voice message',vo_call:'Call',vo_wa:'WhatsApp call',vo_pre:'🎤 Voice message',m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
  ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'Pick a billboard and a duration, then fill in the request.',ad_s2:'It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
@@ -1234,12 +1241,16 @@ function renderThreads(){
   if(!c){if(cur===null){openChat(list[0].id)}else{cur=null;box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_pick'))+'</div>'}return}
   if(box.dataset.cur!==c.id||box.dataset.lang!==lang||!$('sendForm')){
     box.dataset.cur=c.id;box.dataset.lang=lang;
-    box.innerHTML='<div class="chathead" id="chatHead"></div><div class="chat" id="chat"></div><form class="send" id="sendForm"><input id="msgIn" maxlength="1000" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button></form>';
+    box.innerHTML='<div class="chathead" id="chatHead"></div><div class="chat" id="chat"></div><form class="send" id="sendForm"><input id="msgIn" maxlength="1000" autocomplete="off" placeholder="'+esc(t('m_ph'))+'" aria-label="'+esc(t('m_ph'))+'"><button class="btn" type="submit">'+esc(t('m_send'))+'</button><button class="btn alt vobtn" type="button" id="voMic" aria-label="'+esc(t('vo_rec'))+'">🎤</button><span class="vorec" id="voRec"><i></i><span id="voT">0:00</span><button class="btn" type="button" id="voGo">'+esc(t('vo_stop'))+'</button><button class="btn alt" type="button" id="voNo">'+esc(t('vo_cancel'))+'</button></span></form>';
   }
-  $('chatHead').textContent=c.title+' · '+c.other;
+  var hd=c.title+' · '+c.other,lp=byId(c.listingId),cr='';
+  if(lp&&c.members[0]===uid&&lp.phone&&lp.phone.replace(/\D/g,'').length>=6){var pn=lp.phone.replace(/[^\d+]/g,'');cr='<div class="callrow"><a class="btn alt sm" href="tel:'+esc(pn.charAt(0)==='+'?pn:'+'+pn.replace(/^\+/,''))+'">📞 '+esc(t('vo_call'))+'</a><a class="btn alt sm" target="_blank" rel="noopener" href="'+esc(waLink(lp))+'">'+esc(t('vo_wa'))+'</a></div>'}
+  var hh=hd+'|'+cr;if($('chatHead')._h!==hh){$('chatHead')._h=hh;$('chatHead').textContent=hd;if(cr)$('chatHead').insertAdjacentHTML('beforeend',cr)}
   var ch=$('chat');
-  ch.innerHTML=msgs.length?msgs.map(function(m){return '<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
-  ch.scrollTop=ch.scrollHeight;
+  var sg=msgs.length+'|'+(msgs.length?msgs[msgs.length-1].ts:0)+'|'+lang;
+  if(ch._sg!==sg){ch._sg=sg;
+  ch.innerHTML=msgs.length?msgs.map(function(m,i){return m.au?'<div class="msg vo'+(m.from===uid?' me':'')+'"><audio controls preload="none" src="'+esc(m.au)+'"></audio><button type="button" class="vosv" data-vosv="'+i+'">⬇ '+esc(t('vo_save'))+(m.dur?' · '+voFmt(m.dur):'')+'</button></div>':'<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
+  ch.scrollTop=ch.scrollHeight}
 }
 function cleanChat(id,d){
   var m=Array.isArray(d.members)?d.members.slice(0,2).map(String):[];
@@ -1274,29 +1285,72 @@ function openChat(id){
   if(unsubMsgs){unsubMsgs();unsubMsgs=null}
   var isNew=draft&&draft.id===id&&!draft.sent;
   if(!isNew){
-    unsubMsgs=onSnapshot(query(collection(db,'chats',id,'msgs'),orderBy('ts','desc'),limit(100)),function(s){
+    unsubMsgs=onSnapshot(query(collection(db,'chats',id,'msgs'),orderBy('ts','desc'),limit(60)),function(s){
       if(cur!==id)return;
-      msgs=s.docs.map(function(d){var x=d.data()||{};return {from:String(x.from||''),text:String(x.text||'').slice(0,1000),ts:Number(x.ts)||0}}).sort(function(a,b){return a.ts-b.ts});
+      msgs=s.docs.map(function(d){var x=d.data()||{};return {from:String(x.from||''),text:String(x.text||'').slice(0,1000),ts:Number(x.ts)||0,au:(typeof x.au==='string'&&x.au.indexOf('data:audio/')===0&&x.au.length<700000)?x.au:'',dur:Math.max(0,Math.min(130,Number(x.dur)||0))}}).sort(function(a,b){return a.ts-b.ts});
       if(location.hash==='#messages')markSeen();
       renderThreads();
     },function(){});
   }
   renderThreads();
 }
-async function sendMsg(){
+async function sendMsg(voice){
   var inp=$('msgIn');if(!inp||!uid||!cur||sendBusy)return;
-  var v=inp.value.trim().slice(0,1000);if(!v)return;
+  var v=voice?t('vo_pre'):inp.value.trim().slice(0,1000);if(!v)return;
   var c=(draft&&draft.id===cur)?draft:chats.filter(function(x){return x.id===cur})[0];if(!c)return;
   sendBusy=true;var now=Date.now(),first=!!(c.draft&&!c.sent);
   try{
     if(first){await setDoc(doc(db,'chats',c.id),{members:c.members,listingId:c.listingId,title:c.title,bn:c.bn,sn:c.sn,last:v.slice(0,200),lastFrom:uid,ts:now});c.sent=true}
-    await addDoc(collection(db,'chats',c.id,'msgs'),{from:uid,text:v,ts:now});
+    var md={from:uid,text:v,ts:now};if(voice){md.au=voice.au;md.dur=voice.dur}
+    await addDoc(collection(db,'chats',c.id,'msgs'),md);
     if(!first)await updateDoc(doc(db,'chats',c.id),{last:v.slice(0,200),lastFrom:uid,ts:now});
-    inp.value='';
+    if(!voice)inp.value='';
     if(first)openChat(c.id);
   }catch(e){toast(t('err'))}
   finally{sendBusy=false}
 }
+/* Messages vocaux */
+var VO={rec:null,st:null,chunks:[],t0:0,tm:0,cancel:false};
+function voFmt(n){n=Math.round(n);return Math.floor(n/60)+':'+('0'+n%60).slice(-2)}
+function voUi(on){var f=$('sendForm');if(f)f.classList.toggle('rec',!!on)}
+function voBlobUrl(du){var m=/^data:([^;,]+)[^,]*;base64,(.*)$/.exec(du);if(!m)return '';var b=atob(m[2]),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return URL.createObjectURL(new Blob([a],{type:m[1]}))}
+async function voStart(){
+  if(VO.rec||sendBusy)return;
+  if(!navigator.mediaDevices||!window.MediaRecorder){toast(t('vo_nomic'));return}
+  try{
+    var st=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
+    var mt=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'].filter(function(x){return MediaRecorder.isTypeSupported(x)})[0]||'';
+    var r=new MediaRecorder(st,mt?{mimeType:mt,audioBitsPerSecond:16000}:{audioBitsPerSecond:16000});
+    VO.rec=r;VO.st=st;VO.chunks=[];VO.cancel=false;VO.t0=Date.now();
+    r.ondataavailable=function(e){if(e.data&&e.data.size)VO.chunks.push(e.data)};
+    r.onstop=voDone;r.start(1000);voUi(true);
+    VO.tm=setInterval(function(){var s=(Date.now()-VO.t0)/1000,el=$('voT');if(el)el.textContent=voFmt(s);if(s>=60){toast(t('vo_long'));voEnd(false)}},250);
+  }catch(e){VO.rec=null;toast(t('vo_nomic'))}
+}
+function voEnd(cancel){if(!VO.rec)return;VO.cancel=!!cancel;clearInterval(VO.tm);try{VO.rec.stop()}catch(e){voDone()}}
+async function voDone(){
+  var r=VO.rec,cancel=VO.cancel,dur=(Date.now()-VO.t0)/1000;
+  if(VO.st)VO.st.getTracks().forEach(function(x){x.stop()});
+  VO.rec=null;VO.st=null;voUi(false);
+  if(cancel||dur<0.8||!VO.chunks.length)return;
+  var blob=new Blob(VO.chunks,{type:(r&&r.mimeType)||'audio/webm'});
+  if(blob.size>480000){toast(t('vo_long'));return}
+  var au=await blobToDataUrl(blob);
+  if(au.indexOf('data:audio/')!==0)au=au.replace(/^data:[^;,]*/,'data:audio/webm');
+  if(au.length>650000){toast(t('vo_long'));return}
+  sendMsg({au:au,dur:Math.round(dur)})
+}
+document.addEventListener('click',function(e){
+  var x=e.target.closest&&e.target.closest('#voMic,#voGo,#voNo,[data-vosv]');if(!x)return;
+  if(x.id==='voMic'){voStart();return}
+  if(x.id==='voGo'){voEnd(false);return}
+  if(x.id==='voNo'){voEnd(true);return}
+  var m=msgs[+x.dataset.vosv];if(!m||!m.au)return;
+  var u=voBlobUrl(m.au);if(!u)return;
+  var ext=/mp4/.test(m.au.slice(0,30))?'m4a':(/ogg/.test(m.au.slice(0,30))?'ogg':'webm'),d=new Date(m.ts||Date.now()),pad=function(n){return ('0'+n).slice(-2)};
+  var a=document.createElement('a');a.href=u;a.download='Burkindi-vocal-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())+'.'+ext;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);toast(t('vo_saved'))
+});
 function startChatWith(p){
   if(!uid){if(openId)closeSheet();toast(t('m_login'));location.hash='#compte';show();return}
   if(p.ownerId===uid){toast(t('m_own'));return}
