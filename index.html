@@ -152,6 +152,7 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .msg.vo{display:flex;flex-direction:column;gap:6px;min-width:230px}.msg.vo audio{width:100%;height:38px}
 .msg.vo{flex-wrap:wrap}.msg.vo .vosv{align-self:flex-start;margin-right:6px;font-size:13px;padding:4px 10px;border-radius:8px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
 .msg .mim{display:block;max-width:100%;max-height:260px;border-radius:8px;cursor:zoom-in}
+.msg .mdel{display:block;margin-inline-start:auto;margin-top:4px;border:0;background:transparent;color:inherit;opacity:.75;font-size:14px;padding:2px 4px;cursor:pointer}
 .msg .fname{font-weight:700;overflow-wrap:anywhere}
 .msg a.vosv{text-decoration:none;display:inline-block}
 #imgView{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:12px}
@@ -1269,7 +1270,7 @@ function renderThreads(){
   var ch=$('chat');
   var sg=msgs.length+'|'+(msgs.length?msgs[msgs.length-1].ts:0)+'|'+lang;
   if(ch._sg!==sg){ch._sg=sg;
-  ch.innerHTML=msgs.length?msgs.map(function(m,i){return m.im||m.fl||m.la!==null?attHtml(m,i):m.au?'<div class="msg vo'+(m.from===uid?' me':'')+'"><audio controls preload="none" src="'+esc(m.au)+'"></audio><button type="button" class="vosv" data-vosv="'+i+'">⬇ '+esc(t('vo_save'))+(m.dur?' · '+voFmt(m.dur):'')+'</button>'+(m.from===uid?'<button type="button" class="vosv vodel" data-vodel="'+i+'">🗑 '+esc(t('vo_del'))+'</button>':'')+'</div>':'<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
+  ch.innerHTML=msgs.length?msgs.map(function(m,i){return m.im||m.fl||m.la!==null?attHtml(m,i):m.au?'<div class="msg vo'+(m.from===uid?' me':'')+'"><audio controls preload="none" src="'+esc(m.au)+'"></audio><button type="button" class="vosv" data-vosv="'+i+'">⬇ '+esc(t('vo_save'))+(m.dur?' · '+voFmt(m.dur):'')+'</button>'+(m.from===uid?'<button type="button" class="vosv vodel" data-vodel="'+i+'">🗑 '+esc(t('vo_del'))+'</button>':'')+'</div>':'<div class="msg'+(m.from===uid?' me':'')+'">'+esc(m.text)+(m.from===uid?'<button type="button" class="mdel" data-vodel="'+i+'" aria-label="'+esc(t('vo_del'))+'">🗑</button>':'')+'</div>'}).join(''):'<p class="meta">'+esc(t('m_first'))+'</p>';
   ch.scrollTop=ch.scrollHeight}
 }
 function cleanChat(id,d){
