@@ -152,6 +152,21 @@ label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
 .msg.vo{display:flex;flex-direction:column;gap:6px;min-width:230px}.msg.vo audio{width:100%;height:38px}
 .msg.vo{flex-wrap:wrap}.msg.vo .vosv{align-self:flex-start;margin-right:6px;font-size:13px;padding:4px 10px;border-radius:8px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
 .msg .mim{display:block;max-width:100%;max-height:260px;border-radius:8px;cursor:zoom-in}
+.clTabs{display:flex;gap:8px;margin:0 0 12px}
+.clTabs .chip{cursor:pointer}.clTabs .chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--madder);margin-inline-start:6px}
+.clx{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px;margin:0 0 14px;display:grid;gap:10px}
+.clx h3{margin:0;font-family:var(--display);font-size:1.05rem}
+.clx .cnt{font-weight:700;color:var(--primary)}
+.clrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:8px}
+.clrow:first-of-type{border-top:0;padding-top:0}
+.clrow .who2{min-width:0;flex:1 1 150px;overflow-wrap:anywhere}.clrow .who2 small{display:block;color:var(--muted)}
+.clrow .acts{display:flex;flex-wrap:wrap;gap:6px}.clrow .acts .btn,.clrow .acts a.btn{padding:5px 10px;font-size:.88rem;text-decoration:none}
+.clbadge{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:99px;border:1px solid var(--line);margin-inline-start:6px;vertical-align:middle}
+.clbadge.on{background:color-mix(in srgb,var(--primary) 16%,var(--surface));color:var(--primary)}.clbadge.off{color:var(--danger)}
+.clx textarea,.clx input[type=text],.clx input[type=tel]{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);font:inherit}
+.clx textarea{min-height:70px;resize:vertical}
+.clx details summary{cursor:pointer;font-weight:700}.clx details form{display:grid;gap:8px;margin-top:8px}
+.clpost{border-top:1px solid var(--line);padding-top:8px;overflow-wrap:anywhere}.clpost small{color:var(--muted);display:block}
 .msg .mdel{display:block;margin-inline-start:auto;margin-top:4px;border:0;background:transparent;color:inherit;opacity:.75;font-size:14px;padding:2px 4px;cursor:pointer}
 .msg .fname{font-weight:700;overflow-wrap:anywhere}
 .msg a.vosv{text-decoration:none;display:inline-block}
@@ -487,6 +502,8 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
     <section id="v-messages" data-view hidden>
       <h2 data-i18n="m_title"></h2>
       <p class="note" data-i18n="m_note"></p>
+      <div class="clTabs" id="clTabs"></div>
+      <div id="msgChats">
       <div class="threads" id="threads"></div>
       <p class="safenote">🛡️ <span data-i18n="ch_safe"></span> <a href="#securite" data-i18n="ch_safe_l"></a></p>
       <div id="chatBox"></div>
@@ -495,6 +512,8 @@ footer p{margin:14px 0 0;color:var(--muted);font-size:.85rem}
         <div class="chips"><span class="chip">Orange Money</span><span class="chip">Moov Money</span><span class="chip">MTN MoMo</span><span class="chip">Wave</span></div>
         <span class="meta" data-i18n="pay_note"></span>
       </div>
+      </div>
+      <div id="clPanel" hidden></div>
     </section>
 
     <section id="v-parametres" data-view hidden>
@@ -587,7 +606,7 @@ fr:{proto:'Maquette',slogan:'Le commerce africain sans frontières',n_list:'Anno
  d_cond:'État',cond_new:'Neuf',cond_used:'Occasion',cond_refurb:'Reconditionné',d_loc:'Lieu',d_deliv:'Livraison',dv_pickup:'Retrait sur place',dv_national:'Dans le pays',dv_border:'Entre pays',d_seller:'Vendeur',d_cat:'Catégorie',sales:'ventes',
  tip:'Conseil : rencontrez le vendeur dans un lieu public et ne payez qu’à la réception, ou via un paiement protégé.',
  s_title:'Publier une annonce',s_sub:'Ajoutez jusqu’à 3 photos : une annonce avec photos reçoit plus de messages.',s_photos:'Photos',s_add:'Appuyer pour ajouter des photos',s_hint:'3 photos maximum, JPG ou PNG',s_name:'Nom du produit',s_cat:'Catégorie',s_cond:'État',s_price:'Prix',s_cur:'Devise',country:'Pays',city:'Ville',s_deliv:'Livraison',s_desc:'Description',s_go:'Publier l’annonce',s_ok:'Annonce publiée.',s_max:'3 photos maximum.',
- at_join:'Joindre',vo_rec:'Message vocal',vo_stop:'Envoyer',vo_cancel:'Annuler',vo_save:'Enregistrer',vo_saved:'Enregistré dans Téléchargements.',vo_nomic:'Micro non autorisé ou indisponible.',vo_long:'1 minute maximum.',vo_lbl:'Message vocal',vo_call:'Appeler',vo_wa:'Appel WhatsApp',vo_pre:'🎤 Message vocal',at_img:'Image',at_loc:'Position',at_doc:'Document',at_big:'Fichier trop lourd (600 Ko maximum).',at_badtype:'Type de fichier non accepté (PDF, Word, Excel, PowerPoint, texte).',at_imgerr:'Image impossible à envoyer.',at_locq:'Envoyer votre position actuelle à cette personne ?',at_locerr:'Position impossible à obtenir. Activez la localisation du téléphone.',at_locmsg:'Position partagée',at_open:'Ouvrir dans Maps',at_dl:'Télécharger',at_close:'Fermer',vo_del:'Supprimer',vo_delq:'Supprimer ce message ? Il disparaîtra pour les deux personnes.',vo_deld:'Message supprimé.',m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
+ cl_tab:'Clientèle',cl_chats:'Conversations',cl_note:'Vos clients et vos vendeurs : suivez-vous, restez en contact et progressez ensemble.',cl_my:'Mes clients',cl_n1:'abonné actif',cl_nn:'abonnés actifs',cl_none:'Aucun client pour le moment. Les acheteurs qui vous suivent apparaîtront ici, et vous pouvez aussi ajouter vos connaissances au carnet.',cl_follow:'☆ Suivre ce vendeur',cl_following:'✓ Vous suivez ce vendeur',cl_paused:'Abonnement suspendu par le vendeur',cl_login:'Connectez-vous pour suivre ce vendeur.',cl_followed:'Vous suivez ce vendeur.',cl_unfollowed:'Vous ne suivez plus ce vendeur.',cl_sub:'Abonner',cl_unsub:'Désabonner',cl_rm:'Retirer',cl_rmq:'Retirer cette personne de votre liste ?',cl_add:'➕ Ajouter à mes clients',cl_in:'✓ Dans mes clients',cl_added:'Client ajouté à votre liste.',cl_ok:'Abonné',cl_off:'Désabonné',cl_left:'A quitté',cl_carn:'Carnet',cl_book:'Ajouter une connaissance au carnet',cl_name:'Nom',cl_phone:'Téléphone ou WhatsApp (avec indicatif)',cl_nt:'Note (facultatif)',cl_save:'Enregistrer',cl_saved:'Ajouté au carnet.',cl_call:'📞 Appeler',cl_wa:'WhatsApp',cl_msg:'💬 Message',cl_post_t:'Annonce à mes abonnés',cl_post_ph:'Une nouveauté, une promo, un nouvel arrivage…',cl_post:'Publier',cl_posted:'Annonce publiée.',cl_postq:'Supprimer cette annonce ?',cl_posts:'Mes dernières annonces',cl_vend:'Vendeurs que je suis',cl_vend_none:'Vous ne suivez encore aucun vendeur. Ouvrez une annonce et touchez « Suivre ce vendeur ».',cl_write:'💬 Écrire',cl_feed:'Nouveautés de mes vendeurs',cl_feed_none:'Aucune nouveauté pour le moment.',cl_refresh:'Actualiser',cl_unf:'Ne plus suivre',cl_fol:'Suivre',cl_err:'Action impossible. Réessayez.',cl_hint:'Le client peut vous écrire depuis votre annonce ; vous lui répondrez dans Conversations.', at_join:'Joindre',vo_rec:'Message vocal',vo_stop:'Envoyer',vo_cancel:'Annuler',vo_save:'Enregistrer',vo_saved:'Enregistré dans Téléchargements.',vo_nomic:'Micro non autorisé ou indisponible.',vo_long:'1 minute maximum.',vo_lbl:'Message vocal',vo_call:'Appeler',vo_wa:'Appel WhatsApp',vo_pre:'🎤 Message vocal',at_img:'Image',at_loc:'Position',at_doc:'Document',at_big:'Fichier trop lourd (600 Ko maximum).',at_badtype:'Type de fichier non accepté (PDF, Word, Excel, PowerPoint, texte).',at_imgerr:'Image impossible à envoyer.',at_locq:'Envoyer votre position actuelle à cette personne ?',at_locerr:'Position impossible à obtenir. Activez la localisation du téléphone.',at_locmsg:'Position partagée',at_open:'Ouvrir dans Maps',at_dl:'Télécharger',at_close:'Fermer',vo_del:'Supprimer',vo_delq:'Supprimer ce message ? Il disparaîtra pour les deux personnes.',vo_deld:'Message supprimé.',m_title:'Messagerie',m_none:'Aucune conversation. Appuyez sur Message depuis une annonce.',m_ph:'Votre message…',m_send:'Envoyer',m_hi:'Bonjour, ce produit est-il toujours disponible ?',m_re:'Bonjour ! Oui, il est disponible. Quel est votre pays de livraison ?',
  pay_title:'Paiement mobile',pay_note:'Bientôt disponible : payez et encaissez avec votre portefeuille mobile.',
  a_title:'Mon compte',a_type:'Je suis',a_ind:'Particulier',a_mer:'Commerçant',a_fn:'Nom complet',a_ph:'Téléphone',a_pw:'Mot de passe',a_go:'Créer mon compte',a_ok:'Compte créé.',a_out:'Se déconnecter',a_mine:'Mes annonces',a_none:'Vous n’avez encore rien publié.',a_ver:'Vérification en attente',you:'Vous',
  ad_lbl:'Publicité',ad_free:'Espace publicitaire à louer',ad_free_s:'Votre commerce ou votre site ici. Touchez pour réserver.',ad_t:'Faire de la publicité',ad_intro:'Louez un panneau sur Burkindi Commerce et montrez votre site ou votre boutique à tous nos visiteurs.',ad_s1:'Choisissez un panneau et une durée, puis remplissez la demande.',ad_s2:'Elle arrive sur le WhatsApp du concepteur du site : nous échangeons pour valider le contenu, le prix et les dates.',ad_s3:'Après accord et paiement, votre publicité est installée. Rien n’est publié avant cet échange.',ad_from:'À partir de',ad_slot_top:'Bannière en haut',ad_slot_inline:'Entre les annonces',ad_slot_bottom:'Bannière en bas',ad_d_top:'Au-dessus des annonces, vue en premier à l’ouverture.',ad_d_inline:'Au milieu de la liste, en pleine largeur.',ad_d_bottom:'Sous la liste des annonces, avant le pied de page.',ad_days:'jours',ad_f_slot:'Panneau',ad_f_dur:'Durée',ad_f_name:'Nom de votre commerce ou site',ad_f_site:'Lien de votre site ou page',ad_f_text:'Texte de la publicité (une courte phrase)',ad_f_date:'Début souhaité',ad_price:'Prix indicatif',ad_go:'Envoyer la demande sur WhatsApp',ad_note:'Votre image (logo ou affiche) : envoyez-la dans la conversation WhatsApp après la demande.',ad_err:'Indiquez le nom, un lien valide (https://…) et le texte.',ad_m_h:'Bonjour, je souhaite louer un panneau publicitaire sur Burkindi Commerce.',ad_m_img:'Je vous envoie mon image juste après.',ad_sent:'Demande prête : envoyez-la sur WhatsApp.',st_ads:'Publicité',st_ads_s:'Louer un panneau publicitaire',
@@ -603,7 +622,7 @@ en:{proto:'Prototype',slogan:'African commerce without borders',n_list:'Listings
  d_cond:'Condition',cond_new:'New',cond_used:'Used',cond_refurb:'Refurbished',d_loc:'Location',d_deliv:'Delivery',dv_pickup:'Pickup only',dv_national:'Within the country',dv_border:'Across borders',d_seller:'Seller',d_cat:'Category',sales:'sales',
  tip:'Tip: meet the seller in a public place and pay only on receipt, or through a protected payment.',
  s_title:'Post a listing',s_sub:'Add up to 3 photos: listings with photos get more messages.',s_photos:'Photos',s_add:'Tap to add photos',s_hint:'Up to 3 photos, JPG or PNG',s_name:'Product name',s_cat:'Category',s_cond:'Condition',s_price:'Price',s_cur:'Currency',country:'Country',city:'City',s_deliv:'Delivery',s_desc:'Description',s_go:'Publish listing',s_ok:'Listing published.',s_max:'Up to 3 photos.',
- at_join:'Attach',vo_rec:'Voice message',vo_stop:'Send',vo_cancel:'Cancel',vo_save:'Save',vo_saved:'Saved in Downloads.',vo_nomic:'Microphone not allowed or unavailable.',vo_long:'1 minute maximum.',vo_lbl:'Voice message',vo_call:'Call',vo_wa:'WhatsApp call',vo_pre:'🎤 Voice message',at_img:'Image',at_loc:'Location',at_doc:'Document',at_big:'File too large (600 KB max).',at_badtype:'File type not accepted (PDF, Word, Excel, PowerPoint, text).',at_imgerr:'Could not send the image.',at_locq:'Send your current location to this person?',at_locerr:'Could not get your location. Turn on location on your phone.',at_locmsg:'Shared location',at_open:'Open in Maps',at_dl:'Download',at_close:'Close',vo_del:'Delete',vo_delq:'Delete this message? It will disappear for both people.',vo_deld:'Message deleted.',m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
+ cl_tab:'Customers',cl_chats:'Chats',cl_note:'Your customers and your sellers: follow each other, stay in touch and grow together.',cl_my:'My customers',cl_n1:'active follower',cl_nn:'active followers',cl_none:'No customers yet. Buyers who follow you will appear here, and you can also add people you know to your book.',cl_follow:'☆ Follow this seller',cl_following:'✓ You follow this seller',cl_paused:'Subscription paused by the seller',cl_login:'Log in to follow this seller.',cl_followed:'You now follow this seller.',cl_unfollowed:'You no longer follow this seller.',cl_sub:'Subscribe',cl_unsub:'Unsubscribe',cl_rm:'Remove',cl_rmq:'Remove this person from your list?',cl_add:'➕ Add to my customers',cl_in:'✓ In my customers',cl_added:'Customer added to your list.',cl_ok:'Subscribed',cl_off:'Unsubscribed',cl_left:'Left',cl_carn:'Book',cl_book:'Add a contact to your book',cl_name:'Name',cl_phone:'Phone or WhatsApp (with country code)',cl_nt:'Note (optional)',cl_save:'Save',cl_saved:'Added to your book.',cl_call:'📞 Call',cl_wa:'WhatsApp',cl_msg:'💬 Message',cl_post_t:'Announcement to my followers',cl_post_ph:'News, a promo, new stock…',cl_post:'Publish',cl_posted:'Announcement published.',cl_postq:'Delete this announcement?',cl_posts:'My latest announcements',cl_vend:'Sellers I follow',cl_vend_none:'You do not follow any seller yet. Open a listing and tap “Follow this seller”.',cl_write:'💬 Write',cl_feed:'News from my sellers',cl_feed_none:'No news yet.',cl_refresh:'Refresh',cl_unf:'Unfollow',cl_fol:'Follow',cl_err:'Action failed. Try again.',cl_hint:'The customer can write to you from your listing; you will answer in Chats.', at_join:'Attach',vo_rec:'Voice message',vo_stop:'Send',vo_cancel:'Cancel',vo_save:'Save',vo_saved:'Saved in Downloads.',vo_nomic:'Microphone not allowed or unavailable.',vo_long:'1 minute maximum.',vo_lbl:'Voice message',vo_call:'Call',vo_wa:'WhatsApp call',vo_pre:'🎤 Voice message',at_img:'Image',at_loc:'Location',at_doc:'Document',at_big:'File too large (600 KB max).',at_badtype:'File type not accepted (PDF, Word, Excel, PowerPoint, text).',at_imgerr:'Could not send the image.',at_locq:'Send your current location to this person?',at_locerr:'Could not get your location. Turn on location on your phone.',at_locmsg:'Shared location',at_open:'Open in Maps',at_dl:'Download',at_close:'Close',vo_del:'Delete',vo_delq:'Delete this message? It will disappear for both people.',vo_deld:'Message deleted.',m_title:'Messages',m_none:'No conversations yet. Tap Message on a listing.',m_ph:'Your message…',m_send:'Send',m_hi:'Hello, is this product still available?',m_re:'Hello! Yes, it is available. Which country should we deliver to?',
  pay_title:'Mobile payment',pay_note:'Coming soon: pay and get paid with your mobile wallet.',
  a_title:'My account',a_type:'I am a',a_ind:'Individual',a_mer:'Trader',a_fn:'Full name',a_ph:'Phone',a_pw:'Password',a_go:'Create my account',a_ok:'Account created.',a_out:'Sign out',a_mine:'My listings',a_none:'You have not posted anything yet.',a_ver:'Verification pending',you:'You',
  ad_lbl:'Ad',ad_free:'Ad space for rent',ad_free_s:'Your business or website here. Tap to book.',ad_t:'Advertise with us',ad_intro:'Rent a billboard on Burkindi Commerce and show your website or shop to all our visitors.',ad_s1:'Pick a billboard and a duration, then fill in the request.',ad_s2:'It goes to the site creator’s WhatsApp: we talk to agree on the content, price and dates.',ad_s3:'After agreement and payment, your ad is installed. Nothing is published before that talk.',ad_from:'From',ad_slot_top:'Top banner',ad_slot_inline:'Between listings',ad_slot_bottom:'Bottom banner',ad_d_top:'Above the listings, the first thing seen on opening.',ad_d_inline:'In the middle of the list, full width.',ad_d_bottom:'Below the listings, before the footer.',ad_days:'days',ad_f_slot:'Billboard',ad_f_dur:'Duration',ad_f_name:'Your business or site name',ad_f_site:'Link to your site or page',ad_f_text:'Ad text (one short sentence)',ad_f_date:'Preferred start',ad_price:'Indicative price',ad_go:'Send the request on WhatsApp',ad_note:'Your image (logo or poster): send it in the WhatsApp chat after the request.',ad_err:'Enter the name, a valid link (https://…) and the text.',ad_m_h:'Hello, I would like to rent an ad billboard on Burkindi Commerce.',ad_m_img:'I will send you my image right after.',ad_sent:'Request ready: send it on WhatsApp.',st_ads:'Advertising',st_ads_s:'Rent an ad billboard',
@@ -769,7 +788,7 @@ function renderShopHead(){
   var name=(sh&&sh.name)||(any&&any.seller)||'—';
   var ver=!!((sh&&sh.v)||P.some(function(x){return x.ownerId===sellerFilter&&x.v}));
   var logo=sh&&sh.logo?'<img class="shoplogo" src="'+esc(sh.logo)+'" alt="">':'<div class="shoplogo ini" aria-hidden="true">'+esc(name.charAt(0).toUpperCase())+'</div>';
-  h.innerHTML='<div class="shop">'+logo+'<div class="shopinfo"><h2>'+esc(name)+(ver?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh&&sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+(sh&&sh.cc?'<div class="meta">'+esc(country(sh.cc))+'</div>':'')+'</div>'+
+  h.innerHTML='<div class="shop">'+logo+'<div class="shopinfo"><h2>'+esc(name)+(ver?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+'</h2>'+(sh&&sh.desc?'<p>'+esc(sh.desc)+'</p>':'')+(sh&&sh.cc?'<div class="meta">'+esc(country(sh.cc))+'</div>':'')+(sellerFilter!==uid?'<div class="btnrow" style="margin-top:8px">'+folBtn(sellerFilter,name)+'</div>':'')+'</div>'+
     '<div class="btnrow"><button class="btn alt sm" type="button" data-shopclear="1">'+esc(t('sh_all'))+'</button><a class="btn alt sm" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(t('shop_msg')+' '+name+' '+BASE+'#b='+sellerFilter)+'">'+esc(t('shop_share'))+'</a>'+(isAdmin()?'<button class="btn alt sm" type="button" data-shopver="'+esc(sellerFilter)+'">'+esc(t(sh&&sh.v?'sh_unver':'sh_ver'))+'</button>':'')+'</div></div>';
   h.hidden=false;
 }
@@ -1176,7 +1195,7 @@ function renderSheet(){
   '<div class="det"><h2 id="sheetTitle">'+esc(ttl(p))+(p.sold?' <span class="soldb inl">'+esc(t('sold_b'))+'</span>':'')+'</h2><div class="big">'+esc(money(p.price,p.cur))+'</div>'+
   (desc(p)?'<p style="margin:0;overflow-wrap:anywhere">'+esc(desc(p))+'</p>':'')+vidBox(p)+
   '<dl><dt>'+esc(t('d_cat'))+'</dt><dd>'+esc(t('cat_'+p.cat))+'</dd><dt>'+esc(t('d_cond'))+'</dt><dd>'+esc(t('cond_'+p.cond))+'</dd><dt>'+esc(t('d_loc'))+'</dt><dd>'+esc(p.city)+', '+esc(country(p.cc))+'</dd><dt>'+esc(t('d_deliv'))+'</dt><dd>'+esc(t('dv_'+p.dv))+'</dd><dt>'+esc(t('d_seller'))+'</dt><dd>'+sav(p.ownerId,sellerName(p))+'<button type="button" class="linkbtn" data-shop="'+esc(p.ownerId)+'">'+esc(sellerName(p))+'</button>'+(isV(p)?' <span class="ver">'+CHK+esc(t('ver'))+'</span>':'')+rate(p.ownerId)+'</dd></dl>'+(own?'<div class="mystat">👁 '+p.vw+' '+esc(t(p.vw===1?'sx_v1':'sx_nv'))+' · 💬 '+p.wc+' '+esc(t(p.wc===1?'sx_c1':'sx_nc'))+'</div>':'')+
-  contactRow(p)+'<div class="btnrow"><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
+  (p.ownerId!==uid?'<div class="btnrow">'+folBtn(p.ownerId,sellerName(p))+'</div>':'')+contactRow(p)+'<div class="btnrow"><button class="btn alt" data-fav="'+esc(p.id)+'" aria-pressed="'+f+'">'+HEART.replace('width="20" height="20"','width="18" height="18"').replace('fill="none"',f?'fill="currentColor"':'fill="none"')+' '+esc(t(f?'fav_del':'fav_add'))+'</button></div>'+
   '<div class="btnrow"><button class="btn alt" type="button" data-share="'+esc(p.id)+'">'+SHIC+' '+esc(t('sh_btn'))+'</button>'+(own?'<button class="btn alt" data-edit="1">'+esc(t('ed_btn'))+'</button><button class="btn alt" data-sold="'+esc(p.id)+'">'+esc(t(p.sold?'unsold_btn':'sold_btn'))+'</button>':'<button class="btn alt" data-report="1">'+esc(t('rp_btn'))+'</button>')+'</div>'+reportBox(p)+
   (canDel?'<button class="btn alt" data-del="'+esc(p.id)+'" style="color:var(--danger)">'+esc(t(confirmDel?'del_ok':'del'))+'</button>':'')+
   (uid&&p.ownerId===uid?boostPanel(p):'')+(isAdmin()?adminPanel(p):'')+
@@ -1253,7 +1272,7 @@ function updateUnread(){
   if(uid&&chats.some(isUnread))a.setAttribute('data-unread','1');else a.removeAttribute('data-unread');
 }
 function renderThreads(){
-  var box=$('chatBox');
+  var box=$('chatBox');clApplyTab();
   if(!uid){$('threads').innerHTML='';box.dataset.cur='';box.innerHTML='<div class="empty">'+esc(t('m_login'))+' <a href="#compte">'+esc(t('n_acc'))+'</a></div>';return}
   var list=chats.slice();if(draft&&!list.some(function(c){return c.id===draft.id}))list.unshift(draft);
   $('threads').innerHTML=list.map(function(c){var lb=c.other+' · '+c.title;if(lb.length>40)lb=lb.slice(0,38)+'…';return '<button type="button" class="chip" data-th="'+esc(c.id)+'" aria-pressed="'+(c.id===cur)+'">'+esc(lb)+(isUnread(c)?' •':'')+'</button>'}).join('');
@@ -1266,6 +1285,7 @@ function renderThreads(){
   }
   var hd=c.title+' · '+c.other,lp=byId(c.listingId),cr='';
   if(lp&&c.members[0]===uid&&lp.phone&&lp.phone.replace(/\D/g,'').length>=6){var pn=lp.phone.replace(/[^\d+]/g,'');cr='<div class="callrow"><a class="btn alt sm" href="tel:'+esc(pn.charAt(0)==='+'?pn:'+'+pn.replace(/^\+/,''))+'">📞 '+esc(t('vo_call'))+'</a><a class="btn alt sm" target="_blank" rel="noopener" href="'+esc(waLink(lp))+'">'+esc(t('vo_wa'))+'</a></div>'}
+  cr=clHeadRow(c,cr);
   var hh=hd+'|'+cr;if($('chatHead')._h!==hh){$('chatHead')._h=hh;$('chatHead').textContent=hd;if(cr)$('chatHead').insertAdjacentHTML('beforeend',cr)}
   var ch=$('chat');
   var sg=msgs.length+'|'+(msgs.length?msgs[msgs.length-1].ts:0)+'|'+lang;
@@ -1422,6 +1442,133 @@ document.addEventListener('click',function(e){
   document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);toast(t('vo_saved'))
 });
 document.addEventListener('change',function(e){var f=e.target;if(f.id==='atImgF'){var a=f.files[0];f.value='';attImage(a)}else if(f.id==='atDocF'){var b=f.files[0];f.value='';attDoc(b)}});
+/* Clientèle : abonnés, carnet, annonces */
+var CLS=[],CLC=[],CARN=[],BC={},clTab='chats',unsubCl=[],clSeen=0;
+try{clSeen=+localStorage.getItem('bk-clseen')||0}catch(e){}
+function byTsD(a,b){return b.ts-a.ts}
+function clClean(id,d){return {id:id,sid:String(d.sid||''),cid:String(d.cid||''),sn:String(d.sn||'').slice(0,40),cn:String(d.cn||'').slice(0,40),sOk:d.sOk===true,cOk:d.cOk===true,ts:Number(d.ts)||0}}
+function clMine(sid){return CLC.filter(function(x){return x.sid===sid})[0]||null}
+function clOf(cid){return CLS.filter(function(x){return x.cid===cid})[0]||null}
+function clActive(x){return x.sOk&&x.cOk}
+function folLabel(sid){var x=clMine(sid);if(x&&x.cOk)return t(x.sOk?'cl_following':'cl_paused');return t('cl_follow')}
+function folBtn(sid,name,cls){if(!sid||sid===uid)return '';return '<button type="button" class="btn alt '+(cls||'')+'" data-clfol="'+esc(sid)+'" data-clname="'+esc(String(name||'').slice(0,40))+'">'+esc(folLabel(sid))+'</button>'}
+function stopClients(){unsubCl.forEach(function(u){try{u()}catch(e){}});unsubCl=[];CLS=[];CLC=[];CARN=[];BC={};clTab='chats'}
+function startClients(){
+  stopClients();var me=uid;if(!db)return;
+  unsubCl.push(onSnapshot(query(collection(db,'clients'),where('sid','==',me)),function(sn){CLS=sn.docs.map(function(d){return clClean(d.id,d.data()||{})}).sort(byTsD);clRefresh()},function(){}));
+  unsubCl.push(onSnapshot(query(collection(db,'clients'),where('cid','==',me)),function(sn){CLC=sn.docs.map(function(d){return clClean(d.id,d.data()||{})}).sort(byTsD);clRefresh();clLoadFeed()},function(){}));
+  unsubCl.push(onSnapshot(collection(db,'users',me,'carnet'),function(sn){CARN=sn.docs.map(function(d){var x=d.data()||{};return {id:d.id,n:String(x.n||'').slice(0,60),ph:String(x.ph||'').slice(0,30),note:String(x.note||'').slice(0,200),ts:Number(x.ts)||0}}).sort(byTsD);clRefresh()},function(){}))
+}
+function clLoadFeed(){
+  if(!db||!uid)return;
+  var ids=CLC.filter(clActive).map(function(x){return x.sid}).slice(0,20);if(ids.indexOf(uid)<0)ids.push(uid);
+  ids.forEach(function(sid){getDoc(doc(db,'bcast',sid)).then(function(d){var x=d.exists()?d.data():null;
+    BC[sid]=(Array.isArray(x&&x.items)?x.items:[]).slice(0,10).map(function(i){return {t:String((i&&i.t)||'').slice(0,400),ts:Number(i&&i.ts)||0}});clRefresh()}).catch(function(){})})
+}
+function clFeed(){
+  var out=[];CLC.filter(clActive).forEach(function(x){(BC[x.sid]||[]).forEach(function(i){out.push({sn:x.sn,t:i.t,ts:i.ts})})});
+  return out.sort(byTsD).slice(0,30)
+}
+function clNewCount(){return clFeed().filter(function(i){return i.ts>clSeen}).length}
+function clTabsHtml(){
+  if(!uid)return '';var n=clNewCount();
+  return '<button type="button" class="chip" data-cltab="chats" aria-pressed="'+(clTab==='chats')+'">'+esc(t('cl_chats'))+'</button><button type="button" class="chip" data-cltab="cl" aria-pressed="'+(clTab==='cl')+'">'+esc(t('cl_tab'))+(n&&clTab!=='cl'?'<span class="dot"></span>':'')+'</button>'
+}
+function clApplyTab(){
+  var tb=$('clTabs'),ch=$('msgChats'),pn=$('clPanel');if(!tb||!ch||!pn)return;
+  var h=clTabsHtml();if(tb._h!==h){tb._h=h;tb.innerHTML=h}
+  var on=!!uid&&clTab==='cl';ch.hidden=on;pn.hidden=!on;
+  if(on){clSeen=Date.now();try{localStorage.setItem('bk-clseen',String(clSeen))}catch(e){}renderCl()}
+}
+function clRefresh(){
+  document.querySelectorAll('[data-clfol]').forEach(function(b){b.textContent=folLabel(b.dataset.clfol)});
+  if(location.hash==='#messages'){clApplyTab();if(clTab==='chats')renderThreads()}
+}
+function clPhone(ph){return String(ph||'').replace(/[^\d]/g,'')}
+function renderCl(){
+  var pn=$('clPanel');if(!pn||pn.hidden)return;
+  var act=CLS.filter(clActive).length,h='<p class="note">'+esc(t('cl_note'))+'</p>';
+  /* A. Mes clients */
+  h+='<div class="clx"><h3>'+esc(t('cl_my'))+' <span class="cnt">· '+act+' '+esc(t(act===1?'cl_n1':'cl_nn'))+'</span></h3>';
+  h+='<div><b>'+esc(t('cl_post_t'))+'</b><textarea id="clPostT" maxlength="400" placeholder="'+esc(t('cl_post_ph'))+'"></textarea><div class="btnrow"><button type="button" class="btn" data-clpost="1">'+esc(t('cl_post'))+'</button></div></div>';
+  var mine=BC[uid]||[];
+  if(mine.length){h+='<div><b>'+esc(t('cl_posts'))+'</b>'+mine.map(function(i){return '<div class="clpost"><small>'+esc(new Date(i.ts).toLocaleDateString(lang))+'</small>'+esc(i.t)+' <button type="button" class="linkbtn" data-clpdel="'+i.ts+'" style="color:var(--danger)">'+esc(t('cl_rm'))+'</button></div>'}).join('')+'</div>'}
+  var rows='';
+  CLS.forEach(function(x){
+    var st=!x.sOk?['off','cl_off']:(!x.cOk?['off','cl_left']:['on','cl_ok']);
+    var chat=chats.filter(function(c){return c.members.indexOf(x.cid)>-1})[0];
+    rows+='<div class="clrow"><div class="who2"><b>'+esc(x.cn||'—')+'</b><span class="clbadge '+st[0]+'">'+esc(t(st[1]))+'</span></div><div class="acts">'+
+      (chat?'<button type="button" class="btn alt" data-clchat="'+esc(chat.id)+'">'+esc(t('cl_msg'))+'</button>':'')+
+      '<button type="button" class="btn alt" data-clsub="'+esc(x.id)+'">'+esc(t(x.sOk?'cl_unsub':'cl_sub'))+'</button>'+
+      '<button type="button" class="btn alt" data-clrm="'+esc(x.id)+'" style="color:var(--danger)">'+esc(t('cl_rm'))+'</button></div></div>'});
+  CARN.forEach(function(c){var d=clPhone(c.ph);
+    rows+='<div class="clrow"><div class="who2"><b>'+esc(c.n)+'</b><span class="clbadge">'+esc(t('cl_carn'))+'</span>'+(c.ph||c.note?'<small>'+esc(c.ph)+(c.ph&&c.note?' · ':'')+esc(c.note)+'</small>':'')+'</div><div class="acts">'+
+      (d.length>=6?'<a class="btn alt" href="tel:+'+d+'">'+esc(t('cl_call'))+'</a><a class="btn alt" target="_blank" rel="noopener" href="https://wa.me/'+d+'">'+esc(t('cl_wa'))+'</a>':'')+
+      '<button type="button" class="btn alt" data-carm="'+esc(c.id)+'" style="color:var(--danger)">'+esc(t('cl_rm'))+'</button></div></div>'});
+  h+=rows?'<div>'+rows+'</div><p class="meta" style="margin:0">'+esc(t('cl_hint'))+'</p>':'<p class="meta" style="margin:0">'+esc(t('cl_none'))+'</p>';
+  h+='<details><summary>'+esc(t('cl_book'))+'</summary><form id="clCarnetForm"><input type="text" id="clcN" maxlength="60" required placeholder="'+esc(t('cl_name'))+'"><input type="tel" id="clcP" maxlength="30" placeholder="'+esc(t('cl_phone'))+'"><input type="text" id="clcT" maxlength="200" placeholder="'+esc(t('cl_nt'))+'"><button class="btn" type="submit">'+esc(t('cl_save'))+'</button></form></details></div>';
+  /* B. Vendeurs que je suis */
+  h+='<div class="clx"><h3>'+esc(t('cl_vend'))+'</h3>';
+  if(!CLC.length)h+='<p class="meta" style="margin:0">'+esc(t('cl_vend_none'))+'</p>';
+  CLC.forEach(function(x){
+    var st=!x.cOk?['off','cl_left']:(!x.sOk?['off','cl_paused']:['on','cl_ok']),own=P.filter(function(q){return q.ownerId===x.sid})[0];
+    h+='<div class="clrow"><div class="who2"><b>'+esc(x.sn||'—')+'</b><span class="clbadge '+st[0]+'">'+esc(t(st[1]))+'</span></div><div class="acts">'+
+      (own?'<button type="button" class="btn alt" data-clwrite="'+esc(own.id)+'">'+esc(t('cl_write'))+'</button>':'')+
+      '<button type="button" class="btn alt" data-clfol="'+esc(x.sid)+'" data-clname="'+esc(x.sn)+'">'+esc(x.cOk?t('cl_unf'):t('cl_fol'))+'</button></div></div>'});
+  var fd=clFeed();
+  h+='<div><b>'+esc(t('cl_feed'))+'</b> <button type="button" class="linkbtn" data-clrefresh="1">'+esc(t('cl_refresh'))+'</button>'+(fd.length?fd.map(function(i){return '<div class="clpost"><small>'+esc(i.sn)+' · '+esc(new Date(i.ts).toLocaleDateString(lang))+'</small>'+esc(i.t)+'</div>'}).join(''):'<p class="meta" style="margin:4px 0 0">'+esc(t('cl_feed_none'))+'</p>')+'</div></div>';
+  var keep=pn.querySelector('#clPostT'),kv=keep?keep.value:'';
+  if(pn._h!==h){pn._h=h;pn.innerHTML=h;var nt=pn.querySelector('#clPostT');if(nt&&kv)nt.value=kv}
+}
+function clErr(){toast(t('cl_err'))}
+function clFollow(sid,name){
+  if(!uid||!profile){toast(t('cl_login'));location.hash='#compte';return}
+  var x=clMine(sid);
+  if(x&&x.cOk){updateDoc(doc(db,'clients',x.id),{cOk:false,ts:Date.now()}).then(function(){toast(t('cl_unfollowed'))}).catch(clErr);return}
+  if(x){updateDoc(doc(db,'clients',x.id),{cOk:true,ts:Date.now()}).then(function(){toast(t('cl_followed'))}).catch(clErr);return}
+  setDoc(doc(db,'clients',sid+'_'+uid),{sid:sid,cid:uid,sn:String(name||'—').slice(0,40),cn:profile.name.slice(0,40),sOk:true,cOk:true,ts:Date.now()}).then(function(){toast(t('cl_followed'))}).catch(clErr)
+}
+function clAddFromChat(cid,name){
+  if(!uid||!profile||!cid)return;var x=clOf(cid);
+  if(x){if(!x.sOk)updateDoc(doc(db,'clients',x.id),{sOk:true,ts:Date.now()}).then(function(){toast(t('cl_added'))}).catch(clErr);return}
+  setDoc(doc(db,'clients',uid+'_'+cid),{sid:uid,cid:cid,sn:profile.name.slice(0,40),cn:String(name||'—').slice(0,40),sOk:true,cOk:true,ts:Date.now()}).then(function(){toast(t('cl_added'))}).catch(clErr)
+}
+function clHeadRow(c,cr){
+  var inner=cr?cr.slice(cr.indexOf('>')+1,cr.lastIndexOf('</div>')):'',ex='';
+  if(c.members[0]===uid)ex=folBtn(c.members[1],c.other,'sm');
+  else if(c.members[1]===uid){var x=clOf(c.members[0]);ex='<button type="button" class="btn alt sm" data-cladd="'+esc(c.members[0])+'" data-clname="'+esc(c.bn)+'"'+(x&&x.sOk?' disabled':'')+'>'+esc(t(x&&x.sOk?'cl_in':'cl_add'))+'</button>'}
+  return inner+ex?'<div class="callrow">'+inner+ex+'</div>':''
+}
+async function clPost(){
+  var ta=$('clPostT');if(!ta||!uid||!profile)return;var tx=ta.value.trim().slice(0,400);if(!tx)return;
+  try{
+    if(BC[uid]===undefined){var d=await getDoc(doc(db,'bcast',uid));var x=d.exists()?d.data():null;BC[uid]=(Array.isArray(x&&x.items)?x.items:[]).slice(0,10).map(function(i){return {t:String((i&&i.t)||'').slice(0,400),ts:Number(i&&i.ts)||0}})}
+    var items=[{t:tx,ts:Date.now()}].concat(BC[uid]).slice(0,10);
+    await setDoc(doc(db,'bcast',uid),{sn:profile.name.slice(0,40),items:items,ts:Date.now()});
+    BC[uid]=items;var t2=$('clPostT');if(t2)t2.value='';ta.value='';toast(t('cl_posted'));if($('clPanel'))$('clPanel')._h='';clRefresh()
+  }catch(e){clErr()}
+}
+document.addEventListener('click',function(e){
+  var x=e.target.closest&&e.target.closest('[data-cltab],[data-clfol],[data-clsub],[data-clrm],[data-clchat],[data-cladd],[data-carm],[data-clpost],[data-clpdel],[data-clrefresh],[data-clwrite]');if(!x)return;
+  var D=x.dataset;
+  if(D.cltab){clTab=D.cltab;var tb=$('clTabs');if(tb)tb._h='';clApplyTab();if(clTab==='chats')renderThreads();return}
+  if(D.clfol!==undefined){clFollow(D.clfol,D.clname);return}
+  if(D.cladd){clAddFromChat(D.cladd,D.clname);return}
+  if(D.clsub){var a=CLS.filter(function(q){return q.id===D.clsub})[0];if(a)updateDoc(doc(db,'clients',a.id),{sOk:!a.sOk,ts:Date.now()}).catch(clErr);return}
+  if(D.clrm){if(confirm(t('cl_rmq')))deleteDoc(doc(db,'clients',D.clrm)).catch(clErr);return}
+  if(D.carm){if(confirm(t('cl_rmq')))deleteDoc(doc(db,'users',uid,'carnet',D.carm)).catch(clErr);return}
+  if(D.clchat){clTab='chats';var tb2=$('clTabs');if(tb2)tb2._h='';openChat(D.clchat);clApplyTab();return}
+  if(D.clwrite){var lp=byId(D.clwrite);if(lp){clTab='chats';startChatWith(lp)}return}
+  if(D.clpost){clPost();return}
+  if(D.clrefresh){clLoadFeed();return}
+  if(D.clpdel){if(!confirm(t('cl_postq')))return;var ts=+D.clpdel,items=(BC[uid]||[]).filter(function(i){return i.ts!==ts});
+    setDoc(doc(db,'bcast',uid),{sn:profile.name.slice(0,40),items:items,ts:Date.now()}).then(function(){BC[uid]=items;clRefresh()}).catch(clErr);return}
+});
+document.addEventListener('submit',function(e){
+  if(e.target.id!=='clCarnetForm')return;e.preventDefault();
+  var n=$('clcN').value.trim().slice(0,60);if(!n||!uid)return;
+  setDoc(doc(db,'users',uid,'carnet','c'+Date.now().toString(36)),{n:n,ph:$('clcP').value.trim().slice(0,30),note:$('clcT').value.trim().slice(0,200),ts:Date.now()}).then(function(){toast(t('cl_saved'));e.target.reset()}).catch(clErr)
+});
 function startChatWith(p){
   if(!uid){if(openId)closeSheet();toast(t('m_login'));location.hash='#compte';show();return}
   if(p.ownerId===uid){toast(t('m_own'));return}
@@ -1849,8 +1996,8 @@ function init(){
   catch(e){status='offline';authReady=true;renderGrid();renderAcc();renderSellGate();return}
   startListings();
   onAuthStateChanged(auth,async function(u){
-    if(u){uid=u.uid;mode='login';await loadUser(u);seenLoad();startChats();startReports()}
-    else{stopChats();stopReports();uid=null;profile=null;favs={};editing=false;shopEditing=false;shopLogoNew=null}
+    if(u){uid=u.uid;mode='login';await loadUser(u);seenLoad();startChats();startReports();startClients()}
+    else{stopChats();stopReports();stopClients();uid=null;profile=null;favs={};editing=false;shopEditing=false;shopLogoNew=null}
     authReady=true;
     renderGrid();renderAcc();renderSellGate();renderThreads();if(openId)renderSheet();
   },function(){authReady=true;renderAcc();renderSellGate()});
